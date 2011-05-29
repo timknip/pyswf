@@ -38,7 +38,7 @@ svg_exporter = SVGExporter()
 svg = swf.export(svg_exporter)
 
 # save the SVG
-open('path/to/svg', 'wb').write(svg)
+open('path/to/svg', 'wb').write(svg.read())
 ------------------------------------------------------------------------------
 		
 	
