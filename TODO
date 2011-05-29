@@ -1,3 +1,5 @@
 - write methods
 - timeline, multiple frames
 - actions
+- implement SVG filters (now only basic DropShadow, 
+  ColorTransform filters are implemented)
