@@ -6,6 +6,18 @@ PYSWF is a Python port of Claus Wahlers *great* SWF parser https://github.com/cl
 
 Can't thank Claus enough!
 
+INSTALL
+==============================================================================
+python setup.py install
+or you might need do:
+sudo python setup.py install
+
+DEPENDENCIES
+==============================================================================
+- lxml
+- StringIO
+- Image (PIL)
+
 USAGE
 ==============================================================================
 
