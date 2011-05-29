@@ -1,0 +1,223 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module swf.movie</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="swf.html"><font color="#ffffff">swf</font></a>.movie</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/floorplanner/pyswf/blob/master/swf/movie.py">movie.py</a></font></td></tr></table>
+    <p><tt><a href="#SWF">SWF</a></tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="StringIO.html">StringIO</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.movie.html#SWFHeader">SWFHeader</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.movie.html#SWFHeaderException">SWFHeaderException</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#SWFTimelineContainer">swf.tag.SWFTimelineContainer</a>(<a href="swf.tag.html#DefinitionTag">swf.tag.DefinitionTag</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.movie.html#SWF">SWF</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SWF">class <strong>SWF</strong></a>(<a href="swf.tag.html#SWFTimelineContainer">swf.tag.SWFTimelineContainer</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#SWF">SWF</a>&nbsp;class<br>
+&nbsp;<br>
+The&nbsp;<a href="#SWF">SWF</a>&nbsp;(pronounced&nbsp;'swiff')&nbsp;file&nbsp;format&nbsp;delivers&nbsp;vector&nbsp;graphics,&nbsp;text,&nbsp;<br>
+video,&nbsp;and&nbsp;sound&nbsp;over&nbsp;the&nbsp;Internet&nbsp;and&nbsp;is&nbsp;supported&nbsp;by&nbsp;Adobe&nbsp;Flash<br>
+Player&nbsp;software.&nbsp;The&nbsp;<a href="#SWF">SWF</a>&nbsp;file&nbsp;format&nbsp;is&nbsp;designed&nbsp;to&nbsp;be&nbsp;an&nbsp;efficient&nbsp;<br>
+delivery&nbsp;format,&nbsp;not&nbsp;a&nbsp;format&nbsp;for&nbsp;exchanging&nbsp;graphics&nbsp;between&nbsp;graphics&nbsp;<br>
+editors.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.movie.html#SWF">SWF</a></dd>
+<dd><a href="swf.tag.html#SWFTimelineContainer">swf.tag.SWFTimelineContainer</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">swf.tag.DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">swf.tag.Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SWF-__init__"><strong>__init__</strong></a>(self, file<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="SWF-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SWF-export"><strong>export</strong></a>(self, exporter<font color="#909090">=None</font>)</dt><dd><tt>Export&nbsp;this&nbsp;<a href="#SWF">SWF</a>&nbsp;using&nbsp;the&nbsp;specified&nbsp;exporter.&nbsp;<br>
+When&nbsp;no&nbsp;exporter&nbsp;is&nbsp;passed&nbsp;in&nbsp;the&nbsp;default&nbsp;exporter&nbsp;used&nbsp;<br>
+is&nbsp;swf.export.SVGExporter.<br>
+&nbsp;<br>
+Exporters&nbsp;should&nbsp;extend&nbsp;the&nbsp;swf.export.BaseExporter&nbsp;class.</tt></dd></dl>
+
+<dl><dt><a name="SWF-parse"><strong>parse</strong></a>(self, data)</dt><dd><tt>Parses&nbsp;the&nbsp;<a href="#SWF">SWF</a>.<br>
+&nbsp;<br>
+The&nbsp;@data&nbsp;parameter&nbsp;can&nbsp;be&nbsp;a&nbsp;file&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;or&nbsp;a&nbsp;SWFStream</tt></dd></dl>
+
+<dl><dt><a name="SWF-parse_file"><strong>parse_file</strong></a>(self, filename)</dt><dd><tt>Parses&nbsp;the&nbsp;<a href="#SWF">SWF</a>&nbsp;from&nbsp;a&nbsp;filename</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>data</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;SWFStream&nbsp;object&nbsp;(READ&nbsp;ONLY)</tt></dd>
+</dl>
+<dl><dt><strong>header</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;SWFHeader</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#SWFTimelineContainer">swf.tag.SWFTimelineContainer</a>:<br>
+<dl><dt><a name="SWF-parse_tag"><strong>parse_tag</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="SWF-parse_tags"><strong>parse_tags</strong></a>(self, data, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">swf.tag.DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">swf.tag.Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>The&nbsp;tag&nbsp;name</tt></dd>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SWFHeader">class <strong>SWFHeader</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#SWF">SWF</a>&nbsp;header<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="SWFHeader-__init__"><strong>__init__</strong></a>(self, stream)</dt></dl>
+
+<dl><dt><a name="SWFHeader-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>compressed</strong></dt>
+<dd><tt>Whether&nbsp;the&nbsp;SWF&nbsp;is&nbsp;compressed&nbsp;using&nbsp;ZLIB</tt></dd>
+</dl>
+<dl><dt><strong>file_length</strong></dt>
+<dd><tt>Return&nbsp;uncompressed&nbsp;file&nbsp;length</tt></dd>
+</dl>
+<dl><dt><strong>frame_count</strong></dt>
+<dd><tt>Return&nbsp;number&nbsp;of&nbsp;frames</tt></dd>
+</dl>
+<dl><dt><strong>frame_rate</strong></dt>
+<dd><tt>Return&nbsp;frame&nbsp;rate</tt></dd>
+</dl>
+<dl><dt><strong>frame_size</strong></dt>
+<dd><tt>Return&nbsp;frame&nbsp;size&nbsp;as&nbsp;a&nbsp;SWFRectangle</tt></dd>
+</dl>
+<dl><dt><strong>version</strong></dt>
+<dd><tt>Return&nbsp;SWF&nbsp;version</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SWFHeaderException">class <strong>SWFHeaderException</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="exceptions.html#Exception">Exception</a>&nbsp;raised&nbsp;in&nbsp;case&nbsp;of&nbsp;an&nbsp;invalid&nbsp;<a href="#SWFHeader">SWFHeader</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.movie.html#SWFHeaderException">SWFHeaderException</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SWFHeaderException-__init__"><strong>__init__</strong></a>(self, message)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#SWFHeaderException-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="SWFHeaderException-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SWFHeaderException-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SWFHeaderException-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#SWFHeaderException-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SWFHeaderException-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#SWFHeaderException-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="SWFHeaderException-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#SWFHeaderException-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="SWFHeaderException-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SWFHeaderException-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#SWFHeaderException-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="SWFHeaderException-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SWFHeaderException-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SWFHeaderException-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SWFHeaderException-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#SWFHeaderException-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="SWFHeaderException-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

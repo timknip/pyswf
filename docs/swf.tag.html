@@ -1,0 +1,2551 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module swf.tag</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="swf.html"><font color="#ffffff">swf</font></a>.tag</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/floorplanner/pyswf/blob/master/swf/tag.py">tag.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="Image.html">Image</a><br>
+</td><td width="25%" valign=top><a href="StringIO.html">StringIO</a><br>
+</td><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="struct.html">struct</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#Tag">Tag</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#DefinitionTag">DefinitionTag</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#SWFTimelineContainer">SWFTimelineContainer</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineSprite">TagDefineSprite</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineBits">TagDefineBits</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineBitsJPEG2">TagDefineBitsJPEG2</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineBitsJPEG3">TagDefineBitsJPEG3</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineBitsLossless">TagDefineBitsLossless</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineBitsLossless2">TagDefineBitsLossless2</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineFont">TagDefineFont</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineFont2">TagDefineFont2</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineFont3">TagDefineFont3</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineMorphShape">TagDefineMorphShape</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineShape">TagDefineShape</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineShape2">TagDefineShape2</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineShape3">TagDefineShape3</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineShape4">TagDefineShape4</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineText">TagDefineText</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineText2">TagDefineText2</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#DisplayListTag">DisplayListTag</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagPlaceObject">TagPlaceObject</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagPlaceObject2">TagPlaceObject2</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagPlaceObject3">TagPlaceObject3</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagRemoveObject">TagRemoveObject</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagRemoveObject2">TagRemoveObject2</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagCSMTextSettings">TagCSMTextSettings</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineFontAlignZones">TagDefineFontAlignZones</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineFontName">TagDefineFontName</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.tag.html#TagDefineSceneAndFrameLabelData">TagDefineSceneAndFrameLabelData</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.tag.html#TagDoABC">TagDoABC</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.tag.html#TagDoAction">TagDoAction</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.tag.html#TagEnd">TagEnd</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.tag.html#TagFileAttributes">TagFileAttributes</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.tag.html#TagFrameLabel">TagFrameLabel</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.tag.html#TagJPEGTables">TagJPEGTables</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.tag.html#TagMetadata">TagMetadata</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.tag.html#TagSetBackgroundColor">TagSetBackgroundColor</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.tag.html#TagShowFrame">TagShowFrame</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.tag.html#TagSymbolClass">TagSymbolClass</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.tag.html#TagFactory">TagFactory</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DefinitionTag">class <strong>DefinitionTag</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="DefinitionTag-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefinitionTag-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="DefinitionTag-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>The&nbsp;tag&nbsp;name</tt></dd>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DisplayListTag">class <strong>DisplayListTag</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#DisplayListTag">DisplayListTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="DisplayListTag-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DisplayListTag-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>characterId</strong> = -1</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="DisplayListTag-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>The&nbsp;tag&nbsp;name</tt></dd>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SWFTimelineContainer">class <strong>SWFTimelineContainer</strong></a>(<a href="swf.tag.html#DefinitionTag">DefinitionTag</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#SWFTimelineContainer">SWFTimelineContainer</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SWFTimelineContainer-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SWFTimelineContainer-parse_tag"><strong>parse_tag</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="SWFTimelineContainer-parse_tags"><strong>parse_tags</strong></a>(self, data, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><a name="SWFTimelineContainer-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="SWFTimelineContainer-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>The&nbsp;tag&nbsp;name</tt></dd>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Tag">class <strong>Tag</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Tag-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Tag-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Tag-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt><dd><tt>Parses&nbsp;this&nbsp;tag</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>The&nbsp;tag&nbsp;name</tt></dd>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagCSMTextSettings">class <strong>TagCSMTextSettings</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagCSMTextSettings">TagCSMTextSettings</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagCSMTextSettings-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagCSMTextSettings-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 74</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagCSMTextSettings-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineBits">class <strong>TagDefineBits</strong></a>(<a href="swf.tag.html#DefinitionTag">DefinitionTag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;tag&nbsp;defines&nbsp;a&nbsp;bitmap&nbsp;character&nbsp;with&nbsp;JPEG&nbsp;compression.&nbsp;It&nbsp;contains&nbsp;only&nbsp;<br>
+the&nbsp;JPEG&nbsp;compressed&nbsp;image&nbsp;data&nbsp;(from&nbsp;the&nbsp;Frame&nbsp;Header&nbsp;onward).&nbsp;A&nbsp;separate&nbsp;<br>
+JPEGTables&nbsp;tag&nbsp;contains&nbsp;the&nbsp;JPEG&nbsp;encoding&nbsp;data&nbsp;used&nbsp;to&nbsp;encode&nbsp;this&nbsp;image&nbsp;<br>
+(the&nbsp;Tables/Misc&nbsp;segment).<br>
+NOTE:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Only&nbsp;one&nbsp;JPEGTables&nbsp;tag&nbsp;is&nbsp;allowed&nbsp;in&nbsp;a&nbsp;SWF&nbsp;file,&nbsp;and&nbsp;thus&nbsp;all&nbsp;bitmaps&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;defined&nbsp;with&nbsp;DefineBits&nbsp;must&nbsp;share&nbsp;common&nbsp;encoding&nbsp;tables.<br>
+The&nbsp;data&nbsp;in&nbsp;this&nbsp;tag&nbsp;begins&nbsp;with&nbsp;the&nbsp;JPEG&nbsp;SOI&nbsp;marker&nbsp;0xFF,&nbsp;0xD8&nbsp;and&nbsp;ends&nbsp;<br>
+with&nbsp;the&nbsp;EOI&nbsp;marker&nbsp;0xFF,&nbsp;0xD9.&nbsp;Before&nbsp;version&nbsp;8&nbsp;of&nbsp;the&nbsp;SWF&nbsp;file&nbsp;format,&nbsp;<br>
+SWF&nbsp;files&nbsp;could&nbsp;contain&nbsp;an&nbsp;erroneous&nbsp;header&nbsp;of&nbsp;0xFF,&nbsp;0xD9,&nbsp;0xFF,&nbsp;0xD8&nbsp;before&nbsp;<br>
+the&nbsp;JPEG&nbsp;SOI&nbsp;marker.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineBits">TagDefineBits</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineBits-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineBits-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 6</dl>
+
+<dl><dt><strong>bitmapData</strong> = None</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDefineBits-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineBitsJPEG2">class <strong>TagDefineBitsJPEG2</strong></a>(<a href="swf.tag.html#TagDefineBits">TagDefineBits</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;tag&nbsp;defines&nbsp;a&nbsp;bitmap&nbsp;character&nbsp;with&nbsp;JPEG&nbsp;compression.&nbsp;It&nbsp;differs&nbsp;from&nbsp;<br>
+DefineBits&nbsp;in&nbsp;that&nbsp;it&nbsp;contains&nbsp;both&nbsp;the&nbsp;JPEG&nbsp;encoding&nbsp;table&nbsp;and&nbsp;the&nbsp;JPEG&nbsp;<br>
+image&nbsp;data.&nbsp;This&nbsp;tag&nbsp;allows&nbsp;multiple&nbsp;JPEG&nbsp;images&nbsp;with&nbsp;differing&nbsp;encoding&nbsp;<br>
+tables&nbsp;to&nbsp;be&nbsp;defined&nbsp;within&nbsp;a&nbsp;single&nbsp;SWF&nbsp;file.<br>
+The&nbsp;data&nbsp;in&nbsp;this&nbsp;tag&nbsp;begins&nbsp;with&nbsp;the&nbsp;JPEG&nbsp;SOI&nbsp;marker&nbsp;0xFF,&nbsp;0xD8&nbsp;and&nbsp;ends&nbsp;<br>
+with&nbsp;the&nbsp;EOI&nbsp;marker&nbsp;0xFF,&nbsp;0xD9.&nbsp;Before&nbsp;version&nbsp;8&nbsp;of&nbsp;the&nbsp;SWF&nbsp;file&nbsp;format,&nbsp;<br>
+SWF&nbsp;files&nbsp;could&nbsp;contain&nbsp;an&nbsp;erroneous&nbsp;header&nbsp;of&nbsp;0xFF,&nbsp;0xD9,&nbsp;0xFF,&nbsp;0xD8&nbsp;<br>
+before&nbsp;the&nbsp;JPEG&nbsp;SOI&nbsp;marker.<br>
+In&nbsp;addition&nbsp;to&nbsp;specifying&nbsp;JPEG&nbsp;data,&nbsp;DefineBitsJPEG2&nbsp;can&nbsp;also&nbsp;contain&nbsp;PNG&nbsp;<br>
+image&nbsp;data&nbsp;and&nbsp;non-animated&nbsp;GIF89a&nbsp;image&nbsp;data.<br>
+&nbsp;<br>
+-&nbsp;If&nbsp;ImageData&nbsp;begins&nbsp;with&nbsp;the&nbsp;eight&nbsp;bytes&nbsp;0x89&nbsp;0x50&nbsp;0x4E&nbsp;0x47&nbsp;0x0D&nbsp;0x0A&nbsp;0x1A&nbsp;0x0A,&nbsp;<br>
+&nbsp;&nbsp;the&nbsp;ImageData&nbsp;contains&nbsp;PNG&nbsp;data.<br>
+-&nbsp;If&nbsp;ImageData&nbsp;begins&nbsp;with&nbsp;the&nbsp;six&nbsp;bytes&nbsp;0x47&nbsp;0x49&nbsp;0x46&nbsp;0x38&nbsp;0x39&nbsp;0x61,&nbsp;the&nbsp;ImageData&nbsp;<br>
+&nbsp;&nbsp;contains&nbsp;GIF89a&nbsp;data.<br>
+&nbsp;&nbsp;<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;for&nbsp;this&nbsp;tag&nbsp;is&nbsp;SWF&nbsp;2.&nbsp;The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;<br>
+version&nbsp;for&nbsp;embedding&nbsp;PNG&nbsp;of&nbsp;GIF89a&nbsp;data&nbsp;is&nbsp;SWF&nbsp;8.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineBitsJPEG2">TagDefineBitsJPEG2</a></dd>
+<dd><a href="swf.tag.html#TagDefineBits">TagDefineBits</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineBitsJPEG2-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineBitsJPEG2-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 21</dl>
+
+<dl><dt><strong>bitmapType</strong> = 0</dl>
+
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#TagDefineBits">TagDefineBits</a>:<br>
+<dl><dt><strong>bitmapData</strong> = None</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDefineBitsJPEG2-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineBitsJPEG3">class <strong>TagDefineBitsJPEG3</strong></a>(<a href="swf.tag.html#TagDefineBitsJPEG2">TagDefineBitsJPEG2</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;tag&nbsp;defines&nbsp;a&nbsp;bitmap&nbsp;character&nbsp;with&nbsp;JPEG&nbsp;compression.&nbsp;This&nbsp;tag&nbsp;<br>
+extends&nbsp;DefineBitsJPEG2,&nbsp;adding&nbsp;alpha&nbsp;channel&nbsp;(opacity)&nbsp;data.&nbsp;<br>
+Opacity/transparency&nbsp;information&nbsp;is&nbsp;not&nbsp;a&nbsp;standard&nbsp;feature&nbsp;in&nbsp;JPEG&nbsp;images,&nbsp;<br>
+so&nbsp;the&nbsp;alpha&nbsp;channel&nbsp;information&nbsp;is&nbsp;encoded&nbsp;separately&nbsp;from&nbsp;the&nbsp;JPEG&nbsp;data,&nbsp;<br>
+and&nbsp;compressed&nbsp;using&nbsp;the&nbsp;ZLIB&nbsp;standard&nbsp;for&nbsp;compression.&nbsp;The&nbsp;data&nbsp;format&nbsp;<br>
+used&nbsp;by&nbsp;the&nbsp;ZLIB&nbsp;library&nbsp;is&nbsp;described&nbsp;by&nbsp;Request&nbsp;for&nbsp;Comments&nbsp;(RFCs)&nbsp;<br>
+documents&nbsp;1950&nbsp;to&nbsp;1952.<br>
+The&nbsp;data&nbsp;in&nbsp;this&nbsp;tag&nbsp;begins&nbsp;with&nbsp;the&nbsp;JPEG&nbsp;SOI&nbsp;marker&nbsp;0xFF,&nbsp;0xD8&nbsp;and&nbsp;ends&nbsp;<br>
+with&nbsp;the&nbsp;EOI&nbsp;marker&nbsp;0xFF,&nbsp;0xD9.&nbsp;Before&nbsp;version&nbsp;8&nbsp;of&nbsp;the&nbsp;SWF&nbsp;file&nbsp;format,&nbsp;<br>
+SWF&nbsp;files&nbsp;could&nbsp;contain&nbsp;an&nbsp;erroneous&nbsp;header&nbsp;of&nbsp;0xFF,&nbsp;0xD9,&nbsp;0xFF,&nbsp;0xD8&nbsp;<br>
+before&nbsp;the&nbsp;JPEG&nbsp;SOI&nbsp;marker.<br>
+In&nbsp;addition&nbsp;to&nbsp;specifying&nbsp;JPEG&nbsp;data,&nbsp;DefineBitsJPEG2&nbsp;can&nbsp;also&nbsp;contain&nbsp;<br>
+PNG&nbsp;image&nbsp;data&nbsp;and&nbsp;non-animated&nbsp;GIF89a&nbsp;image&nbsp;data.<br>
+-&nbsp;If&nbsp;ImageData&nbsp;begins&nbsp;with&nbsp;the&nbsp;eight&nbsp;bytes&nbsp;0x89&nbsp;0x50&nbsp;0x4E&nbsp;0x47&nbsp;0x0D&nbsp;0x0A&nbsp;0x1A&nbsp;0x0A,&nbsp;<br>
+&nbsp;&nbsp;the&nbsp;ImageData&nbsp;contains&nbsp;PNG&nbsp;data.<br>
+-&nbsp;If&nbsp;ImageData&nbsp;begins&nbsp;with&nbsp;the&nbsp;six&nbsp;bytes&nbsp;0x47&nbsp;0x49&nbsp;0x46&nbsp;0x38&nbsp;0x39&nbsp;0x61,&nbsp;<br>
+&nbsp;&nbsp;the&nbsp;ImageData&nbsp;contains&nbsp;GIF89a&nbsp;data.<br>
+If&nbsp;ImageData&nbsp;contains&nbsp;PNG&nbsp;or&nbsp;GIF89a&nbsp;data,&nbsp;the&nbsp;optional&nbsp;BitmapAlphaData&nbsp;is&nbsp;<br>
+not&nbsp;supported.<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;for&nbsp;this&nbsp;tag&nbsp;is&nbsp;SWF&nbsp;3.&nbsp;The&nbsp;minimum&nbsp;file&nbsp;<br>
+format&nbsp;version&nbsp;for&nbsp;embedding&nbsp;PNG&nbsp;of&nbsp;GIF89a&nbsp;data&nbsp;is&nbsp;SWF&nbsp;8.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineBitsJPEG3">TagDefineBitsJPEG3</a></dd>
+<dd><a href="swf.tag.html#TagDefineBitsJPEG2">TagDefineBitsJPEG2</a></dd>
+<dd><a href="swf.tag.html#TagDefineBits">TagDefineBits</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineBitsJPEG3-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineBitsJPEG3-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 35</dl>
+
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#TagDefineBitsJPEG2">TagDefineBitsJPEG2</a>:<br>
+<dl><dt><strong>bitmapType</strong> = 0</dl>
+
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#TagDefineBits">TagDefineBits</a>:<br>
+<dl><dt><strong>bitmapData</strong> = None</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDefineBitsJPEG3-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineBitsLossless">class <strong>TagDefineBitsLossless</strong></a>(<a href="swf.tag.html#DefinitionTag">DefinitionTag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Defines&nbsp;a&nbsp;lossless&nbsp;bitmap&nbsp;character&nbsp;that&nbsp;contains&nbsp;RGB&nbsp;bitmap&nbsp;data&nbsp;compressed&nbsp;<br>
+with&nbsp;ZLIB.&nbsp;The&nbsp;data&nbsp;format&nbsp;used&nbsp;by&nbsp;the&nbsp;ZLIB&nbsp;library&nbsp;is&nbsp;described&nbsp;by&nbsp;<br>
+Request&nbsp;for&nbsp;Comments&nbsp;(RFCs)&nbsp;documents&nbsp;1950&nbsp;to&nbsp;1952.<br>
+Two&nbsp;kinds&nbsp;of&nbsp;bitmaps&nbsp;are&nbsp;supported.&nbsp;Colormapped&nbsp;images&nbsp;define&nbsp;a&nbsp;colormap&nbsp;of&nbsp;<br>
+up&nbsp;to&nbsp;256&nbsp;colors,&nbsp;each&nbsp;represented&nbsp;by&nbsp;a&nbsp;24-bit&nbsp;RGB&nbsp;value,&nbsp;and&nbsp;then&nbsp;use&nbsp;<br>
+8-bit&nbsp;pixel&nbsp;values&nbsp;to&nbsp;index&nbsp;into&nbsp;the&nbsp;colormap.&nbsp;Direct&nbsp;images&nbsp;store&nbsp;actual&nbsp;<br>
+pixel&nbsp;color&nbsp;values&nbsp;using&nbsp;15&nbsp;bits&nbsp;(32,768&nbsp;colors)&nbsp;or&nbsp;24&nbsp;bits&nbsp;(about&nbsp;17&nbsp;million&nbsp;colors).<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;for&nbsp;this&nbsp;tag&nbsp;is&nbsp;SWF&nbsp;2.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineBitsLossless">TagDefineBitsLossless</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineBitsLossless-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineBitsLossless-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 20</dl>
+
+<dl><dt><strong>bitmapData</strong> = None</dl>
+
+<dl><dt><strong>bitmap_color_size</strong> = 0</dl>
+
+<dl><dt><strong>bitmap_format</strong> = 0</dl>
+
+<dl><dt><strong>bitmap_height</strong> = 0</dl>
+
+<dl><dt><strong>bitmap_width</strong> = 0</dl>
+
+<dl><dt><strong>image_buffer</strong> = ''</dl>
+
+<dl><dt><strong>padded_width</strong> = 0</dl>
+
+<dl><dt><strong>zlib_bitmap_data</strong> = None</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDefineBitsLossless-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineBitsLossless2">class <strong>TagDefineBitsLossless2</strong></a>(<a href="swf.tag.html#TagDefineBitsLossless">TagDefineBitsLossless</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>DefineBitsLossless2&nbsp;extends&nbsp;DefineBitsLossless&nbsp;with&nbsp;support&nbsp;for&nbsp;<br>
+opacity&nbsp;(alpha&nbsp;values).&nbsp;The&nbsp;colormap&nbsp;colors&nbsp;in&nbsp;colormapped&nbsp;images<br>
+are&nbsp;defined&nbsp;using&nbsp;RGBA&nbsp;values,&nbsp;and&nbsp;direct&nbsp;images&nbsp;store&nbsp;32-bit&nbsp;<br>
+ARGB&nbsp;colors&nbsp;for&nbsp;each&nbsp;pixel.&nbsp;The&nbsp;intermediate&nbsp;15-bit&nbsp;color&nbsp;depth&nbsp;<br>
+is&nbsp;not&nbsp;available&nbsp;in&nbsp;DefineBitsLossless2.<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;for&nbsp;this&nbsp;tag&nbsp;is&nbsp;SWF&nbsp;3.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineBitsLossless2">TagDefineBitsLossless2</a></dd>
+<dd><a href="swf.tag.html#TagDefineBitsLossless">TagDefineBitsLossless</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineBitsLossless2-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 36</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#TagDefineBitsLossless">TagDefineBitsLossless</a>:<br>
+<dl><dt><a name="TagDefineBitsLossless2-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#TagDefineBitsLossless">TagDefineBitsLossless</a>:<br>
+<dl><dt><strong>bitmapData</strong> = None</dl>
+
+<dl><dt><strong>bitmap_color_size</strong> = 0</dl>
+
+<dl><dt><strong>bitmap_format</strong> = 0</dl>
+
+<dl><dt><strong>bitmap_height</strong> = 0</dl>
+
+<dl><dt><strong>bitmap_width</strong> = 0</dl>
+
+<dl><dt><strong>image_buffer</strong> = ''</dl>
+
+<dl><dt><strong>padded_width</strong> = 0</dl>
+
+<dl><dt><strong>zlib_bitmap_data</strong> = None</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDefineBitsLossless2-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineFont">class <strong>TagDefineFont</strong></a>(<a href="swf.tag.html#DefinitionTag">DefinitionTag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;DefineFont&nbsp;tag&nbsp;defines&nbsp;the&nbsp;shape&nbsp;outlines&nbsp;of&nbsp;each&nbsp;glyph&nbsp;used&nbsp;in&nbsp;a&nbsp;<br>
+particular&nbsp;font.&nbsp;Only&nbsp;the&nbsp;glyphs&nbsp;that&nbsp;are&nbsp;used&nbsp;by&nbsp;subsequent&nbsp;DefineText&nbsp;<br>
+tags&nbsp;are&nbsp;actually&nbsp;defined.<br>
+DefineFont&nbsp;tags&nbsp;cannot&nbsp;be&nbsp;used&nbsp;for&nbsp;dynamic&nbsp;text.&nbsp;Dynamic&nbsp;text&nbsp;requires&nbsp;<br>
+the&nbsp;DefineFont2&nbsp;tag.&nbsp;<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;is&nbsp;SWF&nbsp;1.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineFont">TagDefineFont</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineFont-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineFont-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>unitDivisor</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 10</dl>
+
+<dl><dt><strong>glyphShapeTable</strong> = []</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDefineFont-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineFont2">class <strong>TagDefineFont2</strong></a>(<a href="swf.tag.html#TagDefineFont">TagDefineFont</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineFont2">TagDefineFont2</a></dd>
+<dd><a href="swf.tag.html#TagDefineFont">TagDefineFont</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineFont2-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineFont2-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>unitDivisor</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 48</dl>
+
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#TagDefineFont">TagDefineFont</a>:<br>
+<dl><dt><strong>glyphShapeTable</strong> = []</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDefineFont2-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineFont3">class <strong>TagDefineFont3</strong></a>(<a href="swf.tag.html#TagDefineFont2">TagDefineFont2</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineFont3">TagDefineFont3</a></dd>
+<dd><a href="swf.tag.html#TagDefineFont2">TagDefineFont2</a></dd>
+<dd><a href="swf.tag.html#TagDefineFont">TagDefineFont</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineFont3-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 75</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#TagDefineFont2">TagDefineFont2</a>:<br>
+<dl><dt><a name="TagDefineFont3-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#TagDefineFont2">TagDefineFont2</a>:<br>
+<dl><dt><strong>unitDivisor</strong></dt>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#TagDefineFont">TagDefineFont</a>:<br>
+<dl><dt><strong>glyphShapeTable</strong> = []</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDefineFont3-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineFontAlignZones">class <strong>TagDefineFontAlignZones</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineFontAlignZones">TagDefineFontAlignZones</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineFontAlignZones-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineFontAlignZones-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 73</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDefineFontAlignZones-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineFontName">class <strong>TagDefineFontName</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineFontName">TagDefineFontName</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineFontName-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineFontName-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 88</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDefineFontName-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineMorphShape">class <strong>TagDefineMorphShape</strong></a>(<a href="swf.tag.html#DefinitionTag">DefinitionTag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;DefineMorphShape&nbsp;tag&nbsp;defines&nbsp;the&nbsp;start&nbsp;and&nbsp;end&nbsp;states&nbsp;of&nbsp;a&nbsp;morph&nbsp;<br>
+sequence.&nbsp;A&nbsp;morph&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;should&nbsp;be&nbsp;displayed&nbsp;with&nbsp;the&nbsp;PlaceObject2&nbsp;tag,&nbsp;<br>
+where&nbsp;the&nbsp;ratio&nbsp;field&nbsp;specifies&nbsp;how&nbsp;far&nbsp;the&nbsp;morph&nbsp;has&nbsp;progressed.<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;is&nbsp;SWF&nbsp;3.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineMorphShape">TagDefineMorphShape</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineMorphShape-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineMorphShape-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>morph_fill_styles</strong></dt>
+<dd><tt>Return&nbsp;list&nbsp;of&nbsp;SWFMorphFillStyle</tt></dd>
+</dl>
+<dl><dt><strong>morph_line_styles</strong></dt>
+<dd><tt>Return&nbsp;list&nbsp;of&nbsp;SWFMorphLineStyle</tt></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 46</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDefineMorphShape-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineSceneAndFrameLabelData">class <strong>TagDefineSceneAndFrameLabelData</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineSceneAndFrameLabelData">TagDefineSceneAndFrameLabelData</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineSceneAndFrameLabelData-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineSceneAndFrameLabelData-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 86</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDefineSceneAndFrameLabelData-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineShape">class <strong>TagDefineShape</strong></a>(<a href="swf.tag.html#DefinitionTag">DefinitionTag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;DefineShape&nbsp;tag&nbsp;defines&nbsp;a&nbsp;shape&nbsp;for&nbsp;later&nbsp;use&nbsp;by&nbsp;control&nbsp;tags&nbsp;such&nbsp;as&nbsp;<br>
+PlaceObject.&nbsp;The&nbsp;ShapeId&nbsp;uniquely&nbsp;identifies&nbsp;this&nbsp;shape&nbsp;as&nbsp;'character'&nbsp;in&nbsp;<br>
+the&nbsp;Dictionary.&nbsp;The&nbsp;ShapeBounds&nbsp;field&nbsp;is&nbsp;the&nbsp;rectangle&nbsp;that&nbsp;completely&nbsp;<br>
+encloses&nbsp;the&nbsp;shape.&nbsp;The&nbsp;SHAPEWITHSTYLE&nbsp;structure&nbsp;includes&nbsp;all&nbsp;the&nbsp;paths,&nbsp;<br>
+fill&nbsp;styles&nbsp;and&nbsp;line&nbsp;styles&nbsp;that&nbsp;make&nbsp;up&nbsp;the&nbsp;shape.<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;is&nbsp;SWF&nbsp;1.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineShape">TagDefineShape</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineShape-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineShape-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineShape-export"><strong>export</strong></a>(self, handler<font color="#909090">=None</font>)</dt><dd><tt>Export&nbsp;this&nbsp;tag</tt></dd></dl>
+
+<dl><dt><a name="TagDefineShape-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>shape_bounds</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;bounds&nbsp;of&nbsp;this&nbsp;tag&nbsp;as&nbsp;a&nbsp;SWFRectangle</tt></dd>
+</dl>
+<dl><dt><strong>shapes</strong></dt>
+<dd><tt>Return&nbsp;list&nbsp;of&nbsp;SWFShape</tt></dd>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 2</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineShape2">class <strong>TagDefineShape2</strong></a>(<a href="swf.tag.html#TagDefineShape">TagDefineShape</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>DefineShape2&nbsp;extends&nbsp;the&nbsp;capabilities&nbsp;of&nbsp;DefineShape&nbsp;with&nbsp;the&nbsp;ability&nbsp;<br>
+to&nbsp;support&nbsp;more&nbsp;than&nbsp;255&nbsp;styles&nbsp;in&nbsp;the&nbsp;style&nbsp;list&nbsp;and&nbsp;multiple&nbsp;style&nbsp;<br>
+lists&nbsp;in&nbsp;a&nbsp;single&nbsp;shape.<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;is&nbsp;SWF&nbsp;2.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineShape2">TagDefineShape2</a></dd>
+<dd><a href="swf.tag.html#TagDefineShape">TagDefineShape</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineShape2-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 22</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#TagDefineShape">TagDefineShape</a>:<br>
+<dl><dt><a name="TagDefineShape2-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineShape2-export"><strong>export</strong></a>(self, handler<font color="#909090">=None</font>)</dt><dd><tt>Export&nbsp;this&nbsp;tag</tt></dd></dl>
+
+<dl><dt><a name="TagDefineShape2-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#TagDefineShape">TagDefineShape</a>:<br>
+<dl><dt><strong>shape_bounds</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;bounds&nbsp;of&nbsp;this&nbsp;tag&nbsp;as&nbsp;a&nbsp;SWFRectangle</tt></dd>
+</dl>
+<dl><dt><strong>shapes</strong></dt>
+<dd><tt>Return&nbsp;list&nbsp;of&nbsp;SWFShape</tt></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineShape3">class <strong>TagDefineShape3</strong></a>(<a href="swf.tag.html#TagDefineShape2">TagDefineShape2</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>DefineShape3&nbsp;extends&nbsp;the&nbsp;capabilities&nbsp;of&nbsp;DefineShape2&nbsp;by&nbsp;extending&nbsp;<br>
+all&nbsp;of&nbsp;the&nbsp;RGB&nbsp;color&nbsp;fields&nbsp;to&nbsp;support&nbsp;RGBA&nbsp;with&nbsp;opacity&nbsp;information.<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;is&nbsp;SWF&nbsp;3.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineShape3">TagDefineShape3</a></dd>
+<dd><a href="swf.tag.html#TagDefineShape2">TagDefineShape2</a></dd>
+<dd><a href="swf.tag.html#TagDefineShape">TagDefineShape</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineShape3-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 32</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#TagDefineShape">TagDefineShape</a>:<br>
+<dl><dt><a name="TagDefineShape3-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineShape3-export"><strong>export</strong></a>(self, handler<font color="#909090">=None</font>)</dt><dd><tt>Export&nbsp;this&nbsp;tag</tt></dd></dl>
+
+<dl><dt><a name="TagDefineShape3-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#TagDefineShape">TagDefineShape</a>:<br>
+<dl><dt><strong>shape_bounds</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;bounds&nbsp;of&nbsp;this&nbsp;tag&nbsp;as&nbsp;a&nbsp;SWFRectangle</tt></dd>
+</dl>
+<dl><dt><strong>shapes</strong></dt>
+<dd><tt>Return&nbsp;list&nbsp;of&nbsp;SWFShape</tt></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineShape4">class <strong>TagDefineShape4</strong></a>(<a href="swf.tag.html#TagDefineShape3">TagDefineShape3</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineShape4">TagDefineShape4</a></dd>
+<dd><a href="swf.tag.html#TagDefineShape3">TagDefineShape3</a></dd>
+<dd><a href="swf.tag.html#TagDefineShape2">TagDefineShape2</a></dd>
+<dd><a href="swf.tag.html#TagDefineShape">TagDefineShape</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineShape4-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineShape4-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 83</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#TagDefineShape">TagDefineShape</a>:<br>
+<dl><dt><a name="TagDefineShape4-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineShape4-export"><strong>export</strong></a>(self, handler<font color="#909090">=None</font>)</dt><dd><tt>Export&nbsp;this&nbsp;tag</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#TagDefineShape">TagDefineShape</a>:<br>
+<dl><dt><strong>shape_bounds</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;bounds&nbsp;of&nbsp;this&nbsp;tag&nbsp;as&nbsp;a&nbsp;SWFRectangle</tt></dd>
+</dl>
+<dl><dt><strong>shapes</strong></dt>
+<dd><tt>Return&nbsp;list&nbsp;of&nbsp;SWFShape</tt></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineSprite">class <strong>TagDefineSprite</strong></a>(<a href="swf.tag.html#SWFTimelineContainer">SWFTimelineContainer</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;DefineSprite&nbsp;tag&nbsp;defines&nbsp;a&nbsp;sprite&nbsp;character.&nbsp;It&nbsp;consists&nbsp;of&nbsp;<br>
+a&nbsp;character&nbsp;ID&nbsp;and&nbsp;a&nbsp;frame&nbsp;count,&nbsp;followed&nbsp;by&nbsp;a&nbsp;series&nbsp;of&nbsp;control&nbsp;<br>
+tags.&nbsp;The&nbsp;sprite&nbsp;is&nbsp;terminated&nbsp;with&nbsp;an&nbsp;End&nbsp;tag.<br>
+The&nbsp;length&nbsp;specified&nbsp;in&nbsp;the&nbsp;Header&nbsp;reflects&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;<br>
+entire&nbsp;DefineSprite&nbsp;tag,&nbsp;including&nbsp;the&nbsp;ControlTags&nbsp;field.<br>
+Definition&nbsp;tags&nbsp;(such&nbsp;as&nbsp;DefineShape)&nbsp;are&nbsp;not&nbsp;allowed&nbsp;in&nbsp;the&nbsp;<br>
+DefineSprite&nbsp;tag.&nbsp;All&nbsp;of&nbsp;the&nbsp;characters&nbsp;that&nbsp;control&nbsp;tags&nbsp;refer&nbsp;to&nbsp;<br>
+in&nbsp;the&nbsp;sprite&nbsp;must&nbsp;be&nbsp;defined&nbsp;in&nbsp;the&nbsp;main&nbsp;body&nbsp;of&nbsp;the&nbsp;file&nbsp;before&nbsp;<br>
+the&nbsp;sprite&nbsp;is&nbsp;defined.<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;is&nbsp;SWF&nbsp;3.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineSprite">TagDefineSprite</a></dd>
+<dd><a href="swf.tag.html#SWFTimelineContainer">SWFTimelineContainer</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineSprite-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineSprite-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineSprite-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 39</dl>
+
+<dl><dt><strong>frameCount</strong> = 0</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#SWFTimelineContainer">SWFTimelineContainer</a>:<br>
+<dl><dt><a name="TagDefineSprite-parse_tag"><strong>parse_tag</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="TagDefineSprite-parse_tags"><strong>parse_tags</strong></a>(self, data, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineText">class <strong>TagDefineText</strong></a>(<a href="swf.tag.html#DefinitionTag">DefinitionTag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;DefineText&nbsp;tag&nbsp;defines&nbsp;a&nbsp;block&nbsp;of&nbsp;static&nbsp;text.&nbsp;It&nbsp;describes&nbsp;the&nbsp;font,&nbsp;<br>
+size,&nbsp;color,&nbsp;and&nbsp;exact&nbsp;position&nbsp;of&nbsp;every&nbsp;character&nbsp;in&nbsp;the&nbsp;text&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;is&nbsp;SWF&nbsp;1.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineText">TagDefineText</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineText-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDefineText-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>records</strong></dt>
+<dd><tt>Return&nbsp;list&nbsp;of&nbsp;SWFTextRecord</tt></dd>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 11</dl>
+
+<dl><dt><strong>textBounds</strong> = None</dl>
+
+<dl><dt><strong>textMatrix</strong> = None</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDefineText-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDefineText2">class <strong>TagDefineText2</strong></a>(<a href="swf.tag.html#TagDefineText">TagDefineText</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;DefineText&nbsp;tag&nbsp;defines&nbsp;a&nbsp;block&nbsp;of&nbsp;static&nbsp;text.&nbsp;It&nbsp;describes&nbsp;the&nbsp;font,&nbsp;<br>
+size,&nbsp;color,&nbsp;and&nbsp;exact&nbsp;position&nbsp;of&nbsp;every&nbsp;character&nbsp;in&nbsp;the&nbsp;text&nbsp;<a href="__builtin__.html#object">object</a>.<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;is&nbsp;SWF&nbsp;3.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDefineText2">TagDefineText2</a></dd>
+<dd><a href="swf.tag.html#TagDefineText">TagDefineText</a></dd>
+<dd><a href="swf.tag.html#DefinitionTag">DefinitionTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDefineText2-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 33</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#TagDefineText">TagDefineText</a>:<br>
+<dl><dt><a name="TagDefineText2-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#TagDefineText">TagDefineText</a>:<br>
+<dl><dt><strong>records</strong></dt>
+<dd><tt>Return&nbsp;list&nbsp;of&nbsp;SWFTextRecord</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#TagDefineText">TagDefineText</a>:<br>
+<dl><dt><strong>textBounds</strong> = None</dl>
+
+<dl><dt><strong>textMatrix</strong> = None</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#DefinitionTag">DefinitionTag</a>:<br>
+<dl><dt><strong>characterId</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;character&nbsp;ID</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDefineText2-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDoABC">class <strong>TagDoABC</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDoABC">TagDoABC</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDoABC-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDoABC-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 82</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDoABC-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagDoAction">class <strong>TagDoAction</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>DoAction&nbsp;instructs&nbsp;Flash&nbsp;Player&nbsp;to&nbsp;perform&nbsp;a&nbsp;list&nbsp;of&nbsp;actions&nbsp;when&nbsp;the&nbsp;<br>
+current&nbsp;frame&nbsp;is&nbsp;complete.&nbsp;The&nbsp;actions&nbsp;are&nbsp;performed&nbsp;when&nbsp;the&nbsp;ShowFrame&nbsp;<br>
+tag&nbsp;is&nbsp;encountered,&nbsp;regardless&nbsp;of&nbsp;where&nbsp;in&nbsp;the&nbsp;frame&nbsp;the&nbsp;DoAction&nbsp;tag&nbsp;appears.<br>
+Starting&nbsp;with&nbsp;SWF&nbsp;9,&nbsp;if&nbsp;the&nbsp;ActionScript3&nbsp;field&nbsp;of&nbsp;the&nbsp;FileAttributes&nbsp;tag&nbsp;is&nbsp;1,&nbsp;<br>
+the&nbsp;contents&nbsp;of&nbsp;the&nbsp;DoAction&nbsp;tag&nbsp;will&nbsp;be&nbsp;ignored.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagDoAction">TagDoAction</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagDoAction-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagDoAction-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>actions</strong></dt>
+<dd><tt>Return&nbsp;list&nbsp;of&nbsp;SWFActionRecord</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;SWF&nbsp;tag&nbsp;type</tt></dd>
+</dl>
+<dl><dt><strong>version</strong></dt>
+<dd><tt>Return&nbsp;the&nbsp;minimum&nbsp;SWF&nbsp;version</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 12</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagDoAction-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagEnd">class <strong>TagEnd</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;End&nbsp;tag&nbsp;marks&nbsp;the&nbsp;end&nbsp;of&nbsp;a&nbsp;file.&nbsp;This&nbsp;must&nbsp;always&nbsp;be&nbsp;the&nbsp;last&nbsp;tag&nbsp;in&nbsp;a&nbsp;file.&nbsp;<br>
+The&nbsp;End&nbsp;tag&nbsp;is&nbsp;also&nbsp;required&nbsp;to&nbsp;end&nbsp;a&nbsp;sprite&nbsp;definition.<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;is&nbsp;SWF&nbsp;1.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagEnd">TagEnd</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagEnd-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagEnd-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>name</strong></dt>
+<dd><tt>The&nbsp;tag&nbsp;name</tt></dd>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 0</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagEnd-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt><dd><tt>Parses&nbsp;this&nbsp;tag</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagFactory">class <strong>TagFactory</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Class methods defined here:<br>
+<dl><dt><a name="TagFactory-create"><strong>create</strong></a>(cls, type)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt><dd><tt>Return&nbsp;the&nbsp;created&nbsp;tag&nbsp;by&nbsp;specifiying&nbsp;an&nbsp;integer</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagFileAttributes">class <strong>TagFileAttributes</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;FileAttributes&nbsp;tag&nbsp;defines&nbsp;characteristics&nbsp;of&nbsp;the&nbsp;SWF&nbsp;file.&nbsp;This&nbsp;tag&nbsp;<br>
+is&nbsp;required&nbsp;for&nbsp;SWF&nbsp;8&nbsp;and&nbsp;later&nbsp;and&nbsp;must&nbsp;be&nbsp;the&nbsp;first&nbsp;tag&nbsp;in&nbsp;the&nbsp;SWF&nbsp;file.&nbsp;<br>
+Additionally,&nbsp;the&nbsp;FileAttributes&nbsp;tag&nbsp;can&nbsp;optionally&nbsp;be&nbsp;included&nbsp;in&nbsp;all&nbsp;SWF&nbsp;<br>
+file&nbsp;versions.<br>
+The&nbsp;HasMetadata&nbsp;flag&nbsp;identifies&nbsp;whether&nbsp;the&nbsp;SWF&nbsp;file&nbsp;contains&nbsp;the&nbsp;Metadata&nbsp;<br>
+tag.&nbsp;Flash&nbsp;Player&nbsp;does&nbsp;not&nbsp;care&nbsp;about&nbsp;this&nbsp;bit&nbsp;field&nbsp;or&nbsp;the&nbsp;related&nbsp;tag&nbsp;but&nbsp;<br>
+it&nbsp;is&nbsp;useful&nbsp;for&nbsp;search&nbsp;engines.<br>
+The&nbsp;UseNetwork&nbsp;flag&nbsp;signifies&nbsp;whether&nbsp;Flash&nbsp;Player&nbsp;should&nbsp;grant&nbsp;the&nbsp;SWF&nbsp;file&nbsp;<br>
+local&nbsp;or&nbsp;network&nbsp;file&nbsp;access&nbsp;if&nbsp;the&nbsp;SWF&nbsp;file&nbsp;is&nbsp;loaded&nbsp;locally.&nbsp;The&nbsp;default&nbsp;<br>
+behavior&nbsp;is&nbsp;to&nbsp;allow&nbsp;local&nbsp;SWF&nbsp;files&nbsp;to&nbsp;interact&nbsp;with&nbsp;local&nbsp;files&nbsp;only,&nbsp;and&nbsp;<br>
+not&nbsp;with&nbsp;the&nbsp;network.&nbsp;However,&nbsp;by&nbsp;setting&nbsp;the&nbsp;UseNetwork&nbsp;flag,&nbsp;the&nbsp;local&nbsp;SWF&nbsp;<br>
+can&nbsp;forfeit&nbsp;its&nbsp;local&nbsp;file&nbsp;system&nbsp;access&nbsp;in&nbsp;exchange&nbsp;for&nbsp;access&nbsp;to&nbsp;the&nbsp;<br>
+network.&nbsp;Any&nbsp;version&nbsp;of&nbsp;SWF&nbsp;can&nbsp;use&nbsp;the&nbsp;UseNetwork&nbsp;flag&nbsp;to&nbsp;set&nbsp;the&nbsp;file&nbsp;<br>
+access&nbsp;for&nbsp;locally&nbsp;loaded&nbsp;SWF&nbsp;files&nbsp;that&nbsp;are&nbsp;running&nbsp;in&nbsp;Flash&nbsp;Player&nbsp;8&nbsp;or&nbsp;later.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagFileAttributes">TagFileAttributes</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagFileAttributes-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagFileAttributes-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagFileAttributes-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 69</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagFrameLabel">class <strong>TagFrameLabel</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;FrameLabel&nbsp;tag&nbsp;gives&nbsp;the&nbsp;specified&nbsp;Name&nbsp;to&nbsp;the&nbsp;current&nbsp;frame.&nbsp;<br>
+ActionGoToLabel&nbsp;uses&nbsp;this&nbsp;name&nbsp;to&nbsp;identify&nbsp;the&nbsp;frame.<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;is&nbsp;SWF&nbsp;3.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagFrameLabel">TagFrameLabel</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagFrameLabel-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagFrameLabel-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 43</dl>
+
+<dl><dt><strong>frameName</strong> = ''</dl>
+
+<dl><dt><strong>namedAnchorFlag</strong> = False</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagFrameLabel-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagJPEGTables">class <strong>TagJPEGTables</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>This&nbsp;tag&nbsp;defines&nbsp;the&nbsp;JPEG&nbsp;encoding&nbsp;table&nbsp;(the&nbsp;Tables/Misc&nbsp;segment)&nbsp;for&nbsp;all&nbsp;<br>
+JPEG&nbsp;images&nbsp;defined&nbsp;using&nbsp;the&nbsp;DefineBits&nbsp;tag.&nbsp;There&nbsp;may&nbsp;only&nbsp;be&nbsp;one&nbsp;<br>
+JPEGTables&nbsp;tag&nbsp;in&nbsp;a&nbsp;SWF&nbsp;file.<br>
+The&nbsp;data&nbsp;in&nbsp;this&nbsp;tag&nbsp;begins&nbsp;with&nbsp;the&nbsp;JPEG&nbsp;SOI&nbsp;marker&nbsp;0xFF,&nbsp;0xD8&nbsp;and&nbsp;ends&nbsp;<br>
+with&nbsp;the&nbsp;EOI&nbsp;marker&nbsp;0xFF,&nbsp;0xD9.&nbsp;Before&nbsp;version&nbsp;8&nbsp;of&nbsp;the&nbsp;SWF&nbsp;file&nbsp;format,&nbsp;<br>
+SWF&nbsp;files&nbsp;could&nbsp;contain&nbsp;an&nbsp;erroneous&nbsp;header&nbsp;of&nbsp;0xFF,&nbsp;0xD9,&nbsp;0xFF,&nbsp;0xD8&nbsp;before&nbsp;<br>
+the&nbsp;JPEG&nbsp;SOI&nbsp;marker.<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;for&nbsp;this&nbsp;tag&nbsp;is&nbsp;SWF&nbsp;1.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagJPEGTables">TagJPEGTables</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagJPEGTables-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagJPEGTables-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 8</dl>
+
+<dl><dt><strong>jpegTables</strong> = None</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagJPEGTables-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagMetadata">class <strong>TagMetadata</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagMetadata">TagMetadata</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagMetadata-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagMetadata-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 77</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagMetadata-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagPlaceObject">class <strong>TagPlaceObject</strong></a>(<a href="swf.tag.html#DisplayListTag">DisplayListTag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;PlaceObject&nbsp;tag&nbsp;adds&nbsp;a&nbsp;character&nbsp;to&nbsp;the&nbsp;display&nbsp;list.&nbsp;The&nbsp;CharacterId&nbsp;<br>
+identifies&nbsp;the&nbsp;character&nbsp;to&nbsp;be&nbsp;added.&nbsp;The&nbsp;Depth&nbsp;field&nbsp;specifies&nbsp;the&nbsp;<br>
+stacking&nbsp;order&nbsp;of&nbsp;the&nbsp;character.&nbsp;The&nbsp;Matrix&nbsp;field&nbsp;species&nbsp;the&nbsp;position,&nbsp;<br>
+scale,&nbsp;and&nbsp;rotation&nbsp;of&nbsp;the&nbsp;character.&nbsp;If&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;PlaceObject&nbsp;tag&nbsp;<br>
+exceeds&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;transformation&nbsp;matrix,&nbsp;it&nbsp;is&nbsp;assumed&nbsp;that&nbsp;a&nbsp;<br>
+ColorTransform&nbsp;field&nbsp;is&nbsp;appended&nbsp;to&nbsp;the&nbsp;record.&nbsp;The&nbsp;ColorTransform&nbsp;field&nbsp;<br>
+specifies&nbsp;a&nbsp;color&nbsp;effect&nbsp;(such&nbsp;as&nbsp;transparency)&nbsp;that&nbsp;is&nbsp;applied&nbsp;to&nbsp;the&nbsp;character.&nbsp;<br>
+The&nbsp;same&nbsp;character&nbsp;can&nbsp;be&nbsp;added&nbsp;more&nbsp;than&nbsp;once&nbsp;to&nbsp;the&nbsp;display&nbsp;list&nbsp;with&nbsp;<br>
+a&nbsp;different&nbsp;depth&nbsp;and&nbsp;transformation&nbsp;matrix.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagPlaceObject">TagPlaceObject</a></dd>
+<dd><a href="swf.tag.html#DisplayListTag">DisplayListTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagPlaceObject-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagPlaceObject-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagPlaceObject-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt><dd><tt>Parses&nbsp;this&nbsp;tag</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>filters</strong></dt>
+<dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;filter</tt></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 4</dl>
+
+<dl><dt><strong>bitmapCache</strong> = 0</dl>
+
+<dl><dt><strong>blendMode</strong> = 0</dl>
+
+<dl><dt><strong>className</strong> = None</dl>
+
+<dl><dt><strong>clipActions</strong> = None</dl>
+
+<dl><dt><strong>clipDepth</strong> = 0</dl>
+
+<dl><dt><strong>colorTransform</strong> = None</dl>
+
+<dl><dt><strong>depth</strong> = 0</dl>
+
+<dl><dt><strong>hasBlendMode</strong> = False</dl>
+
+<dl><dt><strong>hasCacheAsBitmap</strong> = False</dl>
+
+<dl><dt><strong>hasCharacter</strong> = False</dl>
+
+<dl><dt><strong>hasClassName</strong> = False</dl>
+
+<dl><dt><strong>hasClipActions</strong> = False</dl>
+
+<dl><dt><strong>hasClipDepth</strong> = False</dl>
+
+<dl><dt><strong>hasColorTransform</strong> = False</dl>
+
+<dl><dt><strong>hasFilterList</strong> = False</dl>
+
+<dl><dt><strong>hasImage</strong> = False</dl>
+
+<dl><dt><strong>hasMatrix</strong> = False</dl>
+
+<dl><dt><strong>hasMove</strong> = False</dl>
+
+<dl><dt><strong>hasName</strong> = False</dl>
+
+<dl><dt><strong>hasRatio</strong> = False</dl>
+
+<dl><dt><strong>instanceName</strong> = None</dl>
+
+<dl><dt><strong>matrix</strong> = None</dl>
+
+<dl><dt><strong>ratio</strong> = 0</dl>
+
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#DisplayListTag">DisplayListTag</a>:<br>
+<dl><dt><strong>characterId</strong> = -1</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagPlaceObject2">class <strong>TagPlaceObject2</strong></a>(<a href="swf.tag.html#TagPlaceObject">TagPlaceObject</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;PlaceObject2&nbsp;tag&nbsp;extends&nbsp;the&nbsp;functionality&nbsp;of&nbsp;the&nbsp;PlaceObject&nbsp;tag.&nbsp;<br>
+The&nbsp;PlaceObject2&nbsp;tag&nbsp;can&nbsp;both&nbsp;add&nbsp;a&nbsp;character&nbsp;to&nbsp;the&nbsp;display&nbsp;list,&nbsp;and&nbsp;<br>
+modify&nbsp;the&nbsp;attributes&nbsp;of&nbsp;a&nbsp;character&nbsp;that&nbsp;is&nbsp;already&nbsp;on&nbsp;the&nbsp;display&nbsp;list.&nbsp;<br>
+The&nbsp;PlaceObject2&nbsp;tag&nbsp;changed&nbsp;slightly&nbsp;from&nbsp;SWF&nbsp;4&nbsp;to&nbsp;SWF&nbsp;5.&nbsp;In&nbsp;SWF&nbsp;5,&nbsp;<br>
+clip&nbsp;actions&nbsp;were&nbsp;added.<br>
+The&nbsp;tag&nbsp;begins&nbsp;with&nbsp;a&nbsp;group&nbsp;of&nbsp;flags&nbsp;that&nbsp;indicate&nbsp;which&nbsp;fields&nbsp;are&nbsp;<br>
+present&nbsp;in&nbsp;the&nbsp;tag.&nbsp;The&nbsp;optional&nbsp;fields&nbsp;are&nbsp;CharacterId,&nbsp;Matrix,&nbsp;<br>
+ColorTransform,&nbsp;Ratio,&nbsp;ClipDepth,&nbsp;Name,&nbsp;and&nbsp;ClipActions.&nbsp;<br>
+The&nbsp;Depth&nbsp;field&nbsp;is&nbsp;the&nbsp;only&nbsp;field&nbsp;that&nbsp;is&nbsp;always&nbsp;required.<br>
+The&nbsp;depth&nbsp;value&nbsp;determines&nbsp;the&nbsp;stacking&nbsp;order&nbsp;of&nbsp;the&nbsp;character.&nbsp;<br>
+Characters&nbsp;with&nbsp;lower&nbsp;depth&nbsp;values&nbsp;are&nbsp;displayed&nbsp;underneath&nbsp;characters&nbsp;<br>
+with&nbsp;higher&nbsp;depth&nbsp;values.&nbsp;A&nbsp;depth&nbsp;value&nbsp;of&nbsp;1&nbsp;means&nbsp;the&nbsp;character&nbsp;is&nbsp;<br>
+displayed&nbsp;at&nbsp;the&nbsp;bottom&nbsp;of&nbsp;the&nbsp;stack.&nbsp;Any&nbsp;given&nbsp;depth&nbsp;can&nbsp;have&nbsp;only&nbsp;one&nbsp;<br>
+character.&nbsp;This&nbsp;means&nbsp;a&nbsp;character&nbsp;that&nbsp;is&nbsp;already&nbsp;on&nbsp;the&nbsp;display&nbsp;list&nbsp;can&nbsp;<br>
+be&nbsp;identified&nbsp;by&nbsp;its&nbsp;depth&nbsp;alone&nbsp;(that&nbsp;is,&nbsp;a&nbsp;CharacterId&nbsp;is&nbsp;not&nbsp;required).<br>
+The&nbsp;PlaceFlagMove&nbsp;and&nbsp;PlaceFlagHasCharacter&nbsp;tags&nbsp;indicate&nbsp;whether&nbsp;a&nbsp;new&nbsp;<br>
+character&nbsp;is&nbsp;being&nbsp;added&nbsp;to&nbsp;the&nbsp;display&nbsp;list,&nbsp;or&nbsp;a&nbsp;character&nbsp;already&nbsp;on&nbsp;the&nbsp;<br>
+display&nbsp;list&nbsp;is&nbsp;being&nbsp;modified.&nbsp;The&nbsp;meaning&nbsp;of&nbsp;the&nbsp;flags&nbsp;is&nbsp;as&nbsp;follows:<br>
+&nbsp;<br>
+-&nbsp;PlaceFlagMove&nbsp;=&nbsp;0&nbsp;and&nbsp;PlaceFlagHasCharacter&nbsp;=&nbsp;1&nbsp;A&nbsp;new&nbsp;character&nbsp;<br>
+&nbsp;&nbsp;(with&nbsp;ID&nbsp;of&nbsp;CharacterId)&nbsp;is&nbsp;placed&nbsp;on&nbsp;the&nbsp;display&nbsp;list&nbsp;at&nbsp;the&nbsp;specified<br>
+&nbsp;&nbsp;depth.&nbsp;Other&nbsp;fields&nbsp;set&nbsp;the&nbsp;attributes&nbsp;of&nbsp;this&nbsp;new&nbsp;character.&nbsp;<br>
+-&nbsp;PlaceFlagMove&nbsp;=&nbsp;1&nbsp;and&nbsp;PlaceFlagHasCharacter&nbsp;=&nbsp;0<br>
+&nbsp;&nbsp;The&nbsp;character&nbsp;at&nbsp;the&nbsp;specified&nbsp;depth&nbsp;is&nbsp;modified.&nbsp;Other&nbsp;fields&nbsp;modify&nbsp;the<br>
+&nbsp;&nbsp;attributes&nbsp;of&nbsp;this&nbsp;character.&nbsp;Because&nbsp;any&nbsp;given&nbsp;depth&nbsp;can&nbsp;have&nbsp;only&nbsp;one&nbsp;<br>
+&nbsp;&nbsp;character,&nbsp;no&nbsp;CharacterId&nbsp;is&nbsp;required.<br>
+-&nbsp;PlaceFlagMove&nbsp;=&nbsp;1&nbsp;and&nbsp;PlaceFlagHasCharacter&nbsp;=&nbsp;1&nbsp;<br>
+&nbsp;&nbsp;The&nbsp;character&nbsp;at&nbsp;the&nbsp;specified&nbsp;Depth&nbsp;is&nbsp;removed,&nbsp;and&nbsp;a&nbsp;new&nbsp;character&nbsp;<br>
+&nbsp;&nbsp;(with&nbsp;ID&nbsp;of&nbsp;CharacterId)&nbsp;is&nbsp;placed&nbsp;at&nbsp;that&nbsp;depth.&nbsp;Other&nbsp;fields&nbsp;set&nbsp;the&nbsp;<br>
+&nbsp;&nbsp;attributes&nbsp;of&nbsp;this&nbsp;new&nbsp;character.<br>
+&nbsp;&nbsp;For&nbsp;example,&nbsp;a&nbsp;character&nbsp;that&nbsp;is&nbsp;moved&nbsp;over&nbsp;a&nbsp;series&nbsp;of&nbsp;frames&nbsp;has&nbsp;<br>
+&nbsp;&nbsp;PlaceFlagHasCharacter&nbsp;set&nbsp;in&nbsp;the&nbsp;first&nbsp;frame,&nbsp;and&nbsp;PlaceFlagMove&nbsp;set&nbsp;in&nbsp;<br>
+&nbsp;&nbsp;subsequent&nbsp;frames.&nbsp;The&nbsp;first&nbsp;frame&nbsp;places&nbsp;the&nbsp;new&nbsp;character&nbsp;at&nbsp;the&nbsp;desired&nbsp;<br>
+&nbsp;&nbsp;depth,&nbsp;and&nbsp;sets&nbsp;the&nbsp;initial&nbsp;transformation&nbsp;matrix.&nbsp;Subsequent&nbsp;frames&nbsp;replace&nbsp;<br>
+&nbsp;&nbsp;the&nbsp;transformation&nbsp;matrix&nbsp;of&nbsp;the&nbsp;character&nbsp;at&nbsp;the&nbsp;desired&nbsp;depth.<br>
+&nbsp;&nbsp;<br>
+The&nbsp;optional&nbsp;fields&nbsp;in&nbsp;PlaceObject2&nbsp;have&nbsp;the&nbsp;following&nbsp;meaning:<br>
+-&nbsp;The&nbsp;CharacterId&nbsp;field&nbsp;specifies&nbsp;the&nbsp;character&nbsp;to&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;display&nbsp;list.&nbsp;<br>
+&nbsp;&nbsp;CharacterId&nbsp;is&nbsp;used&nbsp;only&nbsp;when&nbsp;a&nbsp;new&nbsp;character&nbsp;is&nbsp;being&nbsp;added.&nbsp;If&nbsp;a&nbsp;character&nbsp;<br>
+&nbsp;&nbsp;that&nbsp;is&nbsp;already&nbsp;on&nbsp;the&nbsp;display&nbsp;list&nbsp;is&nbsp;being&nbsp;modified,&nbsp;the&nbsp;CharacterId&nbsp;field&nbsp;is&nbsp;absent.<br>
+-&nbsp;The&nbsp;Matrix&nbsp;field&nbsp;specifies&nbsp;the&nbsp;position,&nbsp;scale&nbsp;and&nbsp;rotation&nbsp;of&nbsp;the&nbsp;character&nbsp;<br>
+&nbsp;&nbsp;being&nbsp;added&nbsp;or&nbsp;modified.<br>
+-&nbsp;The&nbsp;ColorTransform&nbsp;field&nbsp;specifies&nbsp;the&nbsp;color&nbsp;effect&nbsp;applied&nbsp;to&nbsp;the&nbsp;character&nbsp;<br>
+&nbsp;&nbsp;being&nbsp;added&nbsp;or&nbsp;modified.<br>
+-&nbsp;The&nbsp;Ratio&nbsp;field&nbsp;specifies&nbsp;a&nbsp;morph&nbsp;ratio&nbsp;for&nbsp;the&nbsp;character&nbsp;being&nbsp;added&nbsp;or&nbsp;modified.&nbsp;<br>
+&nbsp;&nbsp;This&nbsp;field&nbsp;applies&nbsp;only&nbsp;to&nbsp;characters&nbsp;defined&nbsp;with&nbsp;DefineMorphShape,&nbsp;and&nbsp;controls&nbsp;<br>
+&nbsp;&nbsp;how&nbsp;far&nbsp;the&nbsp;morph&nbsp;has&nbsp;progressed.&nbsp;A&nbsp;ratio&nbsp;of&nbsp;zero&nbsp;displays&nbsp;the&nbsp;character&nbsp;at&nbsp;the&nbsp;start&nbsp;<br>
+&nbsp;&nbsp;of&nbsp;the&nbsp;morph.&nbsp;A&nbsp;ratio&nbsp;of&nbsp;65535&nbsp;displays&nbsp;the&nbsp;character&nbsp;at&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;morph.&nbsp;<br>
+&nbsp;&nbsp;For&nbsp;values&nbsp;between&nbsp;zero&nbsp;and&nbsp;65535&nbsp;Flash&nbsp;Player&nbsp;interpolates&nbsp;between&nbsp;the&nbsp;start&nbsp;and&nbsp;end&nbsp;<br>
+&nbsp;&nbsp;shapes,&nbsp;and&nbsp;displays&nbsp;an&nbsp;in-&nbsp;between&nbsp;shape.<br>
+-&nbsp;The&nbsp;ClipDepth&nbsp;field&nbsp;specifies&nbsp;the&nbsp;top-most&nbsp;depth&nbsp;that&nbsp;will&nbsp;be&nbsp;masked&nbsp;by&nbsp;the&nbsp;character&nbsp;<br>
+&nbsp;&nbsp;being&nbsp;added.&nbsp;A&nbsp;ClipDepth&nbsp;of&nbsp;zero&nbsp;indicates&nbsp;that&nbsp;this&nbsp;is&nbsp;not&nbsp;a&nbsp;clipping&nbsp;character.<br>
+-&nbsp;The&nbsp;Name&nbsp;field&nbsp;specifies&nbsp;a&nbsp;name&nbsp;for&nbsp;the&nbsp;character&nbsp;being&nbsp;added&nbsp;or&nbsp;modified.&nbsp;This&nbsp;field&nbsp;<br>
+&nbsp;&nbsp;is&nbsp;typically&nbsp;used&nbsp;with&nbsp;sprite&nbsp;characters,&nbsp;and&nbsp;is&nbsp;used&nbsp;to&nbsp;identify&nbsp;the&nbsp;sprite&nbsp;for&nbsp;<br>
+&nbsp;&nbsp;SetTarget&nbsp;actions.&nbsp;It&nbsp;allows&nbsp;the&nbsp;main&nbsp;file&nbsp;(or&nbsp;other&nbsp;sprites)&nbsp;to&nbsp;perform&nbsp;actions&nbsp;<br>
+&nbsp;&nbsp;inside&nbsp;the&nbsp;sprite&nbsp;(see&nbsp;'Sprites&nbsp;and&nbsp;Movie&nbsp;Clips'&nbsp;on&nbsp;page&nbsp;231).<br>
+-&nbsp;The&nbsp;ClipActions&nbsp;field,&nbsp;which&nbsp;is&nbsp;valid&nbsp;only&nbsp;for&nbsp;placing&nbsp;sprite&nbsp;characters,&nbsp;defines&nbsp;<br>
+&nbsp;&nbsp;one&nbsp;or&nbsp;more&nbsp;event&nbsp;handlers&nbsp;to&nbsp;be&nbsp;invoked&nbsp;when&nbsp;certain&nbsp;events&nbsp;occur.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagPlaceObject2">TagPlaceObject2</a></dd>
+<dd><a href="swf.tag.html#TagPlaceObject">TagPlaceObject</a></dd>
+<dd><a href="swf.tag.html#DisplayListTag">DisplayListTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagPlaceObject2-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagPlaceObject2-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 26</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#TagPlaceObject">TagPlaceObject</a>:<br>
+<dl><dt><a name="TagPlaceObject2-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#TagPlaceObject">TagPlaceObject</a>:<br>
+<dl><dt><strong>filters</strong></dt>
+<dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;filter</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#TagPlaceObject">TagPlaceObject</a>:<br>
+<dl><dt><strong>bitmapCache</strong> = 0</dl>
+
+<dl><dt><strong>blendMode</strong> = 0</dl>
+
+<dl><dt><strong>className</strong> = None</dl>
+
+<dl><dt><strong>clipActions</strong> = None</dl>
+
+<dl><dt><strong>clipDepth</strong> = 0</dl>
+
+<dl><dt><strong>colorTransform</strong> = None</dl>
+
+<dl><dt><strong>depth</strong> = 0</dl>
+
+<dl><dt><strong>hasBlendMode</strong> = False</dl>
+
+<dl><dt><strong>hasCacheAsBitmap</strong> = False</dl>
+
+<dl><dt><strong>hasCharacter</strong> = False</dl>
+
+<dl><dt><strong>hasClassName</strong> = False</dl>
+
+<dl><dt><strong>hasClipActions</strong> = False</dl>
+
+<dl><dt><strong>hasClipDepth</strong> = False</dl>
+
+<dl><dt><strong>hasColorTransform</strong> = False</dl>
+
+<dl><dt><strong>hasFilterList</strong> = False</dl>
+
+<dl><dt><strong>hasImage</strong> = False</dl>
+
+<dl><dt><strong>hasMatrix</strong> = False</dl>
+
+<dl><dt><strong>hasMove</strong> = False</dl>
+
+<dl><dt><strong>hasName</strong> = False</dl>
+
+<dl><dt><strong>hasRatio</strong> = False</dl>
+
+<dl><dt><strong>instanceName</strong> = None</dl>
+
+<dl><dt><strong>matrix</strong> = None</dl>
+
+<dl><dt><strong>ratio</strong> = 0</dl>
+
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#DisplayListTag">DisplayListTag</a>:<br>
+<dl><dt><strong>characterId</strong> = -1</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagPlaceObject3">class <strong>TagPlaceObject3</strong></a>(<a href="swf.tag.html#TagPlaceObject2">TagPlaceObject2</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagPlaceObject3">TagPlaceObject3</a></dd>
+<dd><a href="swf.tag.html#TagPlaceObject2">TagPlaceObject2</a></dd>
+<dd><a href="swf.tag.html#TagPlaceObject">TagPlaceObject</a></dd>
+<dd><a href="swf.tag.html#DisplayListTag">DisplayListTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagPlaceObject3-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagPlaceObject3-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 70</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#TagPlaceObject2">TagPlaceObject2</a>:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Methods inherited from <a href="swf.tag.html#TagPlaceObject">TagPlaceObject</a>:<br>
+<dl><dt><a name="TagPlaceObject3-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#TagPlaceObject">TagPlaceObject</a>:<br>
+<dl><dt><strong>filters</strong></dt>
+<dd><tt>Returns&nbsp;a&nbsp;list&nbsp;of&nbsp;filter</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#TagPlaceObject">TagPlaceObject</a>:<br>
+<dl><dt><strong>bitmapCache</strong> = 0</dl>
+
+<dl><dt><strong>blendMode</strong> = 0</dl>
+
+<dl><dt><strong>className</strong> = None</dl>
+
+<dl><dt><strong>clipActions</strong> = None</dl>
+
+<dl><dt><strong>clipDepth</strong> = 0</dl>
+
+<dl><dt><strong>colorTransform</strong> = None</dl>
+
+<dl><dt><strong>depth</strong> = 0</dl>
+
+<dl><dt><strong>hasBlendMode</strong> = False</dl>
+
+<dl><dt><strong>hasCacheAsBitmap</strong> = False</dl>
+
+<dl><dt><strong>hasCharacter</strong> = False</dl>
+
+<dl><dt><strong>hasClassName</strong> = False</dl>
+
+<dl><dt><strong>hasClipActions</strong> = False</dl>
+
+<dl><dt><strong>hasClipDepth</strong> = False</dl>
+
+<dl><dt><strong>hasColorTransform</strong> = False</dl>
+
+<dl><dt><strong>hasFilterList</strong> = False</dl>
+
+<dl><dt><strong>hasImage</strong> = False</dl>
+
+<dl><dt><strong>hasMatrix</strong> = False</dl>
+
+<dl><dt><strong>hasMove</strong> = False</dl>
+
+<dl><dt><strong>hasName</strong> = False</dl>
+
+<dl><dt><strong>hasRatio</strong> = False</dl>
+
+<dl><dt><strong>instanceName</strong> = None</dl>
+
+<dl><dt><strong>matrix</strong> = None</dl>
+
+<dl><dt><strong>ratio</strong> = 0</dl>
+
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#DisplayListTag">DisplayListTag</a>:<br>
+<dl><dt><strong>characterId</strong> = -1</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagRemoveObject">class <strong>TagRemoveObject</strong></a>(<a href="swf.tag.html#DisplayListTag">DisplayListTag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;RemoveObject&nbsp;tag&nbsp;removes&nbsp;the&nbsp;specified&nbsp;character&nbsp;(at&nbsp;the&nbsp;specified&nbsp;depth)&nbsp;<br>
+from&nbsp;the&nbsp;display&nbsp;list.<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;is&nbsp;SWF&nbsp;1.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagRemoveObject">TagRemoveObject</a></dd>
+<dd><a href="swf.tag.html#DisplayListTag">DisplayListTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagRemoveObject-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagRemoveObject-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt><dd><tt>Parses&nbsp;this&nbsp;tag</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 5</dl>
+
+<dl><dt><strong>depth</strong> = 0</dl>
+
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#DisplayListTag">DisplayListTag</a>:<br>
+<dl><dt><strong>characterId</strong> = -1</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagRemoveObject-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagRemoveObject2">class <strong>TagRemoveObject2</strong></a>(<a href="swf.tag.html#TagRemoveObject">TagRemoveObject</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;RemoveObject2&nbsp;tag&nbsp;removes&nbsp;the&nbsp;character&nbsp;at&nbsp;the&nbsp;specified&nbsp;depth&nbsp;<br>
+from&nbsp;the&nbsp;display&nbsp;list.&nbsp;<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;is&nbsp;SWF&nbsp;3.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagRemoveObject2">TagRemoveObject2</a></dd>
+<dd><a href="swf.tag.html#TagRemoveObject">TagRemoveObject</a></dd>
+<dd><a href="swf.tag.html#DisplayListTag">DisplayListTag</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagRemoveObject2-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagRemoveObject2-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 28</dl>
+
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#TagRemoveObject">TagRemoveObject</a>:<br>
+<dl><dt><strong>depth</strong> = 0</dl>
+
+<hr>
+Data and other attributes inherited from <a href="swf.tag.html#DisplayListTag">DisplayListTag</a>:<br>
+<dl><dt><strong>characterId</strong> = -1</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagRemoveObject2-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagSetBackgroundColor">class <strong>TagSetBackgroundColor</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;SetBackgroundColor&nbsp;tag&nbsp;sets&nbsp;the&nbsp;background&nbsp;color&nbsp;of&nbsp;the&nbsp;display.&nbsp;<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;is&nbsp;SWF&nbsp;1.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagSetBackgroundColor">TagSetBackgroundColor</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagSetBackgroundColor-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagSetBackgroundColor-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagSetBackgroundColor-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 9</dl>
+
+<dl><dt><strong>color</strong> = 0</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagShowFrame">class <strong>TagShowFrame</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;ShowFrame&nbsp;tag&nbsp;instructs&nbsp;Flash&nbsp;Player&nbsp;to&nbsp;display&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;<br>
+display&nbsp;list.&nbsp;The&nbsp;file&nbsp;is&nbsp;paused&nbsp;for&nbsp;the&nbsp;duration&nbsp;of&nbsp;a&nbsp;single&nbsp;frame.<br>
+The&nbsp;minimum&nbsp;file&nbsp;format&nbsp;version&nbsp;is&nbsp;SWF&nbsp;1.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagShowFrame">TagShowFrame</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagShowFrame-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagShowFrame-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 1</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagShowFrame-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt><dd><tt>Parses&nbsp;this&nbsp;tag</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TagSymbolClass">class <strong>TagSymbolClass</strong></a>(<a href="swf.tag.html#Tag">Tag</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.tag.html#TagSymbolClass">TagSymbolClass</a></dd>
+<dd><a href="swf.tag.html#Tag">Tag</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TagSymbolClass-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="TagSymbolClass-parse"><strong>parse</strong></a>(self, data, length, version<font color="#909090">=1</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>level</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>type</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>TYPE</strong> = 76</dl>
+
+<hr>
+Methods inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><a name="TagSymbolClass-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.tag.html#Tag">Tag</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

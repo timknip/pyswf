@@ -1,0 +1,832 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module swf.actions</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="swf.html"><font color="#ffffff">swf</font></a>.actions</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/floorplanner/pyswf/blob/master/swf/actions.py">actions.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.actions.html#Action">Action</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.actions.html#Action4">Action4</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.actions.html#ActionAdd">ActionAdd</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#ActionAnd">ActionAnd</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.actions.html#Action5">Action5</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#Action6">Action6</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#Action7">Action7</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#ActionGetURL">ActionGetURL</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#ActionGotoFrame">ActionGotoFrame</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#ActionGotoLabel">ActionGotoLabel</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#ActionNextFrame">ActionNextFrame</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#ActionPlay">ActionPlay</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#ActionPreviousFrame">ActionPreviousFrame</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#ActionSetTarget">ActionSetTarget</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#ActionStop">ActionStop</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#ActionStopSounds">ActionStopSounds</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#ActionToggleQuality">ActionToggleQuality</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#ActionUnknown">ActionUnknown</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.actions.html#ActionWaitForFrame">ActionWaitForFrame</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.actions.html#SWFActionFactory">SWFActionFactory</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Action">class <strong>Action</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Action-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<dl><dt><a name="Action-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="Action-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Action4">class <strong>Action4</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;SWF&nbsp;4&nbsp;actions<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#Action4">Action4</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Action4-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="Action4-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="Action4-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Action5">class <strong>Action5</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;SWF&nbsp;5&nbsp;actions<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#Action5">Action5</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Action5-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="Action5-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="Action5-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Action6">class <strong>Action6</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;SWF&nbsp;6&nbsp;actions<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#Action6">Action6</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Action6-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="Action6-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="Action6-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Action7">class <strong>Action7</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;class&nbsp;for&nbsp;SWF&nbsp;7&nbsp;actions<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#Action7">Action7</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Action7-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="Action7-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="Action7-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionAdd">class <strong>ActionAdd</strong></a>(<a href="swf.actions.html#Action4">Action4</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#&nbsp;=========================================================&nbsp;<br>
+#&nbsp;SWF&nbsp;4&nbsp;actions<br>
+#&nbsp;=========================================================<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#ActionAdd">ActionAdd</a></dd>
+<dd><a href="swf.actions.html#Action4">Action4</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActionAdd-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CODE</strong> = 10</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action4">Action4</a>:<br>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="ActionAdd-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="ActionAdd-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionAnd">class <strong>ActionAnd</strong></a>(<a href="swf.actions.html#Action4">Action4</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#ActionAnd">ActionAnd</a></dd>
+<dd><a href="swf.actions.html#Action4">Action4</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActionAnd-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CODE</strong> = 16</dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action4">Action4</a>:<br>
+<dl><dt><strong>version</strong></dt>
+</dl>
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="ActionAnd-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="ActionAnd-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionGetURL">class <strong>ActionGetURL</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>#&nbsp;=========================================================&nbsp;<br>
+#&nbsp;SWF&nbsp;3&nbsp;actions<br>
+#&nbsp;=========================================================<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#ActionGetURL">ActionGetURL</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActionGetURL-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<dl><dt><a name="ActionGetURL-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CODE</strong> = 131</dl>
+
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="ActionGetURL-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionGotoFrame">class <strong>ActionGotoFrame</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#ActionGotoFrame">ActionGotoFrame</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActionGotoFrame-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<dl><dt><a name="ActionGotoFrame-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CODE</strong> = 129</dl>
+
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="ActionGotoFrame-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionGotoLabel">class <strong>ActionGotoLabel</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#ActionGotoLabel">ActionGotoLabel</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActionGotoLabel-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<dl><dt><a name="ActionGotoLabel-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CODE</strong> = 140</dl>
+
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="ActionGotoLabel-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionNextFrame">class <strong>ActionNextFrame</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#ActionNextFrame">ActionNextFrame</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActionNextFrame-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CODE</strong> = 4</dl>
+
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="ActionNextFrame-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="ActionNextFrame-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionPlay">class <strong>ActionPlay</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#ActionPlay">ActionPlay</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActionPlay-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<dl><dt><a name="ActionPlay-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CODE</strong> = 6</dl>
+
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="ActionPlay-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionPreviousFrame">class <strong>ActionPreviousFrame</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#ActionPreviousFrame">ActionPreviousFrame</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActionPreviousFrame-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CODE</strong> = 5</dl>
+
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="ActionPreviousFrame-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="ActionPreviousFrame-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionSetTarget">class <strong>ActionSetTarget</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#ActionSetTarget">ActionSetTarget</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActionSetTarget-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<dl><dt><a name="ActionSetTarget-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CODE</strong> = 139</dl>
+
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="ActionSetTarget-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionStop">class <strong>ActionStop</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#ActionStop">ActionStop</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActionStop-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<dl><dt><a name="ActionStop-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CODE</strong> = 7</dl>
+
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="ActionStop-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionStopSounds">class <strong>ActionStopSounds</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#ActionStopSounds">ActionStopSounds</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActionStopSounds-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CODE</strong> = 9</dl>
+
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="ActionStopSounds-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="ActionStopSounds-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionToggleQuality">class <strong>ActionToggleQuality</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#ActionToggleQuality">ActionToggleQuality</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActionToggleQuality-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CODE</strong> = 8</dl>
+
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="ActionToggleQuality-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="ActionToggleQuality-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionUnknown">class <strong>ActionUnknown</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Dummy&nbsp;class&nbsp;to&nbsp;read&nbsp;unknown&nbsp;actions<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#ActionUnknown">ActionUnknown</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActionUnknown-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<dl><dt><a name="ActionUnknown-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="ActionUnknown-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActionWaitForFrame">class <strong>ActionWaitForFrame</strong></a>(<a href="swf.actions.html#Action">Action</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.actions.html#ActionWaitForFrame">ActionWaitForFrame</a></dd>
+<dd><a href="swf.actions.html#Action">Action</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActionWaitForFrame-__init__"><strong>__init__</strong></a>(self, code, length)</dt></dl>
+
+<dl><dt><a name="ActionWaitForFrame-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>CODE</strong> = 138</dl>
+
+<hr>
+Methods inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><a name="ActionWaitForFrame-tostring"><strong>tostring</strong></a>(self, indent<font color="#909090">=0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.actions.html#Action">Action</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>code</strong></dt>
+</dl>
+<dl><dt><strong>length</strong></dt>
+</dl>
+<dl><dt><strong>version</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SWFActionFactory">class <strong>SWFActionFactory</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Class methods defined here:<br>
+<dl><dt><a name="SWFActionFactory-create"><strong>create</strong></a>(cls, code, length)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

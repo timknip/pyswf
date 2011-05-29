@@ -1,0 +1,352 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module swf.filters</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="swf.html"><font color="#ffffff">swf</font></a>.filters</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/floorplanner/pyswf/blob/master/swf/filters.py">filters.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.filters.html#Filter">Filter</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.filters.html#FilterBevel">FilterBevel</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.filters.html#FilterBlur">FilterBlur</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.filters.html#FilterColorMatrix">FilterColorMatrix</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.filters.html#FilterConvolution">FilterConvolution</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.filters.html#FilterDropShadow">FilterDropShadow</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.filters.html#FilterGlow">FilterGlow</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.filters.html#FilterGradientGlow">FilterGradientGlow</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.filters.html#FilterGradientBevel">FilterGradientBevel</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.filters.html#SWFFilterFactory">SWFFilterFactory</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Filter">class <strong>Filter</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Base&nbsp;<a href="#Filter">Filter</a>&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Filter-__init__"><strong>__init__</strong></a>(self, id)</dt></dl>
+
+<dl><dt><a name="Filter-parse"><strong>parse</strong></a>(self, data)</dt><dd><tt>Parses&nbsp;the&nbsp;filter</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><tt>Return&nbsp;filter&nbsp;ID</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FilterBevel">class <strong>FilterBevel</strong></a>(<a href="swf.filters.html#Filter">Filter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Bevel&nbsp;<a href="#Filter">Filter</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.filters.html#FilterBevel">FilterBevel</a></dd>
+<dd><a href="swf.filters.html#Filter">Filter</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FilterBevel-__init__"><strong>__init__</strong></a>(self, id)</dt></dl>
+
+<dl><dt><a name="FilterBevel-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FilterBevel-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.filters.html#Filter">Filter</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><tt>Return&nbsp;filter&nbsp;ID</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FilterBlur">class <strong>FilterBlur</strong></a>(<a href="swf.filters.html#Filter">Filter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Blur&nbsp;<a href="#Filter">Filter</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.filters.html#FilterBlur">FilterBlur</a></dd>
+<dd><a href="swf.filters.html#Filter">Filter</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FilterBlur-__init__"><strong>__init__</strong></a>(self, id)</dt></dl>
+
+<dl><dt><a name="FilterBlur-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FilterBlur-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.filters.html#Filter">Filter</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><tt>Return&nbsp;filter&nbsp;ID</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FilterColorMatrix">class <strong>FilterColorMatrix</strong></a>(<a href="swf.filters.html#Filter">Filter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>ColorMatrix&nbsp;<a href="#Filter">Filter</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.filters.html#FilterColorMatrix">FilterColorMatrix</a></dd>
+<dd><a href="swf.filters.html#Filter">Filter</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FilterColorMatrix-__init__"><strong>__init__</strong></a>(self, id)</dt></dl>
+
+<dl><dt><a name="FilterColorMatrix-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<dl><dt><a name="FilterColorMatrix-tostring"><strong>tostring</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.filters.html#Filter">Filter</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><tt>Return&nbsp;filter&nbsp;ID</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FilterConvolution">class <strong>FilterConvolution</strong></a>(<a href="swf.filters.html#Filter">Filter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Convolution&nbsp;<a href="#Filter">Filter</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.filters.html#FilterConvolution">FilterConvolution</a></dd>
+<dd><a href="swf.filters.html#Filter">Filter</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FilterConvolution-__init__"><strong>__init__</strong></a>(self, id)</dt></dl>
+
+<dl><dt><a name="FilterConvolution-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.filters.html#Filter">Filter</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><tt>Return&nbsp;filter&nbsp;ID</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FilterDropShadow">class <strong>FilterDropShadow</strong></a>(<a href="swf.filters.html#Filter">Filter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Drop&nbsp;Shadow&nbsp;<a href="#Filter">Filter</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.filters.html#FilterDropShadow">FilterDropShadow</a></dd>
+<dd><a href="swf.filters.html#Filter">Filter</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FilterDropShadow-__init__"><strong>__init__</strong></a>(self, id)</dt></dl>
+
+<dl><dt><a name="FilterDropShadow-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FilterDropShadow-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.filters.html#Filter">Filter</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><tt>Return&nbsp;filter&nbsp;ID</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FilterGlow">class <strong>FilterGlow</strong></a>(<a href="swf.filters.html#Filter">Filter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Glow&nbsp;<a href="#Filter">Filter</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.filters.html#FilterGlow">FilterGlow</a></dd>
+<dd><a href="swf.filters.html#Filter">Filter</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FilterGlow-__init__"><strong>__init__</strong></a>(self, id)</dt></dl>
+
+<dl><dt><a name="FilterGlow-__str__"><strong>__str__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="FilterGlow-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.filters.html#Filter">Filter</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><tt>Return&nbsp;filter&nbsp;ID</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FilterGradientBevel">class <strong>FilterGradientBevel</strong></a>(<a href="swf.filters.html#FilterGradientGlow">FilterGradientGlow</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Gradient&nbsp;Bevel&nbsp;<a href="#Filter">Filter</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.filters.html#FilterGradientBevel">FilterGradientBevel</a></dd>
+<dd><a href="swf.filters.html#FilterGradientGlow">FilterGradientGlow</a></dd>
+<dd><a href="swf.filters.html#Filter">Filter</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FilterGradientBevel-__init__"><strong>__init__</strong></a>(self, id)</dt></dl>
+
+<hr>
+Methods inherited from <a href="swf.filters.html#FilterGradientGlow">FilterGradientGlow</a>:<br>
+<dl><dt><a name="FilterGradientBevel-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.filters.html#Filter">Filter</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><tt>Return&nbsp;filter&nbsp;ID</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="FilterGradientGlow">class <strong>FilterGradientGlow</strong></a>(<a href="swf.filters.html#Filter">Filter</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Gradient&nbsp;Glow&nbsp;<a href="#Filter">Filter</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.filters.html#FilterGradientGlow">FilterGradientGlow</a></dd>
+<dd><a href="swf.filters.html#Filter">Filter</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="FilterGradientGlow-__init__"><strong>__init__</strong></a>(self, id)</dt></dl>
+
+<dl><dt><a name="FilterGradientGlow-parse"><strong>parse</strong></a>(self, data)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.filters.html#Filter">Filter</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>id</strong></dt>
+<dd><tt>Return&nbsp;filter&nbsp;ID</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SWFFilterFactory">class <strong>SWFFilterFactory</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Filter">Filter</a>&nbsp;factory<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Class methods defined here:<br>
+<dl><dt><a name="SWFFilterFactory-create"><strong>create</strong></a>(cls, type)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt><dd><tt>Return&nbsp;the&nbsp;specified&nbsp;<a href="#Filter">Filter</a></tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

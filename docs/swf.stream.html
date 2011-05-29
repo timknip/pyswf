@@ -1,0 +1,188 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module swf.stream</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="swf.html"><font color="#ffffff">swf</font></a>.stream</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/floorplanner/pyswf/blob/master/swf/stream.py">stream.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="struct.html">struct</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.stream.html#SWFStream">SWFStream</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SWFStream">class <strong>SWFStream</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>SWF&nbsp;File&nbsp;stream<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="SWFStream-__init__"><strong>__init__</strong></a>(self, file)</dt><dd><tt>Initialize&nbsp;with&nbsp;a&nbsp;file&nbsp;<a href="__builtin__.html#object">object</a></tt></dd></dl>
+
+<dl><dt><a name="SWFStream-bin"><strong>bin</strong></a>(self, s)</dt><dd><tt>Return&nbsp;a&nbsp;value&nbsp;as&nbsp;a&nbsp;binary&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-calc_max_bits"><strong>calc_max_bits</strong></a>(self, signed, values)</dt><dd><tt>Calculates&nbsp;the&nbsp;maximim&nbsp;needed&nbsp;bits&nbsp;to&nbsp;represent&nbsp;a&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-close"><strong>close</strong></a>(self)</dt><dd><tt>Closes&nbsp;the&nbsp;stream</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-read"><strong>read</strong></a>(self, count<font color="#909090">=0</font>)</dt><dd><tt>Read</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readACTIONRECORD"><strong>readACTIONRECORD</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;SWFActionRecord</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readCLIPACTIONRECORD"><strong>readCLIPACTIONRECORD</strong></a>(self, version)</dt><dd><tt>Read&nbsp;a&nbsp;SWFClipActionRecord</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readCLIPACTIONS"><strong>readCLIPACTIONS</strong></a>(self, version)</dt><dd><tt>Read&nbsp;a&nbsp;SWFClipActions</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readCLIPEVENTFLAGS"><strong>readCLIPEVENTFLAGS</strong></a>(self, version)</dt><dd><tt>Read&nbsp;a&nbsp;SWFClipEventFlags</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readCURVEDEDGERECORD"><strong>readCURVEDEDGERECORD</strong></a>(self, num_bits)</dt><dd><tt>Read&nbsp;a&nbsp;SWFShapeRecordCurvedEdge</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readCXFORM"><strong>readCXFORM</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;SWFColorTransform</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readCXFORMWITHALPHA"><strong>readCXFORMWITHALPHA</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;SWFColorTransformWithAlpha</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readEncodedU32"><strong>readEncodedU32</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;encoded&nbsp;unsigned&nbsp;int</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readFB"><strong>readFB</strong></a>(self, bits)</dt><dd><tt>Read&nbsp;a&nbsp;float&nbsp;using&nbsp;the&nbsp;specified&nbsp;number&nbsp;of&nbsp;bits</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readFILLSTYLE"><strong>readFILLSTYLE</strong></a>(self, level<font color="#909090">=1</font>)</dt><dd><tt>Read&nbsp;a&nbsp;SWFFillStyle</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readFILTER"><strong>readFILTER</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;SWFFilter</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readFIXED"><strong>readFIXED</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;16.16&nbsp;fixed&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readFIXED8"><strong>readFIXED8</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;8.8&nbsp;fixed&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readFLOAT"><strong>readFLOAT</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;float</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readFLOAT16"><strong>readFLOAT16</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;2&nbsp;byte&nbsp;float</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readFOCALGRADIENT"><strong>readFOCALGRADIENT</strong></a>(self, level<font color="#909090">=1</font>)</dt><dd><tt>Read&nbsp;a&nbsp;SWFFocalGradient</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readGLYPHENTRY"><strong>readGLYPHENTRY</strong></a>(self, glyphBits, advanceBits)</dt><dd><tt>Read&nbsp;a&nbsp;SWFGlyphEntry</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readGRADIENT"><strong>readGRADIENT</strong></a>(self, level<font color="#909090">=1</font>)</dt><dd><tt>Read&nbsp;a&nbsp;SWFGradient</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readGRADIENTRECORD"><strong>readGRADIENTRECORD</strong></a>(self, level<font color="#909090">=1</font>)</dt><dd><tt>Read&nbsp;a&nbsp;SWFColorTransformWithAlpha</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readKERNINGRECORD"><strong>readKERNINGRECORD</strong></a>(self, wideCodes)</dt><dd><tt>Read&nbsp;a&nbsp;SWFKerningRecord</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readLANGCODE"><strong>readLANGCODE</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;language&nbsp;code</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readLINESTYLE"><strong>readLINESTYLE</strong></a>(self, level<font color="#909090">=1</font>)</dt><dd><tt>Read&nbsp;a&nbsp;SWFLineStyle</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readLINESTYLE2"><strong>readLINESTYLE2</strong></a>(self, level<font color="#909090">=1</font>)</dt><dd><tt>Read&nbsp;a&nbsp;SWFLineStyle2</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readMATRIX"><strong>readMATRIX</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;SWFMatrix</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readMORPHFILLSTYLE"><strong>readMORPHFILLSTYLE</strong></a>(self, level<font color="#909090">=1</font>)</dt><dd><tt>Read&nbsp;a&nbsp;SWFMorphFillStyle</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readMORPHGRADIENT"><strong>readMORPHGRADIENT</strong></a>(self, level<font color="#909090">=1</font>)</dt><dd><tt>Read&nbsp;a&nbsp;SWFTextRecord</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readMORPHGRADIENTRECORD"><strong>readMORPHGRADIENTRECORD</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;SWFTextRecord</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readMORPHLINESTYLE"><strong>readMORPHLINESTYLE</strong></a>(self, level<font color="#909090">=1</font>)</dt><dd><tt>Read&nbsp;a&nbsp;SWFMorphLineStyle</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readRECT"><strong>readRECT</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;SWFMatrix</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readRGB"><strong>readRGB</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;RGB&nbsp;color</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readRGBA"><strong>readRGBA</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;RGBA&nbsp;color</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readSB"><strong>readSB</strong></a>(self, bits)</dt><dd><tt>Read&nbsp;a&nbsp;signed&nbsp;int&nbsp;using&nbsp;the&nbsp;specified&nbsp;number&nbsp;of&nbsp;bits</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readSHAPE"><strong>readSHAPE</strong></a>(self, unit_divisor<font color="#909090">=20</font>)</dt><dd><tt>Read&nbsp;a&nbsp;SWFShape</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readSHAPEWITHSTYLE"><strong>readSHAPEWITHSTYLE</strong></a>(self, level<font color="#909090">=1</font>, unit_divisor<font color="#909090">=20</font>)</dt><dd><tt>Read&nbsp;a&nbsp;SWFShapeWithStyle</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readSI16"><strong>readSI16</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;signed&nbsp;short</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readSI32"><strong>readSI32</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;signed&nbsp;int</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readSI8"><strong>readSI8</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;signed&nbsp;byte</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readSTRAIGHTEDGERECORD"><strong>readSTRAIGHTEDGERECORD</strong></a>(self, num_bits)</dt><dd><tt>Read&nbsp;a&nbsp;SWFShapeRecordStraightEdge</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readSTYLECHANGERECORD"><strong>readSTYLECHANGERECORD</strong></a>(self, states, fill_bits, line_bits, level<font color="#909090">=1</font>)</dt><dd><tt>Read&nbsp;a&nbsp;SWFShapeRecordStyleChange</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readSYMBOL"><strong>readSYMBOL</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;SWFSymbol</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readString"><strong>readString</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readTEXTRECORD"><strong>readTEXTRECORD</strong></a>(self, glyphBits, advanceBits, previousRecord<font color="#909090">=None</font>, level<font color="#909090">=1</font>)</dt><dd><tt>Read&nbsp;a&nbsp;SWFTextRecord</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readUB"><strong>readUB</strong></a>(self, bits)</dt><dd><tt>Read&nbsp;a&nbsp;unsigned&nbsp;int&nbsp;using&nbsp;the&nbsp;specified&nbsp;number&nbsp;of&nbsp;bits</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readUI16"><strong>readUI16</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;unsigned&nbsp;short</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readUI32"><strong>readUI32</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;unsigned&nbsp;int</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readUI8"><strong>readUI8</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;unsigned&nbsp;byte</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readZONEDATA"><strong>readZONEDATA</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;SWFZoneData</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readZONERECORD"><strong>readZONERECORD</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;SWFZoneRecord</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readbits"><strong>readbits</strong></a>(self, bits, bit_buffer<font color="#909090">=0</font>)</dt><dd><tt>Read&nbsp;the&nbsp;specified&nbsp;number&nbsp;of&nbsp;bits&nbsp;from&nbsp;the&nbsp;stream</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readraw_tag"><strong>readraw_tag</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;SWFRawTag</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-readtag_header"><strong>readtag_header</strong></a>(self)</dt><dd><tt>Read&nbsp;a&nbsp;tag&nbsp;header</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-reset_bits_pending"><strong>reset_bits_pending</strong></a>(self)</dt><dd><tt>Reset&nbsp;the&nbsp;bit&nbsp;array</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-seek"><strong>seek</strong></a>(self, pos, whence<font color="#909090">=0</font>)</dt><dd><tt>Seek</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-skip_bytes"><strong>skip_bytes</strong></a>(self, length)</dt><dd><tt>Skip&nbsp;over&nbsp;the&nbsp;specified&nbsp;number&nbsp;of&nbsp;bytes</tt></dd></dl>
+
+<dl><dt><a name="SWFStream-tell"><strong>tell</strong></a>(self)</dt><dd><tt>Tell</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>FLOAT16_EXPONENT_BASE</strong> = 15</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-int32"><strong>int32</strong></a>(x)</dt><dd><tt>Return&nbsp;a&nbsp;signed&nbsp;or&nbsp;unsigned&nbsp;int</tt></dd></dl>
+</td></tr></table>
+</body></html>

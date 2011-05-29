@@ -1,0 +1,395 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module swf.export</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="swf.html"><font color="#ffffff">swf</font></a>.export</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/floorplanner/pyswf/blob/master/swf/export.py">export.py</a></font></td></tr></table>
+    <p><tt>This&nbsp;module&nbsp;defines&nbsp;exporters&nbsp;for&nbsp;the&nbsp;SWF&nbsp;fileformat.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="Image.html">Image</a><br>
+<a href="StringIO.html">StringIO</a><br>
+<a href="base64.html">base64</a><br>
+</td><td width="25%" valign=top><a href="copy.html">copy</a><br>
+<a href="lxml.etree.html">lxml.etree</a><br>
+<a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="lxml.objectify.html">lxml.objectify</a><br>
+<a href="re.html">re</a><br>
+<a href="struct.html">struct</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.export.html#BaseExporter">BaseExporter</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.export.html#SVGExporter">SVGExporter</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.export.html#DefaultShapeExporter">DefaultShapeExporter</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.export.html#DefaultSVGShapeExporter">DefaultSVGShapeExporter</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.export.html#SVGShapeExporter">SVGShapeExporter</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="swf.export.html#SVGBounds">SVGBounds</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.export.html#SVGFilterFactory">SVGFilterFactory</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="BaseExporter">class <strong>BaseExporter</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="BaseExporter-__init__"><strong>__init__</strong></a>(self, swf<font color="#909090">=None</font>, shape_exporter<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="BaseExporter-export"><strong>export</strong></a>(self, swf)</dt></dl>
+
+<dl><dt><a name="BaseExporter-export_define_bits"><strong>export_define_bits</strong></a>(self, tag)</dt></dl>
+
+<dl><dt><a name="BaseExporter-export_define_bits_lossless"><strong>export_define_bits_lossless</strong></a>(self, tag)</dt></dl>
+
+<dl><dt><a name="BaseExporter-export_define_shape"><strong>export_define_shape</strong></a>(self, tag)</dt></dl>
+
+<dl><dt><a name="BaseExporter-export_define_shapes"><strong>export_define_shapes</strong></a>(self, tags)</dt></dl>
+
+<dl><dt><a name="BaseExporter-export_define_sprite"><strong>export_define_sprite</strong></a>(self, tag, parent<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="BaseExporter-export_display_list"><strong>export_display_list</strong></a>(self, tags, parent<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="BaseExporter-export_display_list_item"><strong>export_display_list_item</strong></a>(self, tag, parent<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="BaseExporter-export_image"><strong>export_image</strong></a>(self, tag, image<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="BaseExporter-get_display_tags"><strong>get_display_tags</strong></a>(self, tags, z_sorted<font color="#909090">=True</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DefaultSVGShapeExporter">class <strong>DefaultSVGShapeExporter</strong></a>(<a href="swf.export.html#DefaultShapeExporter">DefaultShapeExporter</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.export.html#DefaultSVGShapeExporter">DefaultSVGShapeExporter</a></dd>
+<dd><a href="swf.export.html#DefaultShapeExporter">DefaultShapeExporter</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="DefaultSVGShapeExporter-__init__"><strong>__init__</strong></a>(self, defs<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-begin_bitmap_fill"><strong>begin_bitmap_fill</strong></a>(self, bitmap_id, matrix<font color="#909090">=None</font>, repeat<font color="#909090">=False</font>, smooth<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-begin_fill"><strong>begin_fill</strong></a>(self, color, alpha<font color="#909090">=1.0</font>)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-begin_gradient_fill"><strong>begin_gradient_fill</strong></a>(self, type, colors, alphas, ratios, matrix<font color="#909090">=None</font>, spreadMethod<font color="#909090">=0</font>, interpolationMethod<font color="#909090">=0</font>, focalPointRatio<font color="#909090">=0.0</font>)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-curve_to"><strong>curve_to</strong></a>(self, cx, cy, ax, ay)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-end_fill"><strong>end_fill</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-end_lines"><strong>end_lines</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-finalize_path"><strong>finalize_path</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-line_style"><strong>line_style</strong></a>(self, thickness<font color="#909090">=nan</font>, color<font color="#909090">=0</font>, alpha<font color="#909090">=1.0</font>, pixelHinting<font color="#909090">=False</font>, scaleMode<font color="#909090">=2</font>, startCaps<font color="#909090">=None</font>, endCaps<font color="#909090">=None</font>, joints<font color="#909090">=None</font>, miterLimit<font color="#909090">=3.0</font>)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-line_to"><strong>line_to</strong></a>(self, x, y)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-move_to"><strong>move_to</strong></a>(self, x, y)</dt></dl>
+
+<hr>
+Methods inherited from <a href="swf.export.html#DefaultShapeExporter">DefaultShapeExporter</a>:<br>
+<dl><dt><a name="DefaultSVGShapeExporter-begin_fills"><strong>begin_fills</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-begin_lines"><strong>begin_lines</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-begin_shape"><strong>begin_shape</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-end_fills"><strong>end_fills</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-end_shape"><strong>end_shape</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultSVGShapeExporter-line_gradient_style"><strong>line_gradient_style</strong></a>(self, type, colors, alphas, ratios, matrix<font color="#909090">=None</font>, spreadMethod<font color="#909090">=0</font>, interpolationMethod<font color="#909090">=0</font>, focalPointRatio<font color="#909090">=0.0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.export.html#DefaultShapeExporter">DefaultShapeExporter</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DefaultShapeExporter">class <strong>DefaultShapeExporter</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>The&nbsp;default&nbsp;(abstract)&nbsp;Shape&nbsp;exporter&nbsp;class.&nbsp;<br>
+All&nbsp;shape&nbsp;exporters&nbsp;should&nbsp;extend&nbsp;this&nbsp;class.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="DefaultShapeExporter-__init__"><strong>__init__</strong></a>(self, swf<font color="#909090">=None</font>, debug<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-begin_bitmap_fill"><strong>begin_bitmap_fill</strong></a>(self, bitmap_id, matrix<font color="#909090">=None</font>, repeat<font color="#909090">=False</font>, smooth<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-begin_fill"><strong>begin_fill</strong></a>(self, color, alpha<font color="#909090">=1.0</font>)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-begin_fills"><strong>begin_fills</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-begin_gradient_fill"><strong>begin_gradient_fill</strong></a>(self, type, colors, alphas, ratios, matrix<font color="#909090">=None</font>, spreadMethod<font color="#909090">=0</font>, interpolationMethod<font color="#909090">=0</font>, focalPointRatio<font color="#909090">=0.0</font>)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-begin_lines"><strong>begin_lines</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-begin_shape"><strong>begin_shape</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-curve_to"><strong>curve_to</strong></a>(self, cx, cy, ax, ay)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-end_fill"><strong>end_fill</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-end_fills"><strong>end_fills</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-end_lines"><strong>end_lines</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-end_shape"><strong>end_shape</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-line_gradient_style"><strong>line_gradient_style</strong></a>(self, type, colors, alphas, ratios, matrix<font color="#909090">=None</font>, spreadMethod<font color="#909090">=0</font>, interpolationMethod<font color="#909090">=0</font>, focalPointRatio<font color="#909090">=0.0</font>)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-line_style"><strong>line_style</strong></a>(self, thickness<font color="#909090">=nan</font>, color<font color="#909090">=0</font>, alpha<font color="#909090">=1.0</font>, pixelHinting<font color="#909090">=False</font>, scaleMode<font color="#909090">=2</font>, startCaps<font color="#909090">=None</font>, endCaps<font color="#909090">=None</font>, joints<font color="#909090">=None</font>, miterLimit<font color="#909090">=3.0</font>)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-line_to"><strong>line_to</strong></a>(self, x, y)</dt></dl>
+
+<dl><dt><a name="DefaultShapeExporter-move_to"><strong>move_to</strong></a>(self, x, y)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SVGBounds">class <strong>SVGBounds</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="SVGBounds-__init__"><strong>__init__</strong></a>(self, svg<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="SVGBounds-add_point"><strong>add_point</strong></a>(self, x, y)</dt></dl>
+
+<dl><dt><a name="SVGBounds-grow"><strong>grow</strong></a>(self, margin)</dt></dl>
+
+<dl><dt><a name="SVGBounds-merge"><strong>merge</strong></a>(self, other)</dt></dl>
+
+<dl><dt><a name="SVGBounds-set"><strong>set</strong></a>(self, minx, miny, maxx, maxy)</dt></dl>
+
+<dl><dt><a name="SVGBounds-shrink"><strong>shrink</strong></a>(self, margin)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+</dl>
+<dl><dt><strong>width</strong></dt>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SVGExporter">class <strong>SVGExporter</strong></a>(<a href="swf.export.html#BaseExporter">BaseExporter</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.export.html#SVGExporter">SVGExporter</a></dd>
+<dd><a href="swf.export.html#BaseExporter">BaseExporter</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SVGExporter-__init__"><strong>__init__</strong></a>(self, swf<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="SVGExporter-export"><strong>export</strong></a>(self, swf)</dt></dl>
+
+<dl><dt><a name="SVGExporter-export_color_transform"><strong>export_color_transform</strong></a>(self, cxform, svg_filter, result<font color="#909090">='color-xform'</font>)</dt></dl>
+
+<dl><dt><a name="SVGExporter-export_define_shape"><strong>export_define_shape</strong></a>(self, tag)</dt></dl>
+
+<dl><dt><a name="SVGExporter-export_define_sprite"><strong>export_define_sprite</strong></a>(self, tag, parent<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="SVGExporter-export_display_list_item"><strong>export_display_list_item</strong></a>(self, tag, parent<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="SVGExporter-export_filter_dropshadow"><strong>export_filter_dropshadow</strong></a>(self, swf_filter, svg_filter, blend_in<font color="#909090">=None</font>, result<font color="#909090">='offsetBlur'</font>)</dt></dl>
+
+<dl><dt><a name="SVGExporter-export_filters"><strong>export_filters</strong></a>(self, tag, svg_filter, cxform<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="SVGExporter-export_image"><strong>export_image</strong></a>(self, tag, image<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="swf.export.html#BaseExporter">BaseExporter</a>:<br>
+<dl><dt><a name="SVGExporter-export_define_bits"><strong>export_define_bits</strong></a>(self, tag)</dt></dl>
+
+<dl><dt><a name="SVGExporter-export_define_bits_lossless"><strong>export_define_bits_lossless</strong></a>(self, tag)</dt></dl>
+
+<dl><dt><a name="SVGExporter-export_define_shapes"><strong>export_define_shapes</strong></a>(self, tags)</dt></dl>
+
+<dl><dt><a name="SVGExporter-export_display_list"><strong>export_display_list</strong></a>(self, tags, parent<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="SVGExporter-get_display_tags"><strong>get_display_tags</strong></a>(self, tags, z_sorted<font color="#909090">=True</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.export.html#BaseExporter">BaseExporter</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SVGFilterFactory">class <strong>SVGFilterFactory</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Class methods defined here:<br>
+<dl><dt><a name="SVGFilterFactory-create_blend"><strong>create_blend</strong></a>(cls, e, attr_in<font color="#909090">=None</font>, attr_in2<font color="#909090">='BackgroundImage'</font>, mode<font color="#909090">='normal'</font>, result<font color="#909090">=None</font>)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt></dl>
+
+<dl><dt><a name="SVGFilterFactory-create_drop_shadow_filter"><strong>create_drop_shadow_filter</strong></a>(cls, e, filter, attr_in<font color="#909090">=None</font>, blurX<font color="#909090">=0</font>, blurY<font color="#909090">=0</font>, blend_in<font color="#909090">=None</font>, result<font color="#909090">=None</font>)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt></dl>
+
+<dl><dt><a name="SVGFilterFactory-create_gaussian_blur"><strong>create_gaussian_blur</strong></a>(cls, e, attr_in<font color="#909090">='SourceAlpha'</font>, attr_deviaton<font color="#909090">='3'</font>, result<font color="#909090">=None</font>)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt></dl>
+
+<dl><dt><a name="SVGFilterFactory-create_offset"><strong>create_offset</strong></a>(cls, e, attr_in<font color="#909090">=None</font>, dx<font color="#909090">=0</font>, dy<font color="#909090">=0</font>, result<font color="#909090">=None</font>)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt></dl>
+
+<dl><dt><a name="SVGFilterFactory-export_color_matrix_filter"><strong>export_color_matrix_filter</strong></a>(cls, e, filter, matrix, svg_filter, attr_in<font color="#909090">=None</font>, result<font color="#909090">='color-matrix'</font>)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt></dl>
+
+<dl><dt><a name="SVGFilterFactory-export_glow_filter"><strong>export_glow_filter</strong></a>(cls, e, filter, attr_in<font color="#909090">=None</font>, result<font color="#909090">='glow-out'</font>)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SVGShapeExporter">class <strong>SVGShapeExporter</strong></a>(<a href="swf.export.html#DefaultSVGShapeExporter">DefaultSVGShapeExporter</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="swf.export.html#SVGShapeExporter">SVGShapeExporter</a></dd>
+<dd><a href="swf.export.html#DefaultSVGShapeExporter">DefaultSVGShapeExporter</a></dd>
+<dd><a href="swf.export.html#DefaultShapeExporter">DefaultShapeExporter</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SVGShapeExporter-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SVGShapeExporter-begin_bitmap_fill"><strong>begin_bitmap_fill</strong></a>(self, bitmap_id, matrix<font color="#909090">=None</font>, repeat<font color="#909090">=False</font>, smooth<font color="#909090">=False</font>)</dt></dl>
+
+<dl><dt><a name="SVGShapeExporter-begin_fill"><strong>begin_fill</strong></a>(self, color, alpha<font color="#909090">=1.0</font>)</dt></dl>
+
+<dl><dt><a name="SVGShapeExporter-begin_gradient_fill"><strong>begin_gradient_fill</strong></a>(self, type, colors, alphas, ratios, matrix<font color="#909090">=None</font>, spreadMethod<font color="#909090">=0</font>, interpolationMethod<font color="#909090">=0</font>, focalPointRatio<font color="#909090">=0.0</font>)</dt></dl>
+
+<dl><dt><a name="SVGShapeExporter-begin_shape"><strong>begin_shape</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SVGShapeExporter-finalize_path"><strong>finalize_path</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SVGShapeExporter-line_style"><strong>line_style</strong></a>(self, thickness<font color="#909090">=nan</font>, color<font color="#909090">=0</font>, alpha<font color="#909090">=1.0</font>, pixelHinting<font color="#909090">=False</font>, scaleMode<font color="#909090">=2</font>, startCaps<font color="#909090">=None</font>, endCaps<font color="#909090">=None</font>, joints<font color="#909090">=None</font>, miterLimit<font color="#909090">=3.0</font>)</dt></dl>
+
+<hr>
+Methods inherited from <a href="swf.export.html#DefaultSVGShapeExporter">DefaultSVGShapeExporter</a>:<br>
+<dl><dt><a name="SVGShapeExporter-curve_to"><strong>curve_to</strong></a>(self, cx, cy, ax, ay)</dt></dl>
+
+<dl><dt><a name="SVGShapeExporter-end_fill"><strong>end_fill</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SVGShapeExporter-end_lines"><strong>end_lines</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SVGShapeExporter-line_to"><strong>line_to</strong></a>(self, x, y)</dt></dl>
+
+<dl><dt><a name="SVGShapeExporter-move_to"><strong>move_to</strong></a>(self, x, y)</dt></dl>
+
+<hr>
+Methods inherited from <a href="swf.export.html#DefaultShapeExporter">DefaultShapeExporter</a>:<br>
+<dl><dt><a name="SVGShapeExporter-begin_fills"><strong>begin_fills</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SVGShapeExporter-begin_lines"><strong>begin_lines</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SVGShapeExporter-end_fills"><strong>end_fills</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SVGShapeExporter-end_shape"><strong>end_shape</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="SVGShapeExporter-line_gradient_style"><strong>line_gradient_style</strong></a>(self, type, colors, alphas, ratios, matrix<font color="#909090">=None</font>, spreadMethod<font color="#909090">=0</font>, interpolationMethod<font color="#909090">=0</font>, focalPointRatio<font color="#909090">=0.0</font>)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="swf.export.html#DefaultShapeExporter">DefaultShapeExporter</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>NS</strong> = {'svg': 'http://www.w3.org/2000/svg', 'xlink': 'http://www.w3.org/1999/xlink'}<br>
+<strong>SNAP</strong> = 0.001<br>
+<strong>SVG_NS</strong> = 'http://www.w3.org/2000/svg'<br>
+<strong>SVG_VERSION</strong> = '1.1'<br>
+<strong>XLINK_HREF</strong> = '{http://www.w3.org/1999/xlink}href'<br>
+<strong>XLINK_NS</strong> = 'http://www.w3.org/1999/xlink'</td></tr></table>
+</body></html>

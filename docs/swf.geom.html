@@ -1,0 +1,201 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module swf.geom</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="swf.html"><font color="#ffffff">swf</font></a>.geom</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="https://github.com/floorplanner/pyswf/blob/master/swf/geom.py">geom.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="swf.geom.html#Matrix2">Matrix2</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.geom.html#Matrix4">Matrix4</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.geom.html#Vector2">Vector2</a>
+</font></dt><dt><font face="helvetica, arial"><a href="swf.geom.html#Vector3">Vector3</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Matrix2">class <strong>Matrix2</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Matrix2">Matrix2</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Matrix2-__init__"><strong>__init__</strong></a>(self, a<font color="#909090">=1.0</font>, b<font color="#909090">=0.0</font>, c<font color="#909090">=0.0</font>, d<font color="#909090">=1.0</font>, tx<font color="#909090">=0.0</font>, ty<font color="#909090">=0.0</font>)</dt></dl>
+
+<dl><dt><a name="Matrix2-append"><strong>append</strong></a>(self, a, b, c, d, tx, ty)</dt></dl>
+
+<dl><dt><a name="Matrix2-append_matrix"><strong>append_matrix</strong></a>(self, m)</dt></dl>
+
+<dl><dt><a name="Matrix2-multiply_point"><strong>multiply_point</strong></a>(self, vec)</dt></dl>
+
+<dl><dt><a name="Matrix2-prepend"><strong>prepend</strong></a>(self, a, b, c, d, tx, ty)</dt></dl>
+
+<dl><dt><a name="Matrix2-prepend_matrix"><strong>prepend_matrix</strong></a>(self, m)</dt></dl>
+
+<dl><dt><a name="Matrix2-rotate"><strong>rotate</strong></a>(self, angle)</dt></dl>
+
+<dl><dt><a name="Matrix2-scale"><strong>scale</strong></a>(self, x, y)</dt></dl>
+
+<dl><dt><a name="Matrix2-translate"><strong>translate</strong></a>(self, x, y)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Matrix4">class <strong>Matrix4</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Matrix4">Matrix4</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Matrix4-__init__"><strong>__init__</strong></a>(self, data<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="Matrix4-clone"><strong>clone</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Matrix4-det"><strong>det</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Matrix4-flatten"><strong>flatten</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Matrix4-identity"><strong>identity</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Matrix4-lookAt"><strong>lookAt</strong></a>(self, eye, center, up)</dt></dl>
+
+<dl><dt><a name="Matrix4-multiply"><strong>multiply</strong></a>(self, a, b)</dt></dl>
+
+<dl><dt><a name="Matrix4-multiplyScalar"><strong>multiplyScalar</strong></a>(self, s)</dt></dl>
+
+<dl><dt><a name="Matrix4-multiplyVec3"><strong>multiplyVec3</strong></a>(self, vec)</dt></dl>
+
+<dl><dt><a name="Matrix4-multiplyVector3"><strong>multiplyVector3</strong></a>(self, vec)</dt></dl>
+
+<dl><dt><a name="Matrix4-multiplyVector4"><strong>multiplyVector4</strong></a>(self, v)</dt></dl>
+
+<hr>
+Class methods defined here:<br>
+<dl><dt><a name="Matrix4-inverse"><strong>inverse</strong></a>(cls, m1)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt></dl>
+
+<dl><dt><a name="Matrix4-rotationMatrix"><strong>rotationMatrix</strong></a>(cls, x, y, z, angle)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt></dl>
+
+<dl><dt><a name="Matrix4-scaleMatrix"><strong>scaleMatrix</strong></a>(cls, x, y, z)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt></dl>
+
+<dl><dt><a name="Matrix4-translationMatrix"><strong>translationMatrix</strong></a>(cls, x, y, z)<font color="#909090"><font face="helvetica, arial"> from <a href="__builtin__.html#type">__builtin__.type</a></font></font></dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Vector2">class <strong>Vector2</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Vector2-__init__"><strong>__init__</strong></a>(self, x<font color="#909090">=0.0</font>, y<font color="#909090">=0.0</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Vector3">class <strong>Vector3</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Vector3-__init__"><strong>__init__</strong></a>(self, x<font color="#909090">=0</font>, y<font color="#909090">=0</font>, z<font color="#909090">=0</font>)</dt></dl>
+
+<dl><dt><a name="Vector3-addScalar"><strong>addScalar</strong></a>(self, s)</dt></dl>
+
+<dl><dt><a name="Vector3-clone"><strong>clone</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Vector3-cross"><strong>cross</strong></a>(self, v1, v2)</dt></dl>
+
+<dl><dt><a name="Vector3-distance"><strong>distance</strong></a>(self, v)</dt></dl>
+
+<dl><dt><a name="Vector3-distanceSq"><strong>distanceSq</strong></a>(self, v)</dt></dl>
+
+<dl><dt><a name="Vector3-divScalar"><strong>divScalar</strong></a>(self, s)</dt></dl>
+
+<dl><dt><a name="Vector3-dot"><strong>dot</strong></a>(self, v)</dt></dl>
+
+<dl><dt><a name="Vector3-equals"><strong>equals</strong></a>(self, v, e<font color="#909090">=None</font>)</dt></dl>
+
+<dl><dt><a name="Vector3-length"><strong>length</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Vector3-lengthSq"><strong>lengthSq</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Vector3-multScalar"><strong>multScalar</strong></a>(self, s)</dt></dl>
+
+<dl><dt><a name="Vector3-normalize"><strong>normalize</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Vector3-set"><strong>set</strong></a>(self, x, y, z)</dt></dl>
+
+<dl><dt><a name="Vector3-sub"><strong>sub</strong></a>(self, a, b)</dt></dl>
+
+<dl><dt><a name="Vector3-subScalar"><strong>subScalar</strong></a>(self, s)</dt></dl>
+
+<dl><dt><a name="Vector3-tostring"><strong>tostring</strong></a>(self)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>SNAP</strong> = 0.001</td></tr></table>
+</body></html>
