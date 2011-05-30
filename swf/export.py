@@ -471,9 +471,6 @@ class SVGExporter(BaseExporter):
         g = self._e.g()
         use = self._e.use()
 
-        if tag.hasName and tag.instanceName == "color" and parent is None:
-            # floorplanner specific
-            use.set("class", tag.instanceName)
         if tag.hasMatrix:
             use.set("transform", _swf_matrix_to_svg_matrix(tag.matrix))
         if tag.hasClipDepth:
