@@ -508,7 +508,8 @@ class SVGExporter(BaseExporter):
             parent.append(g)
         else:
             self.root.append(g)
-    
+        return use
+        
     def export_color_transform(self, cxform, svg_filter, result='color-xform'):
         fe_cxform = self._e.feColorMatrix()
         fe_cxform.set("in", "SourceGraphic")
