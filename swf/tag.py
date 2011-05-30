@@ -308,6 +308,8 @@ class TagPlaceObject(DisplayListTag):
         s = super(TagPlaceObject, self).__str__() + " " + \
             "Depth: %d, " % self.depth + \
             "CharacterID: %d" % self.characterId
+        if self.hasName:
+            s+= ", InstanceName: %s" % self.instanceName
         if self.hasMatrix:
             s += ", Matrix: %s" % self.matrix.__str__()
         if self.hasClipDepth:
