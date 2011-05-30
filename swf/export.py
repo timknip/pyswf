@@ -23,7 +23,7 @@ XLINK_HREF  = "{%s}href" % XLINK_NS
 NS = {"svg" : SVG_NS, "xlink" : XLINK_NS}
 
 MINIMUM_STROKE_WIDTH = 1.0
-                       
+                
 class DefaultShapeExporter(object):
     """
     The default (abstract) Shape exporter class. 
@@ -445,7 +445,7 @@ class SVGExporter(BaseExporter):
         vb = [self.bounds.minx, self.bounds.miny, 
               self.bounds.width, self.bounds.height]
         self.svg.set("viewBox", "%s" % " ".join(map(str,vb)))
-            
+        
         # Return the SVG as StringIO
         return self._serialize()
     
@@ -471,7 +471,7 @@ class SVGExporter(BaseExporter):
         g = self._e.g()
         use = self._e.use()
 
-        if tag.hasName and tag.instanceName == "color":
+        if tag.hasName and tag.instanceName == "color" and parent is None:
             # floorplanner specific
             use.set("id", tag.instanceName)
         if tag.hasMatrix:
