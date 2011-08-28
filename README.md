@@ -11,7 +11,7 @@ INSTALL
 
 or you might need do:
 
-    sudo python setup.py install
+    $sudo python setup.py install
 
 DEPENDENCIES
 ============
@@ -27,34 +27,35 @@ USAGE
 
 Basic example:
 --------------
-    from swf.movie import SWF
-    
-    # create a file object
-    file = open('path/to/swf', 'rb')
-    
-    # print out the SWF file structure
-    print SWF(file)
+```python
+from swf.movie import SWF
+
+# create a file object
+file = open('path/to/swf', 'rb')
+
+# print out the SWF file structure
+print SWF(file)
+```
 
 
 SVG export example:
 -------------------
-    from swf.movie import SWF
-    from swf.export import SVGExporter
+```python
+from swf.movie import SWF
+from swf.export import SVGExporter
 
-    # create a file object
-    file = open('path/to/swf', 'rb')
+# create a file object
+file = open('path/to/swf', 'rb')
 
-    # load and parse the SWF
-    swf = SWF(file)
+# load and parse the SWF
+swf = SWF(file)
 
-    # create the SVG exporter
-    svg_exporter = SVGExporter()
+# create the SVG exporter
+svg_exporter = SVGExporter()
 
-    # export!
-    svg = swf.export(svg_exporter)
+# export!
+svg = swf.export(svg_exporter)
 
-    # save the SVG
-    open('path/to/svg', 'wb').write(svg.read())
-
-        
-    
+# save the SVG
+open('path/to/svg', 'wb').write(svg.read())
+```
