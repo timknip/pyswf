@@ -21,6 +21,7 @@ class TagFactory(object):
         elif type == 10: return TagDefineFont()
         elif type == 11: return TagDefineText()
         elif type == 12: return TagDoAction()
+        elif type == 13: return TagDefineFontInfo()
         elif type == 20: return TagDefineBitsLossless()
         elif type == 21: return TagDefineBitsJPEG2()
         elif type == 22: return TagDefineShape2()
@@ -583,7 +584,71 @@ class TagDoAction(Tag):
             #print action.tostring()
             self._actions.append(action)
             action = data.readACTIONRECORD()
-        
+
+class TagDefineFontInfo(Tag):
+    """
+    The DefineFontInfo tag defines a mapping from a glyph font (defined with DefineFont) to a 
+    device font. It provides a font name and style to pass to the playback platform's text engine, 
+    and a table of character codes that identifies the character represented by each glyph in the 
+    corresponding DefineFont tag, allowing the glyph indices of a DefineText tag to be converted 
+    to character strings.
+    The presence of a DefineFontInfo tag does not force a glyph font to become a device font; it 
+    merely makes the option available. The actual choice between glyph and device usage is made 
+    according to the value of devicefont (see the introduction) or the value of UseOutlines in a 
+    DefineEditText tag. If a device font is unavailable on a playback platform, Flash Player will 
+    fall back to glyph text.
+    """
+    TYPE = 13
+    def __init__(self):
+        super(TagDefineFontInfo, self).__init__()
+
+    @property
+    def name(self):
+        return "DefineFontInfo"
+
+    @property
+    def type(self):
+        return TagDefineFontInfo.TYPE
+
+    @property
+    def level(self):
+        return 1
+
+    @property
+    def version(self):
+        return 1
+
+    @property
+    def unitDivisor(self):
+        return 1
+
+    def parse(self, data, length, version=1):
+        self.codeTable = []
+
+        self.characterId = data.readUI16()
+
+        fontNameLen = data.readUI8()
+        fontNameRaw = StringIO.StringIO()
+        fontNameRaw.write(data.f.read(fontNameLen))
+        fontNameRaw.seek(0)
+
+        flags = data.readUI8()
+
+        self.smallText = ((flags & 0x20) != 0)
+        self.shiftJIS = ((flags & 0x10) != 0)
+        self.ansi  = ((flags & 0x08) != 0)
+        self.italic = ((flags & 0x04) != 0)
+        self.bold = ((flags & 0x02) != 0)
+        self.wideCodes = ((flags & 0x01) != 0)
+
+        if self.wideCodes:
+            numGlyphs = (length - 2 - 1 - fontNameLen - 1) / 2
+        else:
+            numGlyphs = length - 2 - 1 - fontNameLen - 1
+
+        for i in range(0, numGlyphs):
+            self.codeTable.append(data.readUI16() if self.wideCodes else data.readUI8())
+
 class TagDefineBitsLossless(DefinitionTag):
     """
     Defines a lossless bitmap character that contains RGB bitmap data compressed 
