@@ -453,15 +453,15 @@ class SWFShapeWithStyle(SWFShape):
     
     def __str__(self):
         s = "    FillStyles:\n" if len(self._fillStyles) > 0 else ""
-        for i in range(0, len(self._fillStyles)):
-            s += "        %d:%s\n" % (i+1, self._fillStyles[i].__str__())
-        if len(self._lineStyles) > 0:
+        for i in range(0, len(self._initialFillStyles)):
+            s += "        %d:%s\n" % (i+1, self._initialFillStyles[i].__str__())
+        if len(self._initialLineStyles) > 0:
             s += "    LineStyles:\n"
-            for i in range(0, len(self._lineStyles)):
-                s += "        %d:%s\n" % (i+1, self._lineStyles[i].__str__())
+            for i in range(0, len(self._initialLineStyles)):
+                s += "        %d:%s\n" % (i+1, self._initialLineStyles[i].__str__())
         for record in self._records:
             s += record.__str__() + '\n'
-        return s.rstrip()
+        return s.rstrip() + super(SWFShapeWithStyle, self).__str__()
               
 class SWFShapeRecord(object):
     
