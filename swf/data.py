@@ -388,16 +388,44 @@ class SWFShape(object):
                     elif line_style.no_hscale_flag:
                         scale_mode = LineScaleMode.VERTICAL
                         
-                    handler.line_style(
-                        line_style.width / 20.0, 
-                        ColorUtils.rgb(line_style.color), 
-                        ColorUtils.alpha(line_style.color), 
-                        line_style.pixelhinting_flag,
-                        scale_mode,
-                        line_style.start_caps_style,
-                        line_style.end_caps_style,
-                        line_style.joint_style,
-                        line_style.miter_limit_factor)
+                    if not line_style.has_fill_flag:
+                        handler.line_style(
+                            line_style.width / 20.0, 
+                            ColorUtils.rgb(line_style.color), 
+                            ColorUtils.alpha(line_style.color), 
+                            line_style.pixelhinting_flag,
+                            scale_mode,
+                            line_style.start_caps_style,
+                            line_style.end_caps_style,
+                            line_style.joint_style,
+                            line_style.miter_limit_factor)
+                    else:
+                        fill_style = line_style.fill_type
+                        # gradient fill
+                        colors = []
+                        ratios = []
+                        alphas = []
+                        for j in range(0, len(fill_style.gradient.records)):
+                            gr = fill_style.gradient.records[j]
+                            colors.append(ColorUtils.rgb(gr.color))
+                            ratios.append(gr.ratio)
+                            alphas.append(ColorUtils.alpha(gr.color))
+
+                        handler.line_gradient_style(
+                            line_style.width / 20.0, 
+                            line_style.pixelhinting_flag,
+                            scale_mode,
+                            line_style.start_caps_style,
+                            line_style.end_caps_style,
+                            line_style.joint_style,
+                            line_style.miter_limit_factor,
+                            GradientType.LINEAR if fill_style.type == 0x10 else GradientType.RADIAL,
+                            colors, alphas, ratios,
+                            fill_style.gradient_matrix,
+                            fill_style.gradient.spreadmethod,
+                            fill_style.gradient.interpolation_mode,
+                            fill_style.gradient.focal_point
+                            )
                 else:
                     # we should never get here
                     handler.line_style(0)
@@ -730,7 +758,7 @@ class SWFFillStyle(object):
         if self.type == 0x0:
             s += "Color: %s" % ColorUtils.to_rgb_string(self.rgb)
         elif self.type in [0x10, 0x12, 0x13]:
-            s += "Gradient"
+            s += "Gradient: %s" % self.gradient_matrix
         elif self.type in [0x40, 0x41, 0x42, 0x43]:
             s += "BitmapID: %d" % (self.bitmap_id)
         return s
