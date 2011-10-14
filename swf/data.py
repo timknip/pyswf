@@ -784,6 +784,26 @@ class SWFLineStyle2(SWFLineStyle):
         else:
             self.color = data.readRGBA()
 
+    def __str__(self):
+        s = "[SWFLineStyle2] "
+        s += "Width: %d, " % self.width
+        s += "StartCapsStyle: %d, " % self.start_caps_style
+        s += "JointStyle: %d, " % self.joint_style
+        s += "HasFillFlag: %d, " % self.has_fill_flag
+        s += "NoHscaleFlag: %d, " % self.no_hscale_flag
+        s += "NoVscaleFlag: %d, " % self.no_vscale_flag
+        s += "PixelhintingFlag: %d, " % self.pixelhinting_flag
+        s += "NoClose: %d, " % self.no_close
+        
+        if self.joint_style:
+            s += "MiterLimitFactor: %d" % self.miter_limit_factor
+        if self.has_fill_flag:
+            s += "FillType: %s, " % self.fill_type
+        else:
+            s += "Color: %s" % ColorUtils.to_rgb_string(self.color)
+        
+        return s
+
 class SWFMorphGradientRecord(object):
     def __init__(self, data):
         if not data is None:
