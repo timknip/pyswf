@@ -708,7 +708,6 @@ class TagDefineBitsLossless(DefinitionTag):
 
         indexed_colors = []
         if self.bitmap_format == BitmapFormat.BIT_8:
-            s = StringIO.StringIO()
             for i in range(0, self.bitmap_color_size + 1):
                 r = ord(temp.read(1))
                 g = ord(temp.read(1))
@@ -717,6 +716,7 @@ class TagDefineBitsLossless(DefinitionTag):
                 indexed_colors.append(struct.pack("BBBB", r, g, b, a))
 
             # create the image buffer
+            s = StringIO.StringIO()
             for i in xrange(t):
                 s.write(indexed_colors[ord(temp.read(1))])
             self.image_buffer = s.getvalue()
