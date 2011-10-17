@@ -278,8 +278,7 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
             
         return gradient_id
         
-    def begin_bitmap_fill(self, bitmap_id, matrix=None, repeat=False, smooth=False):
-        self.finalize_path()
+    def export_pattern(self, bitmap_id, matrix, repeat=False, smooth=False):
         self.num_patterns += 1
         bitmap_id = "c%d" % bitmap_id
         e = self.defs.xpath("./svg:image[@id='%s']" % bitmap_id, namespaces=NS)
@@ -301,6 +300,11 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
         pattern.append(use)
         self.defs.append(pattern)
         
+        return pattern_id
+        
+    def begin_bitmap_fill(self, bitmap_id, matrix=None, repeat=False, smooth=False):
+        self.finalize_path()
+        pattern_id = self.export_pattern(bitmap_id, matrix, repeat, smooth)
         self.path.set("stroke", "none")    
         self.path.set("fill", "url(#%s)" % pattern_id)
          
@@ -351,30 +355,7 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
                     joints=None, miterLimit = 3.0,
                     bitmap_id=None, matrix=None, repeat=False, smooth=False):
         self.finalize_path()
-
-        # setup the fill
-        self.num_patterns += 1
-        bitmap_id = "c%d" % bitmap_id
-        e = self.defs.xpath("./svg:image[@id='%s']" % bitmap_id, namespaces=NS)
-        if len(e) < 1:
-            raise Exception("SVGShapeExporter::begin_bitmap_fill Could not find bitmap!")
-        image = e[0]
-        pattern_id = "pat%d" % (self.num_patterns)
-        pattern = self._e.pattern()
-        pattern.set("id", pattern_id)
-        pattern.set("width", image.get("width"))
-        pattern.set("height", image.get("height"))
-        pattern.set("patternUnits", "userSpaceOnUse")
-        #pattern.set("patternContentUnits", "objectBoundingBox")
-        if matrix is not None:
-            pattern.set("patternTransform", _swf_matrix_to_svg_matrix(matrix, True, True, True))
-            pass
-        use = self._e.use()
-        use.set(XLINK_HREF, "#%s" % bitmap_id)
-        pattern.append(use)
-        self.defs.append(pattern)
-        # -------------------------
-        
+        pattern_id = self.export_pattern(bitmap_id, matrix, repeat, smooth)
         self.path.set("fill", "none")
         self.path.set("stroke", "url(#%s)" % pattern_id)
         self.path.set("stroke-linejoin", JOIN_STYLE[joints])
