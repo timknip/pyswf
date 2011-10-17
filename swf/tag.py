@@ -708,6 +708,7 @@ class TagDefineBitsLossless(DefinitionTag):
 
         indexed_colors = []
         if self.bitmap_format == BitmapFormat.BIT_8:
+            s = StringIO.StringIO()
             for i in range(0, self.bitmap_color_size + 1):
                 r = ord(temp.read(1))
                 g = ord(temp.read(1))
@@ -716,10 +717,14 @@ class TagDefineBitsLossless(DefinitionTag):
                 indexed_colors.append(struct.pack("BBBB", r, g, b, a))
 
             # create the image buffer
-            for i in range(0, t):
-                self.image_buffer += indexed_colors[ord(temp.read(1))]
+            for i in xrange(t):
+                s.write(indexed_colors[ord(temp.read(1))])
+            self.image_buffer = s.getvalue()
+            s.close()
+            
             im = Image.fromstring("RGBA", (self.padded_width, self.bitmap_height), self.image_buffer)
             im = im.crop((0, 0, self.bitmap_width, self.bitmap_height))
+            
         elif self.bitmap_format == BitmapFormat.BIT_15:
             raise Exception("DefineBitsLossless: BIT_15 not yet implemented")
         elif self.bitmap_format == BitmapFormat.BIT_24:
