@@ -360,6 +360,7 @@ class SWFShape(object):
         handler.end_fills()
             
     def _export_line_path(self, handler, group_index):
+        
         path = self._create_path_from_edge_map(self.line_edge_maps[group_index])
         pos = [100000000, 100000000]
         u = 1.0 / self.unit_divisor
@@ -367,7 +368,7 @@ class SWFShape(object):
         line_style = None
         if len(path) < 1:
             return
-            
+
         handler.begin_lines()
         for i in range(0, len(path)):
             e = path[i]
@@ -387,7 +388,7 @@ class SWFShape(object):
                         scale_mode = LineScaleMode.HORIZONTAL
                     elif line_style.no_hscale_flag:
                         scale_mode = LineScaleMode.VERTICAL
-                        
+                    
                     if not line_style.has_fill_flag:
                         handler.line_style(
                             line_style.width / 20.0, 
@@ -402,11 +403,8 @@ class SWFShape(object):
                     else:
                         fill_style = line_style.fill_type
                         
-                        print "fill style type %d" % fill_style.type
-                        
                         if fill_style.type in [0x10, 0x12, 0x13]:
                             # gradient fill
-                            print fill_style
                             colors = []
                             ratios = []
                             alphas = []
@@ -431,8 +429,19 @@ class SWFShape(object):
                                 fill_style.gradient.interpolation_mode,
                                 fill_style.gradient.focal_point
                                 )
-                        else:
-                            'other line fill styles are not supported'
+                        elif fill_style.type in [0x40, 0x41, 0x42]:
+                            handler.line_bitmap_style(
+                                line_style.width / 20.0, 
+                                line_style.pixelhinting_flag,
+                                scale_mode,
+                                line_style.start_caps_style,
+                                line_style.end_caps_style,
+                                line_style.joint_style,
+                                line_style.miter_limit_factor,
+                                fill_style.bitmap_id, fill_style.bitmap_matrix,
+                                (fill_style.type == 0x40 or fill_style.type == 0x42),
+                                (fill_style.type == 0x40 or fill_style.type == 0x41)
+                                )
                 else:
                     # we should never get here
                     handler.line_style(0)

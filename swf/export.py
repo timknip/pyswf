@@ -76,6 +76,14 @@ class DefaultShapeExporter(object):
                     spreadMethod=SpreadMethod.PAD,
                     interpolationMethod=InterpolationMethod.RGB,
                     focalPointRatio=0.0):
+        pass
+    def line_bitmap_style(self,
+                    thickness=float('nan'),
+                    pixelHinting=False, 
+                    scaleMode=LineScaleMode.NORMAL, 
+                    startCaps=None, endCaps=None, 
+                    joints=None, miterLimit = 3.0,
+                    bitmap_id=None, matrix=None, repeat=False, smooth=False):
         pass   
     def end_fill(self):
         pass
@@ -335,6 +343,46 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
         thickness = MINIMUM_STROKE_WIDTH if thickness < MINIMUM_STROKE_WIDTH else thickness
         self.path.set("stroke-width", str(thickness))
     
+    def line_bitmap_style(self,
+                    thickness=float('nan'),
+                    pixelHinting=False, 
+                    scaleMode=LineScaleMode.NORMAL, 
+                    startCaps=None, endCaps=None, 
+                    joints=None, miterLimit = 3.0,
+                    bitmap_id=None, matrix=None, repeat=False, smooth=False):
+        self.finalize_path()
+
+        # setup the fill
+        self.num_patterns += 1
+        bitmap_id = "c%d" % bitmap_id
+        e = self.defs.xpath("./svg:image[@id='%s']" % bitmap_id, namespaces=NS)
+        if len(e) < 1:
+            raise Exception("SVGShapeExporter::begin_bitmap_fill Could not find bitmap!")
+        image = e[0]
+        pattern_id = "pat%d" % (self.num_patterns)
+        pattern = self._e.pattern()
+        pattern.set("id", pattern_id)
+        pattern.set("width", image.get("width"))
+        pattern.set("height", image.get("height"))
+        pattern.set("patternUnits", "userSpaceOnUse")
+        #pattern.set("patternContentUnits", "objectBoundingBox")
+        if matrix is not None:
+            pattern.set("patternTransform", _swf_matrix_to_svg_matrix(matrix, True, True, True))
+            pass
+        use = self._e.use()
+        use.set(XLINK_HREF, "#%s" % bitmap_id)
+        pattern.append(use)
+        self.defs.append(pattern)
+        # -------------------------
+        
+        self.path.set("fill", "none")
+        self.path.set("stroke", "url(#%s)" % pattern_id)
+        self.path.set("stroke-linejoin", JOIN_STYLE[joints])
+        self.path.set("stroke-linecap", CAPS_STYLE[startCaps])
+        thickness = 1 if math.isnan(thickness) else thickness
+        thickness = MINIMUM_STROKE_WIDTH if thickness < MINIMUM_STROKE_WIDTH else thickness
+        self.path.set("stroke-width", str(thickness))
+        
     def begin_fills(self):
         self.fills_ended = False
     def end_fills(self):
