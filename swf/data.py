@@ -401,31 +401,38 @@ class SWFShape(object):
                             line_style.miter_limit_factor)
                     else:
                         fill_style = line_style.fill_type
-                        # gradient fill
-                        colors = []
-                        ratios = []
-                        alphas = []
-                        for j in range(0, len(fill_style.gradient.records)):
-                            gr = fill_style.gradient.records[j]
-                            colors.append(ColorUtils.rgb(gr.color))
-                            ratios.append(gr.ratio)
-                            alphas.append(ColorUtils.alpha(gr.color))
+                        
+                        print "fill style type %d" % fill_style.type
+                        
+                        if fill_style.type in [0x10, 0x12, 0x13]:
+                            # gradient fill
+                            print fill_style
+                            colors = []
+                            ratios = []
+                            alphas = []
+                            for j in range(0, len(fill_style.gradient.records)):
+                                gr = fill_style.gradient.records[j]
+                                colors.append(ColorUtils.rgb(gr.color))
+                                ratios.append(gr.ratio)
+                                alphas.append(ColorUtils.alpha(gr.color))
 
-                        handler.line_gradient_style(
-                            line_style.width / 20.0, 
-                            line_style.pixelhinting_flag,
-                            scale_mode,
-                            line_style.start_caps_style,
-                            line_style.end_caps_style,
-                            line_style.joint_style,
-                            line_style.miter_limit_factor,
-                            GradientType.LINEAR if fill_style.type == 0x10 else GradientType.RADIAL,
-                            colors, alphas, ratios,
-                            fill_style.gradient_matrix,
-                            fill_style.gradient.spreadmethod,
-                            fill_style.gradient.interpolation_mode,
-                            fill_style.gradient.focal_point
-                            )
+                            handler.line_gradient_style(
+                                line_style.width / 20.0, 
+                                line_style.pixelhinting_flag,
+                                scale_mode,
+                                line_style.start_caps_style,
+                                line_style.end_caps_style,
+                                line_style.joint_style,
+                                line_style.miter_limit_factor,
+                                GradientType.LINEAR if fill_style.type == 0x10 else GradientType.RADIAL,
+                                colors, alphas, ratios,
+                                fill_style.gradient_matrix,
+                                fill_style.gradient.spreadmethod,
+                                fill_style.gradient.interpolation_mode,
+                                fill_style.gradient.focal_point
+                                )
+                        else:
+                            'other line fill styles are not supported'
                 else:
                     # we should never get here
                     handler.line_style(0)
