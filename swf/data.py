@@ -360,6 +360,7 @@ class SWFShape(object):
         handler.end_fills()
             
     def _export_line_path(self, handler, group_index):
+        
         path = self._create_path_from_edge_map(self.line_edge_maps[group_index])
         pos = [100000000, 100000000]
         u = 1.0 / self.unit_divisor
@@ -367,7 +368,7 @@ class SWFShape(object):
         line_style = None
         if len(path) < 1:
             return
-            
+
         handler.begin_lines()
         for i in range(0, len(path)):
             e = path[i]
@@ -387,17 +388,60 @@ class SWFShape(object):
                         scale_mode = LineScaleMode.HORIZONTAL
                     elif line_style.no_hscale_flag:
                         scale_mode = LineScaleMode.VERTICAL
+                    
+                    if not line_style.has_fill_flag:
+                        handler.line_style(
+                            line_style.width / 20.0, 
+                            ColorUtils.rgb(line_style.color), 
+                            ColorUtils.alpha(line_style.color), 
+                            line_style.pixelhinting_flag,
+                            scale_mode,
+                            line_style.start_caps_style,
+                            line_style.end_caps_style,
+                            line_style.joint_style,
+                            line_style.miter_limit_factor)
+                    else:
+                        fill_style = line_style.fill_type
                         
-                    handler.line_style(
-                        line_style.width / 20.0, 
-                        ColorUtils.rgb(line_style.color), 
-                        ColorUtils.alpha(line_style.color), 
-                        line_style.pixelhinting_flag,
-                        scale_mode,
-                        line_style.start_caps_style,
-                        line_style.end_caps_style,
-                        line_style.joint_style,
-                        line_style.miter_limit_factor)
+                        if fill_style.type in [0x10, 0x12, 0x13]:
+                            # gradient fill
+                            colors = []
+                            ratios = []
+                            alphas = []
+                            for j in range(0, len(fill_style.gradient.records)):
+                                gr = fill_style.gradient.records[j]
+                                colors.append(ColorUtils.rgb(gr.color))
+                                ratios.append(gr.ratio)
+                                alphas.append(ColorUtils.alpha(gr.color))
+
+                            handler.line_gradient_style(
+                                line_style.width / 20.0, 
+                                line_style.pixelhinting_flag,
+                                scale_mode,
+                                line_style.start_caps_style,
+                                line_style.end_caps_style,
+                                line_style.joint_style,
+                                line_style.miter_limit_factor,
+                                GradientType.LINEAR if fill_style.type == 0x10 else GradientType.RADIAL,
+                                colors, alphas, ratios,
+                                fill_style.gradient_matrix,
+                                fill_style.gradient.spreadmethod,
+                                fill_style.gradient.interpolation_mode,
+                                fill_style.gradient.focal_point
+                                )
+                        elif fill_style.type in [0x40, 0x41, 0x42]:
+                            handler.line_bitmap_style(
+                                line_style.width / 20.0, 
+                                line_style.pixelhinting_flag,
+                                scale_mode,
+                                line_style.start_caps_style,
+                                line_style.end_caps_style,
+                                line_style.joint_style,
+                                line_style.miter_limit_factor,
+                                fill_style.bitmap_id, fill_style.bitmap_matrix,
+                                (fill_style.type == 0x40 or fill_style.type == 0x42),
+                                (fill_style.type == 0x40 or fill_style.type == 0x41)
+                                )
                 else:
                     # we should never get here
                     handler.line_style(0)
@@ -453,15 +497,15 @@ class SWFShapeWithStyle(SWFShape):
     
     def __str__(self):
         s = "    FillStyles:\n" if len(self._fillStyles) > 0 else ""
-        for i in range(0, len(self._fillStyles)):
-            s += "        %d:%s\n" % (i+1, self._fillStyles[i].__str__())
-        if len(self._lineStyles) > 0:
+        for i in range(0, len(self._initialFillStyles)):
+            s += "        %d:%s\n" % (i+1, self._initialFillStyles[i].__str__())
+        if len(self._initialLineStyles) > 0:
             s += "    LineStyles:\n"
-            for i in range(0, len(self._lineStyles)):
-                s += "        %d:%s\n" % (i+1, self._lineStyles[i].__str__())
+            for i in range(0, len(self._initialLineStyles)):
+                s += "        %d:%s\n" % (i+1, self._initialLineStyles[i].__str__())
         for record in self._records:
             s += record.__str__() + '\n'
-        return s.rstrip()
+        return s.rstrip() + super(SWFShapeWithStyle, self).__str__()
               
 class SWFShapeRecord(object):
     
@@ -730,7 +774,7 @@ class SWFFillStyle(object):
         if self.type == 0x0:
             s += "Color: %s" % ColorUtils.to_rgb_string(self.rgb)
         elif self.type in [0x10, 0x12, 0x13]:
-            s += "Gradient"
+            s += "Gradient: %s" % self.gradient_matrix
         elif self.type in [0x40, 0x41, 0x42, 0x43]:
             s += "BitmapID: %d" % (self.bitmap_id)
         return s
@@ -783,6 +827,26 @@ class SWFLineStyle2(SWFLineStyle):
             self.fill_type = data.readFILLSTYLE(level)
         else:
             self.color = data.readRGBA()
+
+    def __str__(self):
+        s = "[SWFLineStyle2] "
+        s += "Width: %d, " % self.width
+        s += "StartCapsStyle: %d, " % self.start_caps_style
+        s += "JointStyle: %d, " % self.joint_style
+        s += "HasFillFlag: %d, " % self.has_fill_flag
+        s += "NoHscaleFlag: %d, " % self.no_hscale_flag
+        s += "NoVscaleFlag: %d, " % self.no_vscale_flag
+        s += "PixelhintingFlag: %d, " % self.pixelhinting_flag
+        s += "NoClose: %d, " % self.no_close
+        
+        if self.joint_style:
+            s += "MiterLimitFactor: %d" % self.miter_limit_factor
+        if self.has_fill_flag:
+            s += "FillType: %s, " % self.fill_type
+        else:
+            s += "Color: %s" % ColorUtils.to_rgb_string(self.color)
+        
+        return s
 
 class SWFMorphGradientRecord(object):
     def __init__(self, data):

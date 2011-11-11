@@ -23,6 +23,18 @@ XLINK_HREF  = "{%s}href" % XLINK_NS
 NS = {"svg" : SVG_NS, "xlink" : XLINK_NS}
 
 MINIMUM_STROKE_WIDTH = 1.0
+
+CAPS_STYLE = {
+    0 : 'round',
+    1 : 'butt',
+    2 : 'square'
+}
+
+JOIN_STYLE = {
+    0 : 'round',
+    1 : 'bevel',
+    2 : 'miter'
+}
                 
 class DefaultShapeExporter(object):
     """
@@ -53,11 +65,25 @@ class DefaultShapeExporter(object):
                     startCaps=None, endCaps=None, 
                     joints=None, miterLimit=3.0):
         pass
-    def line_gradient_style(self, type, colors, alphas, ratios, 
-                            matrix=None, 
-                            spreadMethod=SpreadMethod.PAD, 
-                            interpolationMethod=InterpolationMethod.RGB, 
-                            focalPointRatio=0.0):
+    def line_gradient_style(self,
+                    thickness=float('nan'), color=0, alpha=1.0, 
+                    pixelHinting=False,
+                    scaleMode=LineScaleMode.NORMAL,
+                    startCaps=None, endCaps=None,
+                    joints=None, miterLimit=3.0,
+                    type = 1, colors = [], alphas = [], ratios = [],
+                    matrix=None,
+                    spreadMethod=SpreadMethod.PAD,
+                    interpolationMethod=InterpolationMethod.RGB,
+                    focalPointRatio=0.0):
+        pass
+    def line_bitmap_style(self,
+                    thickness=float('nan'),
+                    pixelHinting=False, 
+                    scaleMode=LineScaleMode.NORMAL, 
+                    startCaps=None, endCaps=None, 
+                    joints=None, miterLimit = 3.0,
+                    bitmap_id=None, matrix=None, repeat=False, smooth=False):
         pass   
     def end_fill(self):
         pass
@@ -190,7 +216,15 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
                             interpolationMethod=InterpolationMethod.RGB,
                             focalPointRatio=0.0):
         self.finalize_path()
+        gradient_id = self.export_gradient(type, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio)
+        self.path.set("stroke", "none")    
+        self.path.set("fill", "url(#%s)" % gradient_id)
         
+    def export_gradient(self, type, colors, alphas, ratios, 
+                        matrix=None, 
+                        spreadMethod=SpreadMethod.PAD,
+                        interpolationMethod=InterpolationMethod.RGB,
+                        focalPointRatio=0.0):
         self.num_gradients += 1
         gradient_id = "gradient%d" % self.num_gradients
         gradient = self._e.linearGradient() if type == GradientType.LINEAR \
@@ -242,11 +276,9 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
             gradient.set("id", gradient_id)
             self.defs.append(gradient)
             
-        self.path.set("stroke", "none")    
-        self.path.set("fill", "url(#%s)" % gradient_id)
+        return gradient_id
         
-    def begin_bitmap_fill(self, bitmap_id, matrix=None, repeat=False, smooth=False):
-        self.finalize_path()
+    def export_pattern(self, bitmap_id, matrix, repeat=False, smooth=False):
         self.num_patterns += 1
         bitmap_id = "c%d" % bitmap_id
         e = self.defs.xpath("./svg:image[@id='%s']" % bitmap_id, namespaces=NS)
@@ -268,6 +300,11 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
         pattern.append(use)
         self.defs.append(pattern)
         
+        return pattern_id
+        
+    def begin_bitmap_fill(self, bitmap_id, matrix=None, repeat=False, smooth=False):
+        self.finalize_path()
+        pattern_id = self.export_pattern(bitmap_id, matrix, repeat, smooth)
         self.path.set("stroke", "none")    
         self.path.set("fill", "url(#%s)" % pattern_id)
          
@@ -285,7 +322,48 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
         self.path.set("stroke-width", str(thickness))
         if alpha < 1.0:
             self.path.set("stroke-opacity", str(alpha))
+
+    def line_gradient_style(self,
+                    thickness=float('nan'),
+                    pixelHinting = False, 
+                    scaleMode=LineScaleMode.NORMAL, 
+                    startCaps=0, endCaps=0, 
+                    joints=0, miterLimit=3.0,
+                    type = 1,
+                    colors = [],
+                    alphas = [],
+                    ratios = [], 
+                    matrix=None,
+                    spreadMethod=SpreadMethod.PAD,
+                    interpolationMethod=InterpolationMethod.RGB,
+                    focalPointRatio=0.0):
+        self.finalize_path()
+        gradient_id = self.export_gradient(type, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio)
+        self.path.set("fill", "none")
+        self.path.set("stroke-linejoin", JOIN_STYLE[joints])
+        self.path.set("stroke-linecap", CAPS_STYLE[startCaps])
+        self.path.set("stroke", "url(#%s)" % gradient_id)
+        thickness = 1 if math.isnan(thickness) else thickness
+        thickness = MINIMUM_STROKE_WIDTH if thickness < MINIMUM_STROKE_WIDTH else thickness
+        self.path.set("stroke-width", str(thickness))
     
+    def line_bitmap_style(self,
+                    thickness=float('nan'),
+                    pixelHinting=False, 
+                    scaleMode=LineScaleMode.NORMAL, 
+                    startCaps=None, endCaps=None, 
+                    joints=None, miterLimit = 3.0,
+                    bitmap_id=None, matrix=None, repeat=False, smooth=False):
+        self.finalize_path()
+        pattern_id = self.export_pattern(bitmap_id, matrix, repeat, smooth)
+        self.path.set("fill", "none")
+        self.path.set("stroke", "url(#%s)" % pattern_id)
+        self.path.set("stroke-linejoin", JOIN_STYLE[joints])
+        self.path.set("stroke-linecap", CAPS_STYLE[startCaps])
+        thickness = 1 if math.isnan(thickness) else thickness
+        thickness = MINIMUM_STROKE_WIDTH if thickness < MINIMUM_STROKE_WIDTH else thickness
+        self.path.set("stroke-width", str(thickness))
+        
     def begin_fills(self):
         self.fills_ended = False
     def end_fills(self):
@@ -795,6 +873,7 @@ def _encode_png(data):
     return "data:image/png;base64," + base64.encodestring(data)[:-1]
 
 def _swf_matrix_to_matrix(swf_matrix=None, need_scale=False, need_translate=True, need_rotation=False, unit_div=20.0):
+    
     if swf_matrix is None:
         values = [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
     else:
