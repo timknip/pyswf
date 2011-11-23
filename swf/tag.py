@@ -4,7 +4,10 @@ from utils import *
 from stream import *
 import Image
 import struct
-import StringIO
+try:
+    import cStringIO as StringIO
+except ImportError:
+    import StringIO
 
 class TagFactory(object):
     @classmethod
@@ -730,6 +733,7 @@ class TagDefineBitsLossless(DefinitionTag):
         elif self.bitmap_format == BitmapFormat.BIT_24:
             t = self.bitmap_width * self.bitmap_height if is_lossless2 else t
             # read PIX24's
+            s = StringIO.StringIO()
             for i in range(0, t):
                 if not is_lossless2:
                     temp.read(1) # reserved, always 0
@@ -737,7 +741,8 @@ class TagDefineBitsLossless(DefinitionTag):
                 r = ord(temp.read(1))
                 g = ord(temp.read(1))
                 b = ord(temp.read(1))
-                self.image_buffer += struct.pack("BBBB", r, g, b, a)
+                s.write(struct.pack("BBBB", r, g, b, a))
+            self.image_buffer = s.getvalue()
             if is_lossless2:
                 im = Image.fromstring("RGBA", (self.bitmap_width, self.bitmap_height), self.image_buffer)
             else:
