@@ -12,7 +12,9 @@ class SWFStream(object):
     def __init__(self, file):
         """ Initialize with a file object """
         self.f = file
-        self._bit_pending = 0
+        self._bits_pending = 0
+        self._partial_byte = None
+        self._make_masks()
         
     def bin(self, s):
         """ Return a value as a binary string """
@@ -40,25 +42,62 @@ class SWFStream(object):
         """ Closes the stream """
         if self.f:
             self.f.close()
-            
-    def readbits(self, bits, bit_buffer=0):
-        """ Read the specified number of bits from the stream """
-        if bits == 0: return bit_buffer
+    
+    def _make_masks(self):
+        self._masks = [(1 << x) - 1 for x in range(9)]
+    
+    def _read_bytes_aligned(self, bytes):
+        out = 0
+        buf = self.f.read(bytes)
+        return reduce(lambda x, y: x << 8 | ord(y), buf, 0)
+    
+    def readbits(self, bits):
+        """
+        Read the specified number of bits from the stream.
+        Returns 0 for bits == 0.
+        """
         
-        if self._bits_pending > 0:
-            self.f.seek(self.f.tell() - 1)
-            byte = ord(self.f.read(1)) & (0xff >> (8 - self._bits_pending))
-            consumed = min(self._bits_pending, bits)
-            self._bits_pending -= consumed
-            partial = byte >> self._bits_pending
-        else:
-            consumed = min(8, bits);
-            self._bits_pending = 8 - consumed
-            partial = ord(self.f.read(1)) >> self._bits_pending
+        if bits == 0:
+            return 0
+        
+        # fast byte-aligned path
+        if bits % 8 == 0 and self._bits_pending == 0:
+            return self._read_bytes_aligned(bits / 8)
+        
+        out = 0
+        masks = self._masks
+        
+        def transfer_bits(x, y, n, t):
+            """
+            transfers t bits from the top of y_n to the bottom of x.
+            then returns x and the remaining bits in y
+            """
+            if n == t:
+                # taking all
+                return (x << t) | y, 0
             
-        bits -= consumed;
-        bit_buffer = (bit_buffer << consumed) | partial
-        return self.readbits(bits, bit_buffer) if bits > 0 else bit_buffer
+            mask = masks[t]           # (1 << t) - 1
+            remainmask = masks[n - t] # (1 << n - t) - 1
+            taken = ((y >> n - t) & mask)
+            return (x << t) | taken, y & remainmask
+        
+        while bits > 0:
+            if self._bits_pending > 0:
+                assert self._partial_byte is not None
+                take = min(self._bits_pending, bits)
+                out, self._partial_byte = transfer_bits(out, self._partial_byte, self._bits_pending, take)
+                
+                if take == self._bits_pending:
+                    # we took them all
+                    self._partial_byte = None
+                self._bits_pending -= take
+                bits -= take
+                continue
+            
+            self._partial_byte = ord(self.f.read(1))
+            self._bits_pending = 8
+        
+        return out
      
     def readFB(self, bits):
         """ Read a float using the specified number of bits """

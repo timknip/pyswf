@@ -11,7 +11,10 @@ from lxml import objectify
 from lxml import etree
 import base64
 import Image
-from StringIO import StringIO
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from StringIO import StringIO
 import math
 import re
 import copy
