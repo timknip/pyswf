@@ -47,7 +47,6 @@ class SWFStream(object):
         self._masks = [(1 << x) - 1 for x in range(9)]
     
     def _read_bytes_aligned(self, bytes):
-        out = 0
         buf = self.f.read(bytes)
         return reduce(lambda x, y: x << 8 | ord(y), buf, 0)
     
