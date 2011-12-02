@@ -93,7 +93,10 @@ class SWFStream(object):
                 bits -= take
                 continue
             
-            self._partial_byte = ord(self.f.read(1))
+            r = self.f.read(1)
+            if r == '':
+                raise EOFError
+            self._partial_byte = ord(r)
             self._bits_pending = 8
         
         return out
@@ -140,6 +143,11 @@ class SWFStream(object):
         """ Read a unsigned int """
         self.reset_bits_pending();
         return struct.unpack('<I', self.f.read(4))[0]
+
+    def readUI64(self):
+        """ Read a uint64_t """
+        self.reset_bits_pending();
+        return struct.unpack('<Q', self.f.read(8))[0]
     
     def readEncodedU32(self):
         """ Read a encoded unsigned int """
@@ -280,6 +288,10 @@ class SWFStream(object):
     def readMORPHLINESTYLE(self, level=1):
         """ Read a SWFMorphLineStyle """
         return SWFMorphLineStyle(self, level)
+    
+    def readMORPHLINESTYLE2(self, level=1):
+        """ Read a SWFMorphLineStyle2 """
+        return SWFMorphLineStyle2(self, level)
         
     def readMORPHGRADIENT(self, level=1):
         """ Read a SWFTextRecord """
@@ -299,6 +311,17 @@ class SWFStream(object):
             action = SWFActionFactory.create(actionCode, actionLength)
             action.parse(self)
         return action
+        
+    def readACTIONRECORDs(self):
+        """ Read zero or more button records (zero-terminated) """
+        out = []
+        while 1:
+            action = self.readACTIONRECORD()
+            if action:
+                out.append(action)
+            else:
+                break
+        return out
         
     def readCLIPACTIONS(self, version):
         """ Read a SWFClipActions """
@@ -355,6 +378,11 @@ class SWFStream(object):
         filter.parse(self)
         return filter
     
+    def readFILTERLIST(self):
+        """ Read a length-prefixed list of FILTERs """
+        number = self.readUI8()
+        return [self.readFILTER() for i in xrange(number)]
+    
     def readZONEDATA(self):
         """ Read a SWFZoneData """
         return SWFZoneData(self)
@@ -362,6 +390,64 @@ class SWFStream(object):
     def readZONERECORD(self):
         """ Read a SWFZoneRecord """
         return SWFZoneRecord(self)
+        
+    def readSOUNDINFO(self):
+        """ Read a SWFSoundInfo """
+        return SWFSoundInfo(self)
+        
+    def readSOUNDENVELOPE(self):
+        """ Read a SWFSoundEnvelope """
+        return SWFSoundEnvelope(self)
+    
+    def readBUTTONRECORD(self, version):
+        rc = SWFButtonRecord(data = self, version = version)
+        return rc if rc.valid else None
+        
+    def readBUTTONRECORDs(self, version):
+        """ Read zero or more button records (zero-terminated) """
+        out = []
+        while 1:
+            button = self.readBUTTONRECORD(version)
+            if button:
+                out.append(button)
+            else:
+                break
+        return out
+    
+    def readBUTTONCONDACTION(self):
+        """ Read a size-prefixed BUTTONCONDACTION """
+        size = self.readUI16()
+        if size == 0:
+            return None
+        return SWFButtonCondAction(self)
+    
+    def readBUTTONCONDACTIONSs(self):
+        """ Read zero or more button-condition actions """
+        out = []
+        while 1:
+            action = self.readBUTTONCONDACTION()
+            if action:
+                out.append(action)
+            else:
+                break
+        return out
+        
+    def readEXPORT(self):
+        """ Read a SWFExport """
+        return SWFExport(self)
+    
+    def readMORPHFILLSTYLEARRAY(self):
+        count = self.readUI8()
+        if count == 0xff:
+            count = self.readUI16()
+        return [self.readMORPHFILLSTYLE() for i in xrange(count)]
+        
+    def readMORPHLINESTYLEARRAY(self, version):
+        count = self.readUI8()
+        if count == 0xff:
+            count = self.readUI16()
+        kind = self.readMORPHLINESTYLE if version == 1 else self.readMORPHLINESTYLE2
+        return [kind() for i in xrange(count)]
         
     def readraw_tag(self):
         """ Read a SWFRawTag """

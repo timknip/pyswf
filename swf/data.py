@@ -1095,7 +1095,7 @@ class SWFKerningRecord(object):
         self.adjustment = data.readSI16()
     
     def __str__(self):
-        return "Code1: %d, Code2: %d, Adjustement: %d" % (self.code1, self.code2, self.adjustment)
+        return "Code1: %d, Code2: %d, Adjustment: %d" % (self.code1, self.code2, self.adjustment)
         
 class SWFTextRecord(object):
     def __init__(self, data=None, glyphBits=0, advanceBits=0, previousRecord=None, level=1):
@@ -1276,4 +1276,111 @@ class SWFZoneRecord(object):
 
     def __str__(self):
         return "[SWFZoneRecord]"
-                    
+
+class SWFSoundInfo(object):
+    def __init__(self, data=None):
+        if not data is None:
+            self.parse(data)
+
+    def parse(self, data):
+        reserved = data.readUB(2)
+        assert reserved == 0
+        self.syncStop = data.readUB(1) == 1
+        self.syncNoMultiple = data.readUB(1) == 1
+        self.hasEnvelope = data.readUB(1) == 1
+        self.hasLoops = data.readUB(1) == 1
+        self.hasOutPoint = data.readUB(1) == 1
+        self.hasInPoint = data.readUB(1) == 1
+        self.inPoint = data.readUI32() if self.hasInPoint else None
+        self.outPoint = data.readUI32() if self.hasOutPoint else None
+        self.loopCount = data.readUI16() if self.hasLoops else None
+        self.envPointCount = data.readUI8() if self.hasEnvelope else None
+        self.envelopePoints = [data.readSOUNDENVELOPE() for x in xrange(self.envPointCount)] if self.hasEnvelope else None
+
+    def __str__(self):
+        return "[SWFSoundInfo]"
+
+class SWFSoundEnvelope(object):
+    def __init__(self, data=None):
+        if not data is None:
+            self.parse(data)
+
+    def parse(self, data):
+        self.position = data.readUI32()
+        self.leftLevel = data.readUI16()
+        self.rightLevel = data.readUI16()
+
+    def __str__(self):
+        return "[SWFSoundEnvelope]"
+
+class SWFButtonRecord(object):
+    def __init__(self, version, data=None):
+        # version is 1 for DefineButton, 2 for DefineButton2, etc
+        if not data is None:
+            self.parse(data, version)
+
+    def parse(self, data, version):
+        reserved0 = data.readUB(2)
+        self.hasBlendMode = data.readUB(1) == 1
+        self.hasFilterList = data.readUB(1) == 1
+        self.stateHitTest = data.readUB(1) == 1
+        self.stateDown = data.readUB(1) == 1
+        self.stateOver = data.readUB(1) == 1
+        self.stateUp = data.readUB(1) == 1
+        
+        self.valid = reserved0 or self.hasBlendMode or \
+                     self.hasFilterList or self.stateHitTest or \
+                     self.stateDown or self.stateOver or self.stateUp
+        if not self.valid:
+            return
+        
+        self.characterId = data.readUI16()
+        self.placeDepth = data.readUI16()
+        self.placeMatrix = data.readMATRIX()
+        
+        if version == 2:
+            self.colorTransform = data.readCXFORMWITHALPHA()
+            self.filterList = data.readFILTERLIST() if self.hasFilterList else None
+            self.blendMode = data.readUI8() if self.hasBlendMode else 0
+
+    def __str__(self):
+        return "[SWFButtonRecord]"
+        
+    def __repr__(self):
+        return "[SWFButtonRecord %r]" % self.__dict__
+
+class SWFButtonCondAction(object):
+    def __init__(self, data=None):
+        if not data is None:
+            self.parse(data)
+
+    def parse(self, data):
+        self.idleToOverDown = data.readUB(1) == 1
+        self.outDownToIdle = data.readUB(1) == 1
+        self.outDownToOverDown = data.readUB(1) == 1
+        self.overDownToOutDown = data.readUB(1) == 1
+        
+        self.overDownToOverUp = data.readUB(1) == 1
+        self.overUpToOverDown = data.readUB(1) == 1
+        self.overUpToIdle = data.readUB(1) == 1
+        self.idleToOverUp = data.readUB(1) == 1
+        
+        self.keyPress = data.readUB(7)
+        self.overDownToIdle = data.readUB(1) == 1
+        
+        self.actions = data.readACTIONRECORDs()
+
+    def __str__(self):
+        return "[SWFButtonCondAction]"
+
+class SWFExport(object):
+    def __init__(self, data=None):
+        if not data is None:
+            self.parse(data)
+
+    def parse(self, data):
+        self.characterId = data.readUI16()
+        self.characterName = data.readString()
+
+    def __str__(self):
+        return "[SWFExport %d as %r]" % (self.characterId, self.characterName)

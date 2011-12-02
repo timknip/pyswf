@@ -145,7 +145,6 @@ class SWF(SWFTimelineContainer):
             self._header._frame_count = data.readUI16()
         self.parse_tags(data)
         
-        
     def __str__(self):
         s = "[SWF]\n"
         s += self._header.__str__()
