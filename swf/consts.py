@@ -1,106 +1,313 @@
 
-class BitmapFormat(object):
+class Enum(object):
+    @classmethod
+    def tostring(cls, type):
+        return cls._mapping.get(type, 'unknown')
+
+class BitmapFormat(Enum):
     BIT_8 = 3
     BIT_15 = 4
     BIT_24 = 5
+    
+    _mapping = {
+        BIT_8: 'BIT_8',
+        BIT_15: 'BIT_15',
+        BIT_24: 'BIT_24',
+    }
 
-    @classmethod
-    def tostring(cls, type):
-        if type == BitmapFormat.BIT_8: return "BIT_8"
-        elif type == BitmapFormat.BIT_15: return "BIT_15"
-        elif type == BitmapFormat.BIT_24: return "BIT_24"
-        else: return "unknown"
-
-class BitmapType(object):
+class BitmapType(Enum):
     JPEG = 1  
     GIF89A = 2
     PNG = 3
     
-    @classmethod
-    def tostring(cls, type):
-        if type == BitmapType.JPEG: return "JPEG"
-        elif type == BitmapType.GIF89A: return "GIF89A"
-        elif type == BitmapType.PNG: return "PNG"
-        else: return "unknown"
+    _mapping = {
+        JPEG: 'JPEG',
+        GIF89A: 'GIF89A',
+        PNG: 'PNG',
+    }
 
-class GradientSpreadMode(object):
+class GradientSpreadMode(Enum):
     PAD = 0 
     REFLECT = 1
     REPEAT = 2
+    
+    _mapping = {
+        PAD: 'pad',
+        REFLECT: 'reflect',
+        REPEAT: 'repeat',
+    }
 
-    @classmethod
-    def tostring(cls, type):
-        if type == GradientSpreadMode.PAD: return "pad"
-        elif type == GradientSpreadMode.REFLECT: return "reflect"
-        elif type == GradientSpreadMode.REPEAT: return "repeat"
-        else: return "unknown"
-
-class GradientType(object):
+class GradientType(Enum):
     LINEAR = 1
     RADIAL = 2
-
-    @classmethod
-    def tostring(cls, type):
-        if type == GradientType.LINEAR: return "LINEAR"
-        elif type == GradientType.RADIAL: return "RADIAL"
-        else: return "unknown"
+    
+    _mapping = {
+        LINEAR: 'LINEAR',
+        RADIAL: 'RADIAL',
+    }
                 
-class LineScaleMode(object):
+class LineScaleMode(Enum):
     NONE = 0
     HORIZONTAL = 1 
     NORMAL = 2
     VERTICAL = 3
-    @classmethod
-    def tostring(cls, type):
-        if type == LineScaleMode.HORIZONTAL: return "horizontal"
-        elif type == LineScaleMode.NORMAL: return "normal"
-        elif type == LineScaleMode.VERTICAL: return "vertical"
-        elif type == LineScaleMode.NONE: return "none"
-        else: return "unknown"
+    
+    _mapping = {
+        NONE: 'none',
+        HORIZONTAL: 'horizontal',
+        NORMAL: 'normal',
+        VERTICAL: 'vertical',
+    }
                         
-class SpreadMethod(object):
+class SpreadMethod(Enum):
     PAD = 0 
     REFLECT = 1
     REPEAT = 2
-
-    @classmethod
-    def tostring(cls, type):
-        if type == SpreadMethod.PAD: return "pad"
-        elif type == SpreadMethod.REFLECT: return "reflect"
-        elif type == SpreadMethod.REPEAT: return "repeat"
-        else: return "unknown"
+    
+    _mapping = {
+        PAD: 'pad',
+        REFLECT: 'reflect',
+        REPEAT: 'repeat',
+    }
                 
-class InterpolationMethod(object):
+class InterpolationMethod(Enum):
     RGB = 0
     LINEAR_RGB = 1
-    @classmethod
-    def tostring(cls, type):
-        if type == InterpolationMethod.LINEAR_RGB: return "LINEAR_RGB"
-        elif type == InterpolationMethod.RGB: return "RGB"
-        else: return "unknown"
+    
+    _mapping = {
+        RGB: 'RGB',
+        LINEAR_RGB: 'LINEAR_RGB',
+    }
                         
-class LineJointStyle(object):
+class LineJointStyle(Enum):
     ROUND = 0
     BEVEL = 1
     MITER = 2
     
-    @classmethod
-    def tostring(cls, type):
-        if type == LineJointStyle.ROUND: return "ROUND"
-        elif type == LineJointStyle.BEVEL: return "BEVEL"
-        elif type == LineJointStyle.MITER: return "MITER"
-        else: return "unknown"
+    _mapping = {
+        ROUND: 'ROUND',
+        BEVEL: 'BEVEL',
+        MITER: 'MITER',
+    }
         
-class LineCapsStyle(object):
+class LineCapsStyle(Enum):
     ROUND = 0
     NO = 1
     SQUARE = 2
     
-    @classmethod    
-    def tostring(cls, type):
-        if type == LineCapsStyle.ROUND: return "ROUND"
-        elif type == LineCapsStyle.NO: return "NO"
-        elif type == LineCapsStyle.SQUARE: return "SQUARE"
-        else: return "unknown"
+    _mapping = {
+        ROUND: 'ROUND',
+        NO: 'NO',
+        SQUARE: 'SQUARE',
+    }
         
+class TextAlign(Enum):
+    LEFT = 0
+    RIGHT = 1
+    CENTER = 2
+    JUSTIFY = 3
     
+    _mapping = {
+        LEFT: 'left',
+        RIGHT: 'right',
+        CENTER: 'center',
+        JUSTIFY: 'justify',
+    }
+        
+class BlendMode(Enum):
+    Normal = 0
+    Normal_1 = 1
+    Layer = 2
+    Multiply = 3
+    Screen = 4
+    Lighten = 5
+    Darken = 6
+    Difference = 7
+    Add = 8
+    Subtract = 9
+    Invert = 10
+    Alpha = 11
+    Erase = 12
+    Overlay = 13
+    Hardlight = 14
+    
+    _mapping = {
+        Normal: "Normal",
+        Normal_1: "Normal",
+        Layer: "Layer",
+        Multiply: "Multiply",
+        Screen: "Screen",
+        Lighten: "Lighten",
+        Darken: "Darken",
+        Difference: "Difference",
+        Add: "Add",
+        Subtract: "Subtract",
+        Invert: "Invert",
+        Alpha: "Alpha",
+        Erase: "Erase",
+        Overlay: "Overlay",
+        Hardlight: "Hardlight",
+    }
+
+class AudioSampleRate(Enum):
+    Hz5k512 = 0
+    Hz11k025 = 1
+    Hz22k05 = 2
+    Hz44k1 = 3
+    
+    _mapping = {
+        Hz5k512: '5.512kHz',
+        Hz11k025: '11.025kHz',
+        Hz22k05: '22.05kHz',
+        Hz44k1: '44.1kHz',
+    }
+
+class AudioChannels(Enum):
+    Mono = 0
+    Stereo = 1
+    
+    _mapping = {
+        Mono: 'Mono',
+        Stereo: 'Stereo',
+    }
+
+class AudioSampleSize(Enum):
+    b8 = 0
+    b16 = 1
+    
+    _mapping = {
+        b8: '8-bit',
+        b16: '16-bit',
+    }
+
+class AudioCodec(Enum):
+    UncompressedNativeEndian = 0
+    ADPCM = 1
+    MP3 = 2
+    UncompressedLittleEndian = 3
+    Nellymoser16kHz = 4
+    Nellymoser8kHz = 5
+    Nellymoser = 6
+    Speex = 11
+    
+    _mapping = {
+        UncompressedNativeEndian: 'UncompressedNativeEndian',
+        ADPCM: 'ADPCM',
+        MP3: 'MP3',
+        UncompressedLittleEndian: 'UncompressedLittleEndian',
+        Nellymoser16kHz: 'Nellymoser16kHz',
+        Nellymoser8kHz: 'Nellymoser8kHz',
+        Nellymoser: 'Nellymoser',
+        Speex: 'Speex',
+    }
+    
+    MinimumVersions = {
+        UncompressedNativeEndian: 1,
+        ADPCM: 1,
+        MP3: 4,
+        UncompressedLittleEndian: 4,
+        Nellymoser16kHz: 10,
+        Nellymoser8kHz: 10,
+        Nellymoser: 6,
+        Speex: 10,
+    }
+
+class ProductEdition(Enum):
+    DeveloperEdition = 0
+    FullCommercialEdition = 1
+    NonCommercialEdition = 2
+    EducationalEdition = 3
+    NotForResaleEdition = 4
+    TrialEdition = 5
+    NoEdition = 6
+    
+    _mapping = {
+        DeveloperEdition: 'Developer edition',
+        FullCommercialEdition: 'Full commercial',
+        NonCommercialEdition: 'Non-commercial',
+        EducationalEdition: 'Educational',
+        NotForResaleEdition: 'Not for resale',
+        TrialEdition: 'Trial',
+        NoEdition: 'None',
+    }
+
+class ProductKind(Enum):
+    Unknown = 0
+    FlexForJ2EE = 1
+    FlexForDotNET = 2
+    AdobeFlex = 3
+    
+    _mapping = {
+        Unknown: 'Unknown',
+        FlexForJ2EE: 'Flex for J2EE',
+        FlexForDotNET: 'Flex for .NET',
+        AdobeFlex: 'Adobe Flex',
+    }
+
+class VideoCodec(Enum):
+    SorensonH263 = 2
+    ScreenVideo = 3
+    VP6 = 4
+    VP6Alpha = 5
+    
+    _mapping = {
+        SorensonH263: 'Sorenson H.263',
+        ScreenVideo: 'Screen video',
+        VP6: 'VP6',
+        VP6Alpha: 'VP6 with alpha',
+    }
+    
+    MinimumVersions = {
+        SorensonH263: 6,
+        ScreenVideo: 7,
+        VP6: 8,
+        VP6Alpha: 8,
+    }
+
+class MPEGVersion(Enum):
+    MPEG2_5 = 0
+    RFU = 1
+    MPEG2 = 2
+    MPEG1 = 3
+    
+    _mapping = {
+        MPEG2_5: 'MPEG2.5',
+        RFU: 'Reserved',
+        MPEG2: 'MPEG2',
+        MPEG1: 'MPEG1',
+    }
+
+class MPEGLayer(Enum):
+    RFU = 0
+    Layer3 = 1
+    Layer2 = 2
+    Layer1 = 3
+    
+    _mapping = {
+        RFU: 'Reserved',
+        Layer3: 'Layer 3',
+        Layer2: 'Layer 2',
+        Layer1: 'Layer 1',
+    }
+
+def MPEGBitrate(version, value):
+    """
+    Returns bitrate in thousands of bits per second.
+    """
+    if version == MPEGVersion.MPEG1:
+        bitrates = [ 0, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, None ]
+    else:
+        bitrates = [ 0, 8, 16, 24,32, 40, 48, 56, 64, 80, 96, 112, 128, 144, 160, None ]
+    assert len(bitrates) == 16
+    return bitrates[value]
+
+def MPEGSampleRate(version, value):
+    """
+    Returns sample rate in samples per second.
+    """
+    if version == MPEGVersion.MPEG1:
+        return [ 44100, 22050, 11025 ][value]
+    elif version == MPEGVersion.MPEG2:
+        return [ 48000, 24000, 12000 ][value]
+    elif version == MPEGVersion.MPEG2_5:
+        return [ 32000, 16000, 8000 ][value]
