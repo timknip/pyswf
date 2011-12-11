@@ -169,21 +169,36 @@ class SWFTimelineContainer(DefinitionTag):
         data.f.seek(pos)
         return length
         
-    def all_tags_of_type(self, type_or_types):
+    def all_tags_of_type(self, type_or_types, recurse_into_sprites = True):
         """
         Generator for all tags of the given type_or_types.
         
-        Generates in breadth-first order, including all sub-containers.
+        Generates in breadth-first order, optionally including all sub-containers.
         """
         for t in self.tags:
             if isinstance(t, type_or_types):
                 yield t
-        for t in self.tags:
-            # recurse into nested sprites
-            if isinstance(t, SWFTimelineContainer):
-                for containedtag in t.all_tags_of_type(type_or_types):
-                    yield containedtag
-        
+        if recurse_into_sprites:
+            for t in self.tags:
+                # recurse into nested sprites
+                if isinstance(t, SWFTimelineContainer):
+                    for containedtag in t.all_tags_of_type(type_or_types):
+                        yield containedtag
+    
+    def build_dictionary(self):
+        """
+        Return a dictionary of characterIds to their defining tags.
+        """
+        d = {}
+        for t in self.all_tags_of_type(DefinitionTag, recurse_into_sprites = False):
+            if t.characterId in d:
+                print 'redefinition of characterId %d:' % (t.characterId)
+                print '  was:', d[t.characterId]
+                print 'redef:', t
+                raise ValueError('illegal redefinition of character')
+            d[t.characterId] = t
+        return d
+    
     def collect_sound_streams(self):
         """
         Return a list of sound streams in this timeline and its children.
@@ -2377,7 +2392,7 @@ class TagDefineButtonSound(Tag):
             soundInfo = data.readSOUNDINFO() if soundId else None
             setattr(self, 'soundInfoOn' + event, soundInfo)
 
-class TagDefineScalingGrid(DefinitionTag):
+class TagDefineScalingGrid(Tag):
     """
     The DefineScalingGrid tag introduces the concept of 9-slice scaling, which allows 
     component-style scaling to be applied to a sprite or button character.
