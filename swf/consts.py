@@ -25,6 +25,12 @@ class BitmapType(Enum):
         GIF89A: 'GIF89A',
         PNG: 'PNG',
     }
+    
+    FileExtensions = {
+        JPEG: '.jpeg',
+        GIF89A: '.gif',
+        PNG: '.png'
+    }
 
 class GradientSpreadMode(Enum):
     PAD = 0 
@@ -210,6 +216,21 @@ class AudioCodec(Enum):
         Nellymoser8kHz: 10,
         Nellymoser: 6,
         Speex: 10,
+    }
+    
+    FileExtensions = {
+        MP3: '.mp3',
+        
+        # arbitrary container
+        UncompressedNativeEndian: '.wav',   
+        UncompressedLittleEndian: '.wav',
+        ADPCM: '.wav',
+        
+        # fictitious
+        Nellymoser16kHz: '.nel',
+        Nellymoser8kHz: '.nel',
+        Nellymoser: '.nel',
+        Speex: '.spx',
     }
 
 class ProductEdition(Enum):

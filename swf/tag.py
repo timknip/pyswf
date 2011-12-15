@@ -846,6 +846,7 @@ class TagDefineBitsLossless(DefinitionTag):
         if not im is None:
             im.save(self.bitmapData, "PNG")
             self.bitmapData.seek(0)
+            self.bitmapType = ImageUtils.get_image_type(self.bitmapData)
 
     @property
     def name(self):
