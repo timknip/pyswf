@@ -1825,14 +1825,6 @@ class TagDefineSound(Tag):
         s += " soundSampleSize: %s" % AudioSampleSize.tostring(self.soundSampleSize)
         s += " soundChannels: %s" % AudioChannels.tostring(self.soundChannels)
         return s
-    
-    def encode_for_file(self):
-        if self.soundFormat == AudioCodec.MP3:
-            st = SWFStream(self.soundData)
-            seekSamples = st.readSI16()
-            return st.read()
-        else:
-            raise NotImplementedError('NYI: encode_for_file for ' + str(self))
 
 class TagStartSound(Tag):
     TYPE = 15

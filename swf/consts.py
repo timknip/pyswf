@@ -167,6 +167,13 @@ class AudioSampleRate(Enum):
         Hz22k05: '22.05kHz',
         Hz44k1: '44.1kHz',
     }
+    
+    Rates = {
+        Hz5k512: 5512,
+        Hz11k025: 11025,
+        Hz22k05: 22050,
+        Hz44k1: 44100,
+    }
 
 class AudioChannels(Enum):
     Mono = 0
@@ -176,6 +183,11 @@ class AudioChannels(Enum):
         Mono: 'Mono',
         Stereo: 'Stereo',
     }
+    
+    Channels = {
+        Mono: 1,
+        Stereo: 2
+    }
 
 class AudioSampleSize(Enum):
     b8 = 0
@@ -184,6 +196,11 @@ class AudioSampleSize(Enum):
     _mapping = {
         b8: '8-bit',
         b16: '16-bit',
+    }
+    
+    Bits = {
+        b8: 8,
+        b16: 16
     }
 
 class AudioCodec(Enum):

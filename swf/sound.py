@@ -1,30 +1,75 @@
 import consts
 import tag
+import wave
+import stream
 
-def supported_stream(stream):
-    return stream[0].soundFormat == consts.AudioCodec.MP3
+supportedCodecs = (
+    consts.AudioCodec.MP3,
+    consts.AudioCodec.UncompressedNativeEndian,
+    consts.AudioCodec.UncompressedLittleEndian,
+)
 
-def supported_tag(tt):
-    return tt.soundFormat == consts.AudioCodec.MP3
+uncompressed = (
+    consts.AudioCodec.UncompressedNativeEndian,
+    consts.AudioCodec.UncompressedLittleEndian,
+)
 
-def write_stream_to_file(stream, output):
-    assert len(stream) > 0
+def get_header(stream_or_tag):
+    if isinstance(stream_or_tag, list):
+        assert len(stream_or_tag) > 0, 'empty stream'
+        return stream_or_tag[0]
+    else:
+        assert isinstance(stream_or_tag, tag.TagDefineSound), 'sound is not a stream or DefineSound tag'
+        return stream_or_tag
+
+def reason_unsupported(stream_or_tag):
+    header = get_header(stream_or_tag)
+    is_stream = isinstance(stream_or_tag, list)
     
-    header = stream[0]
-    print '  Format:', consts.AudioCodec.tostring(header.soundFormat)
-    print '  Rate:', consts.AudioSampleRate.tostring(header.soundRate)
-    print '  Sample size:', consts.AudioSampleSize.tostring(header.soundSampleSize)
-    print '  Channels:', consts.AudioChannels.tostring(header.soundChannels)
-    print '  Total samples:', header.samples
-    print '  Latency seek:', header.latencySeek
-    print '  Blocks:', len(stream) - 1
+    if header.soundFormat not in supportedCodecs:
+        return 'codec %s (%d) not supported' % (consts.AudioCodec.tostring(header.soundFormat),
+                                                header.soundFormat)
+    
+    if is_stream and len(stream_or_tag) == 1:
+        return 'stream is empty'
+    
+    return None
+        
+def supported(stream_or_tag):
+    return reason_unsupported(stream_or_tag) is None
+
+def get_wave_for_header(header, output):
+    w = wave.open(output, 'w')
+    w.setframerate(consts.AudioSampleRate.Rates[header.soundRate])
+    w.setnchannels(consts.AudioChannels.Channels[header.soundChannels])
+    w.setsampwidth(consts.AudioSampleSize.Bits[header.soundSampleSize] / 8)
+    return w
+    
+def write_stream_to_file(stream, output):
+    header = get_header(stream)
+    
+    w = None
+    if header.soundFormat in uncompressed:
+        w = get_wave_for_header(header, output)
     
     for block in stream[1:]:
         block.complete_parse_with_header(header)
         
         if header.soundFormat == consts.AudioCodec.MP3:
             output.write(block.mpegFrames)
+        else:
+            w.writeframes(block.data.read())
+    
+    if w:
+        w.close()
 
 def write_sound_to_file(st, output):
     assert isinstance(st, tag.TagDefineSound)
-    output.write(st.encode_for_file())
+    if st.soundFormat == consts.AudioCodec.MP3:
+        swfs = stream.SWFStream(st.soundData)
+        seekSamples = swfs.readSI16()
+        output.write(swfs.read())
+    elif st.soundFormat in uncompressed:
+        w = get_wave_for_header(st, output)
+        w.writeframes(st.soundData.read())
+        w.close()
