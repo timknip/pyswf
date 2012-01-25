@@ -11,7 +11,7 @@ def read(fname):
 setup(name='pyswf',
       version='1.2',
       description='SWF Parsing Utilities',
-      long_description=read('README.md'),
+      long_description=read('README'),
       keywords = "swf parser parsing decompile utilities",
       author='Tim Knip',
       author_email='tim@floorplanner.com',
