@@ -7,21 +7,25 @@ from setuptools import setup, find_packages
 # string in below ...
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
-    
-setup(name='pyswf',
-      version='1.2',
-      description='SWF Parsing Utilities',
-      long_description=read('README.md'),
-      keywords = "swf parser parsing decompile utilities",
-      author='Tim Knip',
-      author_email='tim@floorplanner.com',
-      url='https://github.com/timknip/pyswf',
-      install_requires = ["lxml==2.3", "PIL==1.1.7"],
-      packages=find_packages(),
-      license = "MIT",
-      classifiers=[
-          "Development Status :: 4 - Beta",
-          "Topic :: Utilities",
-          "License :: OSI Approved :: MIT License",
-      ],
-      )
+
+setup(
+    name='pyswf',
+    version='1.2',
+    description='SWF Parsing Utilities',
+    long_description=read('README'),
+    keywords = "swf parser parsing decompile utilities",
+
+    author='Tim Knip',
+    author_email='tim@floorplanner.com',
+    url='https://github.com/timknip/pyswf',
+
+    data_files = [('.', ('LICENSE',))],
+    install_requires = ["lxml==2.3", "PIL==1.1.7"],
+    packages=find_packages(),
+    license = "MIT",
+    classifiers=[
+        "Development Status :: 4 - Beta",
+        "Topic :: Utilities",
+        "License :: OSI Approved :: MIT License",
+    ],
+)
