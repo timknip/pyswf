@@ -516,10 +516,12 @@ class SVGExporter(BaseExporter):
         # Setup svg @width, @height and @viewBox
         # and add the optional margin
         self.bounds = SVGBounds(self.svg)
-        self.svg.set("width", "%dpx" % round(self.bounds.width))
-        self.svg.set("height", "%dpx" % round(self.bounds.height))
-        if self._margin > 0:
-            self.bounds.grow(self._margin)
+
+        self.svg.set("width", "%dpx" % round(self.bounds.width + 2 * self._margin))
+        self.svg.set("height", "%dpx" % round(self.bounds.height + 2 * self._margin))
+
+        self.bounds.grow(self._margin)
+
         vb = [self.bounds.minx, self.bounds.miny, 
               self.bounds.width, self.bounds.height]
         self.svg.set("viewBox", "%s" % " ".join(map(str,vb)))
