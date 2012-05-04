@@ -381,7 +381,7 @@ class SWFStream(object):
     def readFILTERLIST(self):
         """ Read a length-prefixed list of FILTERs """
         number = self.readUI8()
-        return [self.readFILTER() for i in xrange(number)]
+        return [self.readFILTER() for _ in xrange(number)]
     
     def readZONEDATA(self):
         """ Read a SWFZoneData """
@@ -440,14 +440,14 @@ class SWFStream(object):
         count = self.readUI8()
         if count == 0xff:
             count = self.readUI16()
-        return [self.readMORPHFILLSTYLE() for i in xrange(count)]
+        return [self.readMORPHFILLSTYLE() for _ in xrange(count)]
         
     def readMORPHLINESTYLEARRAY(self, version):
         count = self.readUI8()
         if count == 0xff:
             count = self.readUI16()
         kind = self.readMORPHLINESTYLE if version == 1 else self.readMORPHLINESTYLE2
-        return [kind() for i in xrange(count)]
+        return [kind() for _ in xrange(count)]
         
     def readraw_tag(self):
         """ Read a SWFRawTag """
