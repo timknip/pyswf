@@ -437,6 +437,7 @@ class BaseExporter(object):
         self.export_image(tag, image)
     
     def export_define_bits_lossless(self, tag):
+        tag.bitmapData.seek(0)
         image = Image.open(tag.bitmapData)
         self.export_image(tag, image)
         
@@ -562,7 +563,7 @@ class SVGExporter(BaseExporter):
             paths = self.defs.xpath("./svg:g[@id='c%d']/svg:path" % tag.characterId, namespaces=NS)
             for path in paths:
                 path.set("fill", "#ffffff")
-        elif tag.depth <= self.clip_depth:
+        elif tag.depth <= self.clip_depth and self.mask_id is not None:
             g.set("mask", "url(#%s)" % self.mask_id)
 
         filters = []
@@ -691,6 +692,48 @@ class SVGExporter(BaseExporter):
             img.set(XLINK_HREF, "%s" % data_url)
             self.defs.append(img)
 
+class SingleShapeSVGExporter(SVGExporter):
+    """
+    An SVG exporter which knows how to export a single shape.
+    """
+    def __init__(self, margin=0):
+        super(SingleShapeSVGExporter, self).__init__(margin = margin)
+        
+    def export_single_shape(self, shape_tag, swf):
+        from swf.movie import SWF
+        
+        # find a typical use of this shape
+        example_place_objects = [x for x in swf.all_tags_of_type(TagPlaceObject) if x.hasCharacter and x.characterId == shape_tag.characterId]
+        
+        if len(example_place_objects):
+            place_object = example_place_objects[0]
+            characters = swf.build_dictionary()
+            ids_to_export = place_object.get_dependencies()
+            ids_exported = set()
+            tags_to_export = []
+            
+            # this had better form a dag!
+            while len(ids_to_export):
+                id = ids_to_export.pop()
+                if id in ids_exported or id not in characters:
+                    continue
+                tag = characters[id]
+                ids_to_export.update(tag.get_dependencies())
+                tags_to_export.append(tag)
+                ids_exported.add(id)
+            tags_to_export.reverse()
+            tags_to_export.append(place_object)
+        else:            
+            place_object = TagPlaceObject()
+            place_object.hasCharacter = True
+            place_object.characterId = shape_tag.characterId
+            tags_to_export = [ shape_tag, place_object ]
+        
+        stunt_swf = SWF()
+        stunt_swf.tags = tags_to_export
+        
+        return super(SingleShapeSVGExporter, self).export(stunt_swf)
+            
 class SVGFilterFactory(object):
     # http://commons.oreilly.com/wiki/index.php/SVG_Essentials/Filters
     # http://dev.opera.com/articles/view/svg-evolution-3-applying-polish/
