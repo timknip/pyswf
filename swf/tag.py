@@ -94,6 +94,10 @@ class Tag(object):
     def parse(self, data, length, version=1):
         """ Parses this tag """
         pass
+        
+    def get_dependencies(self):
+        """ Returns the character ids this tag refers to """
+        return set()
 
     def __str__(self):
         return "[%02d:%s]" % (self.type, self.name)
@@ -116,6 +120,11 @@ class DefinitionTag(Tag):
 
     def parse(self, data, length, version=1):
         pass
+    
+    def get_dependencies(self):
+        s = super(DefinitionTag, self).get_dependencies()
+        s.add(self.characterId)
+        return s
 
 class DisplayListTag(Tag):
     characterId = -1
@@ -124,11 +133,23 @@ class DisplayListTag(Tag):
 
     def parse(self, data, length, version=1):
         pass
+        
+    def get_dependencies(self):
+        s = super(DisplayListTag, self).get_dependencies()
+        s.add(self.characterId)
+        return s
 
 class SWFTimelineContainer(DefinitionTag):
     def __init__(self):
         self.tags = []
         super(SWFTimelineContainer, self).__init__()
+        
+    def get_dependencies(self):
+        """ Returns the character ids this tag refers to """
+        s = super(SWFTimelineContainer, self).get_dependencies()
+        for dt in self.all_tags_of_type(DefinitionTag):
+            s.update(dt.get_dependencies())
+        return s
 
     def parse_tags(self, data, version=1):
         pos = data.tell()
@@ -302,7 +323,7 @@ class TagDefineShape(DefinitionTag):
     TYPE = 2
 
     def __init__(self):
-        self._shapes = []
+        self._shapes = None
         self._shape_bounds = None
         super(TagDefineShape, self).__init__()
 
@@ -316,7 +337,7 @@ class TagDefineShape(DefinitionTag):
 
     @property
     def shapes(self):
-        """ Return list of SWFShape """
+        """ Return SWFShape """
         return self._shapes
 
     @property
@@ -326,12 +347,17 @@ class TagDefineShape(DefinitionTag):
 
     def export(self, handler=None):
         """ Export this tag """
-        self.shapes.export(handler)
+        return self.shapes.export(handler)
 
     def parse(self, data, length, version=1):
         self.characterId = data.readUI16()
         self._shape_bounds = data.readRECT()
         self._shapes = data.readSHAPEWITHSTYLE(self.level)
+    
+    def get_dependencies(self):
+        s = super(TagDefineShape, self).get_dependencies()
+        s.update(self.shapes.get_dependencies())
+        return s
 
     def __str__(self):
         s = super(TagDefineShape, self).__str__( ) + " " + \
@@ -394,6 +420,12 @@ class TagPlaceObject(DisplayListTag):
         if data.tell() - pos < length:
             colorTransform = data.readCXFORM()
             self.hasColorTransform = True
+            
+    def get_dependencies(self):
+        s = super(TagPlaceObject, self).get_dependencies()
+        if self.hasCharacter:
+            s.add(self.characterId)
+        return s
 
     @property
     def filters(self):
@@ -468,6 +500,7 @@ class TagDefineBits(DefinitionTag):
     bitmapData = None
     def __init__(self):
         self.bitmapData = StringIO.StringIO()
+        self.bitmapType = BitmapType.JPEG
         super(TagDefineBits, self).__init__()
 
     @property
@@ -625,6 +658,12 @@ class TagDefineText(DefinitionTag):
     @property
     def version(self):
         return 1
+    
+    def get_dependencies(self):
+        s = super(TagDefineText, self).get_dependencies()
+        for r in self.records:
+            s.update(r.get_dependencies())
+        return s
 
     @property
     def records(self):
@@ -719,6 +758,11 @@ class TagDefineFontInfo(Tag):
     @property
     def unitDivisor(self):
         return 1
+        
+    def get_dependencies(self):
+        s = super(TagDefineFontInfo, self).get_dependencies()
+        s.add(self.characterId)
+        return s
 
     def parse(self, data, length, version=1):
         self.codeTable = []
@@ -1237,6 +1281,11 @@ class TagDefineSprite(SWFTimelineContainer):
         self.characterId = data.readUI16()
         self.frameCount = data.readUI16()
         self.parse_tags(data, version)
+        
+    def get_dependencies(self):
+        s = super(TagDefineSprite, self).get_dependencies()
+        s.add(self.characterId)
+        return s
 
     @property
     def name(self):
@@ -1782,6 +1831,11 @@ class TagDefineFontName(Tag):
     @property
     def version(self):
         return 9
+        
+    def get_dependencies(self):
+        s = super(TagDefineFontName, self).get_dependencies()
+        s.add(self.fontId)
+        return s
 
     def parse(self, data, length, version=1):
         self.fontId = data.readUI16()
@@ -1810,13 +1864,15 @@ class TagDefineSound(Tag):
         return 1
 
     def parse(self, data, length, version=1):
+        assert length > 7
         self.soundId = data.readUI16()
         self.soundFormat = data.readUB(4)
         self.soundRate = data.readUB(2)
         self.soundSampleSize = data.readUB(1)
         self.soundChannels = data.readUB(1)
-        self.soundSize = data.readUI32()
-        self.soundData = StringIO.StringIO(data.read(self.soundSize))
+        self.soundSamples = data.readUI32()
+        # used 2 + 1 + 4 bytes here
+        self.soundData = StringIO.StringIO(data.read(length - 7))
         
     def __str__(self):
         s = super(TagDefineSound, self).__str__()
@@ -2232,6 +2288,11 @@ class TagDoInitAction(Tag):
     @property
     def type(self):
         return TagDoInitAction.TYPE
+    
+    def get_dependencies(self):
+        s = super(TagDoInitAction, self).get_dependencies()
+        s.add(self.spriteId)
+        return s
 
     def parse(self, data, length, version=1):
         self.spriteId = data.readUI16()
@@ -2258,6 +2319,11 @@ class TagDefineEditText(DefinitionTag):
     @property
     def type(self):
         return TagDefineEditText.TYPE
+    
+    def get_dependencies(self):
+        s = super(TagDefineEditText, self).get_dependencies()
+        s.add(self.fontId) if self.hasFont else None
+        return s
 
     def parse(self, data, length, version=1):
         self.characterId = data.readUI16()
@@ -2318,6 +2384,12 @@ class TagDefineButton(DefinitionTag):
     @property
     def type(self):
         return TagDefineButton.TYPE
+    
+    def get_dependencies(self):
+        s = super(TagDefineButton, self).get_dependencies()
+        for b in self.buttonCharacters:
+            s.update(b.get_dependencies())
+        return s
 
     def parse(self, data, length, version=1):
         self.characterId = data.readUI16()
@@ -2341,6 +2413,12 @@ class TagDefineButton2(DefinitionTag):
     @property
     def type(self):
         return TagDefineButton2.TYPE
+    
+    def get_dependencies(self):
+        s = super(TagDefineButton2, self).get_dependencies()
+        for b in self.buttonCharacters:
+            s.update(b.get_dependencies())
+        return s
 
     def parse(self, data, length, version=1):
         self.characterId = data.readUI16()
@@ -2477,6 +2555,12 @@ class TagDefineMorphShape2(TagDefineMorphShape):
     @property
     def version(self):
         return 8
+    
+    def get_dependencies(self):
+        s = super(TagDefineMorphShape2, self).get_dependencies()
+        s.update(self.startEdges.get_dependencies())
+        s.update(self.endEdges.get_dependencies())
+        return s
 
     def parse(self, data, length, version=1):
         self._morphFillStyles = []
