@@ -249,6 +249,21 @@ class AudioCodec(Enum):
         Nellymoser: '.nel',
         Speex: '.spx',
     }
+    
+    MimeTypes = {
+        MP3: 'audio/mpeg',
+        UncompressedNativeEndian: 'audio/wav',   
+        UncompressedLittleEndian: 'audio/wav',
+        ADPCM: 'audio/wav',
+        
+        # assume ogg container?
+        Speex: 'audio/ogg',
+        
+        # punt
+        Nellymoser16kHz: 'application/octet-stream',
+        Nellymoser8kHz: 'application/octet-stream',
+        Nellymoser: 'application/octet-stream',
+    }
 
 class ProductEdition(Enum):
     DeveloperEdition = 0
@@ -327,25 +342,3 @@ class MPEGLayer(Enum):
         Layer2: 'Layer 2',
         Layer1: 'Layer 1',
     }
-
-def MPEGBitrate(version, value):
-    """
-    Returns bitrate in thousands of bits per second.
-    """
-    if version == MPEGVersion.MPEG1:
-        bitrates = [ 0, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, None ]
-    else:
-        bitrates = [ 0, 8, 16, 24,32, 40, 48, 56, 64, 80, 96, 112, 128, 144, 160, None ]
-    assert len(bitrates) == 16
-    return bitrates[value]
-
-def MPEGSampleRate(version, value):
-    """
-    Returns sample rate in samples per second.
-    """
-    if version == MPEGVersion.MPEG1:
-        return [ 44100, 22050, 11025 ][value]
-    elif version == MPEGVersion.MPEG2:
-        return [ 48000, 24000, 12000 ][value]
-    elif version == MPEGVersion.MPEG2_5:
-        return [ 32000, 16000, 8000 ][value]
