@@ -14,6 +14,9 @@ uncompressed = (
     consts.AudioCodec.UncompressedLittleEndian,
 )
 
+REASON_OK = None
+REASON_EMPTY = 'stream is empty'
+
 def get_header(stream_or_tag):
     if isinstance(stream_or_tag, list):
         assert len(stream_or_tag) > 0, 'empty stream'
@@ -31,12 +34,15 @@ def reason_unsupported(stream_or_tag):
                                                 header.soundFormat)
     
     if is_stream and len(stream_or_tag) == 1:
-        return 'stream is empty'
+        return REASON_EMPTY
     
-    return None
+    return REASON_OK
         
 def supported(stream_or_tag):
     return reason_unsupported(stream_or_tag) is None
+    
+def junk(stream_or_tag):
+    return reason_unsupported(stream_or_tag) == REASON_EMPTY
 
 def get_wave_for_header(header, output):
     w = wave.open(output, 'w')
