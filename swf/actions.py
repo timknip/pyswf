@@ -21,7 +21,7 @@ class Action(object):
         # For the ones that have one we override this method.
         pass
     
-    def tostring(self, indent=0):
+    def __repr__(self):
         return "[Action] Code: 0x%x, Length: %d" % (self._code, self._length)
 
 class ActionUnknown(Action):
@@ -34,7 +34,7 @@ class ActionUnknown(Action):
             #print "skipping %d bytes..." % self._length
             data.skip_bytes(self._length)
     
-    def tostring(self, indent=0):
+    def __repr__(self):
         return "[ActionUnknown] Code: 0x%x, Length: %d" % (self._code, self._length)
         
 class Action4(Action):
@@ -115,7 +115,7 @@ class ActionPlay(Action):
     def __init__(self, code, length):
         super(ActionPlay, self).__init__(code, length)
     
-    def tostring(self, indent=0):
+    def __repr__(self):
         return "[ActionPlay] Code: 0x%x, Length: %d" % (self._code, self._length)
             
 class ActionPreviousFrame(Action):
@@ -137,7 +137,7 @@ class ActionStop(Action):
     def __init__(self, code, length):
         super(ActionStop, self).__init__(code, length)
     
-    def tostring(self, indent=0):
+    def __repr__(self):
         return "[ActionStop] Code: 0x%x, Length: %d" % (self._code, self._length)
              
 class ActionStopSounds(Action):
@@ -176,11 +176,13 @@ class ActionAnd(Action4):
                        
 # urgh! some 100 to go...
 
+ActionTable = {}
+for name, value in dict(locals()).iteritems():
+    if type(value) == type and issubclass(value, Action) and hasattr(value, 'CODE'):
+        ActionTable[value.CODE] = value
 
 class SWFActionFactory(object):
     @classmethod
     def create(cls, code, length):
-        if code == ActionPlay.CODE: return ActionPlay(code, length)
-        if code == ActionStop.CODE: return ActionStop(code, length)
-        else: return ActionUnknown(code, length)
+        return ActionTable.get(code, ActionUnknown)(code, length)
         
