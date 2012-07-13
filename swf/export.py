@@ -464,6 +464,8 @@ class BaseExporter(object):
                 self.export_define_bits(tag)
             elif isinstance(tag, TagDefineBitsLossless):
                 self.export_define_bits_lossless(tag)
+            elif isinstance(tag, TagDefineFont):
+                self.export_define_font(tag)
             elif isinstance(tag, TagDefineText):
                 self.export_define_text(tag)
 
@@ -516,7 +518,8 @@ class SVGExporter(BaseExporter):
         self.svg.append(self.root)
         self.shape_exporter.defs = self.defs
         self._num_filters = 0
-        self.fonts = dict([(x.characterId,x) for x in swf.all_tags_of_type(TagDefineFontInfo)])
+        self.fonts = dict([(x.characterId,x) for x in swf.all_tags_of_type(TagDefineFont)])
+        self.fontInfos = dict([(x.characterId,x) for x in swf.all_tags_of_type(TagDefineFontInfo)])
 
         # GO!
         super(SVGExporter, self).export(swf, force_stroke)
@@ -537,7 +540,7 @@ class SVGExporter(BaseExporter):
 
     def _serialize(self):
         return StringIO(etree.tostring(self.svg,
-                encoding="UTF-8", xml_declaration=True))
+                encoding="UTF-8", xml_declaration=True, pretty_print=True))
 
     def export_define_sprite(self, tag, parent=None):
         id = "c%d"%tag.characterId
@@ -546,29 +549,78 @@ class SVGExporter(BaseExporter):
         self.clip_depth = 0
         super(SVGExporter, self).export_define_sprite(tag, g)
 
+    def export_define_font(self, tag):
+        fontInfo = self.fontInfos[tag.characterId]
+        if not fontInfo.useGlyphText:
+            return
+
+        id="f{0}".format(tag.characterId)
+        font = self._e.font(id=id)
+        font.set("horiz-adv-x", "1024")
+
+        fontFace = etree.Element("font-face")
+        fontFace.set("font-family", fontInfo.fontName)
+        fontFace.set("units-per-em", "1024")
+        fontFace.set("ascent", "921.6")
+        fontFace.set("descent", "255.9999999999999")
+        fontFace.set("font-weight", "normal")
+        fontFace.set("font-style", "normal")
+        font.append(fontFace)
+
+        for index, glyph in enumerate(tag.glyphShapeTable):
+            code_point = fontInfo.codeTable[index]
+            pathGroup = glyph.export().g.getchildren()
+
+            if len(pathGroup):
+                path = pathGroup[0]
+                font.append(self._e.glyph(id="glyph{0}".format(code_point),
+                                          d=path.get('d'),
+                                          unicode=unichr(code_point)))
+        self.defs.append(font)
+
     def export_define_text(self, tag):
         id = "c%d"%tag.characterId
         g = self._e.g(id=id)
         x = 0
         y = 0
+
         for rec in tag.records:
             if rec.hasXOffset:
                 x = rec.xOffset/20
             if rec.hasYOffset:
                 y = rec.yOffset/20
-            font = self.fonts[rec.fontId]
             height = rec.textHeight/20
+
+            font = self.fonts[rec.fontId]
+            fontInfo = self.fontInfos[rec.fontId]
+
             inner_text = ""
             for glyph in rec.glyphEntries:
-                inner_text += chr(font.codeTable[glyph.index])
-            text = etree.XML("<text>" + cgi.escape(inner_text) + "</text>")
-            text.set("font-family", font.fontName)
+                code_point = fontInfo.codeTable[glyph.index]
+
+                # Ignore control characters
+                if code_point in range(32):
+                    continue
+
+                inner_text += unichr(code_point)
+
+            inner_text = cgi.escape(inner_text).encode('ascii', 'xmlcharrefreplace')
+            text = etree.XML("<text>" + inner_text + "</text>")
+            text.set("font-family", fontInfo.fontName)
+
             text.set("font-size", str(height))
             text.set("fill", ColorUtils.to_rgb_string(ColorUtils.rgb(rec.textColor)))
             text.set("x", str(x))
             text.set("y", str(y))
+            text.set("style", "white-space:pre")
+            text.set("fill-rule", "nonzero")
+            text.set("unicode-bidi", "bidi-override")
+            if fontInfo.useGlyphText:
+                text.set("transform", "matrix(1.0 0.0 0.0 -1.0 1 18)")
+
             g.append(text)
-            self.defs.append(g)
+
+        self.defs.append(g)
 
     def export_define_shape(self, tag):
         self.shape_exporter.force_stroke = self.force_stroke

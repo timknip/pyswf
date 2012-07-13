@@ -4,6 +4,7 @@ from utils import *
 from stream import *
 import Image
 import struct
+
 try:
     import cStringIO as StringIO
 except ImportError:
@@ -592,6 +593,7 @@ class TagDefineFont(DefinitionTag):
     The minimum file format version is SWF 1.
     """
     TYPE= 10
+    offsetTable = []
     glyphShapeTable = []
     def __init__(self):
         super(TagDefineFont, self).__init__()
@@ -618,15 +620,20 @@ class TagDefineFont(DefinitionTag):
 
     def parse(self, data, length, version=1):
         self.glyphShapeTable = []
+        self.offsetTable = []
         self.characterId = data.readUI16()
+
         # Because the glyph shape table immediately follows the offset table,
-        # the number of entries in each table (the number of glyphs in the font) can be inferred by
-        # dividing the first entry in the offset table by two.
-        numGlyphs = data.readUI16() >> 1
-        # Skip offsets. We don't need them here.
-        data.skip_bytes((numGlyphs - 1) << 1)
-        # Read glyph shape table
-        for i in range(0, numGlyphs):
+        # the number of entries in each table (the number of glyphs in the
+        # font) can be inferred by dividing the first entry in the offset
+        # table by two.
+        self.offsetTable.append(data.readUI16())
+        numGlyphs = self.offsetTable[0] / 2
+
+        for i in range(1, numGlyphs):
+            self.offsetTable.append(data.readUI16())
+
+        for i in range(numGlyphs):
             self.glyphShapeTable.append(data.readSHAPE(self.unitDivisor))
 
 class TagDefineText(DefinitionTag):
@@ -767,14 +774,24 @@ class TagDefineFontInfo(Tag):
     def parse(self, data, length, version=1):
         self.codeTable = []
 
+        # FontID
         self.characterId = data.readUI16()
 
         fontNameLen = data.readUI8()
-        fontNameRaw = StringIO.StringIO()
-        fontNameRaw.write(data.f.read(fontNameLen))
-        fontNameRaw.seek(0)
 
-        self.fontName = fontNameRaw.read()
+        self.fontName = ""
+        self.useGlyphText = False
+
+        for i in range(fontNameLen):
+            ord = data.readUI8()
+
+            if ord in range(128):
+                self.fontName += chr(ord)
+            else:
+                self.useGlyphText = True
+
+        if self.useGlyphText:
+            self.fontName = "Font_{0}".format(self.characterId)
 
         flags = data.readUI8()
 
@@ -792,7 +809,6 @@ class TagDefineFontInfo(Tag):
 
         for i in range(0, numGlyphs):
             self.codeTable.append(data.readUI16() if self.wideCodes else data.readUI8())
-#        print self.fontName, self.codeTable
 
 class TagDefineBitsLossless(DefinitionTag):
     """
