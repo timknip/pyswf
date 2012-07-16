@@ -26,6 +26,9 @@ XLINK_NS    = "http://www.w3.org/1999/xlink"
 XLINK_HREF  = "{%s}href" % XLINK_NS
 NS = {"svg" : SVG_NS, "xlink" : XLINK_NS}
 
+PIXELS_PER_TWIP = 20
+EM_SQUARE_LENGTH = 1024
+
 MINIMUM_STROKE_WIDTH = 1.0
 
 CAPS_STYLE = {
@@ -551,50 +554,48 @@ class SVGExporter(BaseExporter):
 
     def export_define_font(self, tag):
         fontInfo = self.fontInfos[tag.characterId]
-        if not fontInfo.useGlyphText:
-            return
 
-        id="f{0}".format(tag.characterId)
-        font = self._e.font(id=id)
-        font.set("horiz-adv-x", "1024")
-
-        fontFace = etree.Element("font-face")
-        fontFace.set("font-family", fontInfo.fontName)
-        fontFace.set("units-per-em", "1024")
-        fontFace.set("ascent", "921.6")
-        fontFace.set("descent", "255.9999999999999")
-        fontFace.set("font-weight", "normal")
-        fontFace.set("font-style", "normal")
-        font.append(fontFace)
+        defs = self._e.defs(id="font_{0}".format(tag.characterId))
 
         for index, glyph in enumerate(tag.glyphShapeTable):
+            # Export the glyph as a shape and add the path to the "defs"
+            # element to be referenced later when exporting text.
             code_point = fontInfo.codeTable[index]
             pathGroup = glyph.export().g.getchildren()
 
             if len(pathGroup):
                 path = pathGroup[0]
-                font.append(self._e.glyph(id="glyph{0}".format(code_point),
-                                          d=path.get('d'),
-                                          unicode=unichr(code_point)))
-        self.defs.append(font)
+
+                path.set("id", "font_{0}_{1}".format(tag.characterId, code_point))
+
+                # SWF glyphs are always defined on an EM square of 1024 by 1024 units.
+                path.set("transform", "scale({0})".format(float(1)/EM_SQUARE_LENGTH))
+
+                # We'll be setting the color on the USE element that
+                # references this element.
+                del path.attrib["stroke"]
+                del path.attrib["fill"]
+
+                defs.append(path)
+
+        self.defs.append(defs)
 
     def export_define_text(self, tag):
-        id = "c%d"%tag.characterId
-        g = self._e.g(id=id)
+        g = self._e.g(id="c{0}".format(int(tag.characterId)))
+        g.set("class", "text_content")
+
         x = 0
         y = 0
 
         for rec in tag.records:
             if rec.hasXOffset:
-                x = rec.xOffset/20
+                x = rec.xOffset/PIXELS_PER_TWIP
             if rec.hasYOffset:
-                y = rec.yOffset/20
-            height = rec.textHeight/20
+                y = rec.yOffset/PIXELS_PER_TWIP
 
-            font = self.fonts[rec.fontId]
+            size = rec.textHeight/PIXELS_PER_TWIP
             fontInfo = self.fontInfos[rec.fontId]
 
-            inner_text = ""
             for glyph in rec.glyphEntries:
                 code_point = fontInfo.codeTable[glyph.index]
 
@@ -602,23 +603,24 @@ class SVGExporter(BaseExporter):
                 if code_point in range(32):
                     continue
 
-                inner_text += unichr(code_point)
+                # Include the character as text content within the USE
+                # element so that the content may be indexable.
+                use = (self._e.use(unichr(code_point)))
+                use.set(XLINK_HREF, "#font_{0}_{1}".format(rec.fontId, code_point))
 
-            inner_text = cgi.escape(inner_text).encode('ascii', 'xmlcharrefreplace')
-            text = etree.XML("<text>" + inner_text + "</text>")
-            text.set("font-family", fontInfo.fontName)
+                use.set(
+                    'transform',
+                    "scale({0}) translate({1} {2})".format(
+                        size, float(x)/size, float(y)/size
+                    )
+                )
 
-            text.set("font-size", str(height))
-            text.set("fill", ColorUtils.to_rgb_string(ColorUtils.rgb(rec.textColor)))
-            text.set("x", str(x))
-            text.set("y", str(y))
-            text.set("style", "white-space:pre")
-            text.set("fill-rule", "nonzero")
-            text.set("unicode-bidi", "bidi-override")
-            if fontInfo.useGlyphText:
-                text.set("transform", "matrix(1.0 0.0 0.0 -1.0 1 18)")
+                color = ColorUtils.to_rgb_string(ColorUtils.rgb(rec.textColor))
+                use.set("style", "fill: {0}; stroke: {0}".format(color))
 
-            g.append(text)
+                g.append(use)
+
+                x = x + float(glyph.advance)/PIXELS_PER_TWIP
 
         self.defs.append(g)
 
@@ -940,11 +942,12 @@ class SVGBounds(object):
             self._handle_path_data(str(element.get("d")))
         elif element.tag == "{%s}use" % SVG_NS:
             href = element.get(XLINK_HREF)
-            href = href.replace("#", "")
-            els = self._svg.xpath("./svg:defs//svg:g[@id='%s']" % href,
-                    namespaces=NS)
-            if len(els) > 0:
-                self._parse(els[0])
+            if href:
+                href = href.replace("#", "")
+                els = self._svg.xpath("./svg:defs//svg:g[@id='%s']" % href,
+                        namespaces=NS)
+                if len(els) > 0:
+                    self._parse(els[0])
 
         for child in element.getchildren():
             if child.tag == "{%s}defs" % SVG_NS: continue
