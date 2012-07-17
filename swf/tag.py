@@ -782,6 +782,9 @@ class TagDefineFontInfo(Tag):
         self.fontName = ""
         self.useGlyphText = False
 
+        # Read in font name, one character at a time. If any of the
+        # characters are non-ASCII, assume that glyph text should be
+        # used rather than device text.
         for i in range(fontNameLen):
             ord = data.readUI8()
 

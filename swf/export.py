@@ -554,6 +554,8 @@ class SVGExporter(BaseExporter):
 
     def export_define_font(self, tag):
         fontInfo = self.fontInfos[tag.characterId]
+        if not fontInfo.useGlyphText:
+            return
 
         defs = self._e.defs(id="font_{0}".format(tag.characterId))
 
@@ -596,6 +598,19 @@ class SVGExporter(BaseExporter):
             size = rec.textHeight/PIXELS_PER_TWIP
             fontInfo = self.fontInfos[rec.fontId]
 
+            text = None
+            if not fontInfo.useGlyphText:
+                text = self._e.text()
+
+                text.set("font-family", fontInfo.fontName)
+                text.set("font-size", str(size))
+                text.set("fill", ColorUtils.to_rgb_string(ColorUtils.rgb(rec.textColor)))
+
+                if fontInfo.bold:
+                    text.set("font-weight", "bold")
+                if fontInfo.italic:
+                    text.set("font-style", "italic")
+
             for glyph in rec.glyphEntries:
                 code_point = fontInfo.codeTable[glyph.index]
 
@@ -603,24 +618,34 @@ class SVGExporter(BaseExporter):
                 if code_point in range(32):
                     continue
 
-                # Include the character as text content within the USE
-                # element so that the content may be indexable.
-                use = (self._e.use(unichr(code_point)))
-                use.set(XLINK_HREF, "#font_{0}_{1}".format(rec.fontId, code_point))
+                if fontInfo.useGlyphText:
+                    use = self._e.use()
+                    use.set(XLINK_HREF, "#font_{0}_{1}".format(rec.fontId, code_point))
 
-                use.set(
-                    'transform',
-                    "scale({0}) translate({1} {2})".format(
-                        size, float(x)/size, float(y)/size
+                    use.set(
+                        'transform',
+                        "scale({0}) translate({1} {2})".format(
+                            size, float(x)/size, float(y)/size
+                        )
                     )
-                )
 
-                color = ColorUtils.to_rgb_string(ColorUtils.rgb(rec.textColor))
-                use.set("style", "fill: {0}; stroke: {0}".format(color))
+                    color = ColorUtils.to_rgb_string(ColorUtils.rgb(rec.textColor))
+                    use.set("style", "fill: {0}; stroke: {0}".format(color))
 
-                g.append(use)
+                    g.append(use)
+                else:
+                    # Position each character separately to avoid issues
+                    # with overlapping text.
+                    tspan = self._e.tspan(unichr(code_point))
+                    tspan.set("x", str(x))
+                    tspan.set("y", str(y))
+
+                    text.append(tspan)
 
                 x = x + float(glyph.advance)/PIXELS_PER_TWIP
+
+            if text is not None:
+                g.append(text)
 
         self.defs.append(g)
 
