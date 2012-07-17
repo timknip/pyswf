@@ -543,7 +543,7 @@ class SVGExporter(BaseExporter):
 
     def _serialize(self):
         return StringIO(etree.tostring(self.svg,
-                encoding="UTF-8", xml_declaration=True, pretty_print=True))
+                encoding="UTF-8", xml_declaration=True))
 
     def export_define_sprite(self, tag, parent=None):
         id = "c%d"%tag.characterId
