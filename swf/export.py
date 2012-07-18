@@ -598,18 +598,9 @@ class SVGExporter(BaseExporter):
             size = rec.textHeight/PIXELS_PER_TWIP
             fontInfo = self.fontInfos[rec.fontId]
 
-            text = None
             if not fontInfo.useGlyphText:
-                text = self._e.text()
-
-                text.set("font-family", fontInfo.fontName)
-                text.set("font-size", str(size))
-                text.set("fill", ColorUtils.to_rgb_string(ColorUtils.rgb(rec.textColor)))
-
-                if fontInfo.bold:
-                    text.set("font-weight", "bold")
-                if fontInfo.italic:
-                    text.set("font-style", "italic")
+                inner_text = ""
+                xValues = []
 
             for glyph in rec.glyphEntries:
                 code_point = fontInfo.codeTable[glyph.index]
@@ -634,17 +625,26 @@ class SVGExporter(BaseExporter):
 
                     g.append(use)
                 else:
-                    # Position each character separately to avoid issues
-                    # with overlapping text.
-                    tspan = self._e.tspan(unichr(code_point))
-                    tspan.set("x", str(x))
-                    tspan.set("y", str(y))
-
-                    text.append(tspan)
+                    inner_text += unichr(code_point)
+                    xValues.append(str(x))
 
                 x = x + float(glyph.advance)/PIXELS_PER_TWIP
 
-            if text is not None:
+            if not fontInfo.useGlyphText:
+                text = self._e.text(inner_text)
+
+                text.set("font-family", fontInfo.fontName)
+                text.set("font-size", str(size))
+                text.set("fill", ColorUtils.to_rgb_string(ColorUtils.rgb(rec.textColor)))
+
+                text.set("y", str(y))
+                text.set("x", " ".join(xValues))
+
+                if fontInfo.bold:
+                    text.set("font-weight", "bold")
+                if fontInfo.italic:
+                    text.set("font-style", "italic")
+
                 g.append(text)
 
         self.defs.append(g)
