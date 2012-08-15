@@ -548,7 +548,8 @@ class SVGExporter(BaseExporter):
     def export_display_list_item(self, tag, parent=None):
         g = self._e.g()
         use = self._e.use()
-
+        is_mask = False
+        
         if tag.hasMatrix:
             use.set("transform", _swf_matrix_to_svg_matrix(tag.matrix))
         if tag.hasClipDepth:
@@ -559,6 +560,7 @@ class SVGExporter(BaseExporter):
             paths = self.defs.xpath("./svg:g[@id='c%d']/svg:path" % tag.characterId, namespaces=NS)
             for path in paths:
                 path.set("fill", "#ffffff")
+            is_mask = True
         elif tag.depth <= self.clip_depth:
             g.set("mask", "url(#%s)" % self.mask_id)
 
@@ -579,13 +581,17 @@ class SVGExporter(BaseExporter):
         if tag.hasColorTransform or (tag.hasFilterList and len(filters) > 0):
             self.defs.append(svg_filter)
             use.set("filter", "url(#%s)" % filter_id)
-            
+    
         use.set(XLINK_HREF, "#c%s" % tag.characterId)
         g.append(use)
-        if parent is not None:
-            parent.append(g)
+        
+        if is_mask:
+            self.defs.append(g)
         else:
-            self.root.append(g)
+            if parent is not None:
+                parent.append(g)
+            else:
+                self.root.append(g)
         return use
         
     def export_color_transform(self, cxform, svg_filter, result='color-xform'):
