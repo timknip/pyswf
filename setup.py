@@ -19,7 +19,6 @@ setup(
     author_email='tim@floorplanner.com',
     url='https://github.com/timknip/pyswf',
 
-    data_files = [('.', ('LICENSE',))],
     install_requires = ["lxml==2.3", "PIL==1.1.7"],
     packages=find_packages(),
     license = "MIT",
