@@ -18,14 +18,18 @@ except ImportError:
 import math
 import re
 import copy
- 
+import cgi
+
 SVG_VERSION = "1.1"
 SVG_NS      = "http://www.w3.org/2000/svg"
 XLINK_NS    = "http://www.w3.org/1999/xlink"
 XLINK_HREF  = "{%s}href" % XLINK_NS
 NS = {"svg" : SVG_NS, "xlink" : XLINK_NS}
 
-MINIMUM_STROKE_WIDTH = 1.0
+PIXELS_PER_TWIP = 20
+EM_SQUARE_LENGTH = 1024
+
+MINIMUM_STROKE_WIDTH = 0.5
 
 CAPS_STYLE = {
     0 : 'round',
@@ -38,38 +42,38 @@ JOIN_STYLE = {
     1 : 'bevel',
     2 : 'miter'
 }
-                
+
 class DefaultShapeExporter(object):
     """
-    The default (abstract) Shape exporter class. 
+    The default (abstract) Shape exporter class.
     All shape exporters should extend this class.
-    
-    
+
+
     """
     def __init__(self, swf=None, debug=False, force_stroke=False):
         self.swf = None
         self.debug = debug
         self.force_stroke = force_stroke
-        
+
     def begin_bitmap_fill(self, bitmap_id, matrix=None, repeat=False, smooth=False):
         pass
     def begin_fill(self, color, alpha=1.0):
         pass
-    def begin_gradient_fill(self, type, colors, alphas, ratios, 
-                            matrix=None, 
-                            spreadMethod=SpreadMethod.PAD, 
+    def begin_gradient_fill(self, type, colors, alphas, ratios,
+                            matrix=None,
+                            spreadMethod=SpreadMethod.PAD,
                             interpolationMethod=InterpolationMethod.RGB,
                             focalPointRatio=0.0):
         pass
     def line_style(self,
-                    thickness=float('nan'), color=0, alpha=1.0, 
-                    pixelHinting=False, 
-                    scaleMode=LineScaleMode.NORMAL, 
-                    startCaps=None, endCaps=None, 
+                    thickness=float('nan'), color=0, alpha=1.0,
+                    pixelHinting=False,
+                    scaleMode=LineScaleMode.NORMAL,
+                    startCaps=None, endCaps=None,
                     joints=None, miterLimit=3.0):
         pass
     def line_gradient_style(self,
-                    thickness=float('nan'), color=0, alpha=1.0, 
+                    thickness=float('nan'), color=0, alpha=1.0,
                     pixelHinting=False,
                     scaleMode=LineScaleMode.NORMAL,
                     startCaps=None, endCaps=None,
@@ -82,15 +86,15 @@ class DefaultShapeExporter(object):
         pass
     def line_bitmap_style(self,
                     thickness=float('nan'),
-                    pixelHinting=False, 
-                    scaleMode=LineScaleMode.NORMAL, 
-                    startCaps=None, endCaps=None, 
+                    pixelHinting=False,
+                    scaleMode=LineScaleMode.NORMAL,
+                    startCaps=None, endCaps=None,
                     joints=None, miterLimit = 3.0,
                     bitmap_id=None, matrix=None, repeat=False, smooth=False):
-        pass   
+        pass
     def end_fill(self):
         pass
-            
+
     def begin_fills(self):
         pass
     def end_fills(self):
@@ -99,12 +103,12 @@ class DefaultShapeExporter(object):
         pass
     def end_lines(self):
         pass
-            
+
     def begin_shape(self):
         pass
     def end_shape(self):
         pass
-        
+
     def move_to(self, x, y):
         #print "move_to", x, y
         pass
@@ -123,13 +127,13 @@ class DefaultSVGShapeExporter(DefaultShapeExporter):
         self._e = objectify.ElementMaker(annotate=False,
                         namespace=SVG_NS, nsmap={None : SVG_NS, "xlink" : XLINK_NS})
         super(DefaultSVGShapeExporter, self).__init__()
-    
+
     def move_to(self, x, y):
         self.current_draw_command = ""
         self.path_data += "M" + \
             str(NumberUtils.round_pixels_20(x)) + " " + \
             str(NumberUtils.round_pixels_20(y)) + " "
-        
+
     def line_to(self, x, y):
         if self.current_draw_command != "L":
             self.current_draw_command = "L"
@@ -137,7 +141,7 @@ class DefaultSVGShapeExporter(DefaultShapeExporter):
         self.path_data += "" + \
             str(NumberUtils.round_pixels_20(x)) + " " + \
             str(NumberUtils.round_pixels_20(y)) + " "
-        
+
     def curve_to(self, cx, cy, ax, ay):
         if self.current_draw_command != "Q":
             self.current_draw_command = "Q"
@@ -147,47 +151,47 @@ class DefaultSVGShapeExporter(DefaultShapeExporter):
             str(NumberUtils.round_pixels_20(cy)) + " " + \
             str(NumberUtils.round_pixels_20(ax)) + " " + \
             str(NumberUtils.round_pixels_20(ay)) + " "
-        
+
     def begin_bitmap_fill(self, bitmap_id, matrix=None, repeat=False, smooth=False):
         self.finalize_path()
-        
+
     def begin_fill(self, color, alpha=1.0):
         self.finalize_path()
-    
+
     def end_fill(self):
         pass
         #self.finalize_path()
-    
+
     def begin_fills(self):
         pass
     def end_fills(self):
         self.finalize_path()
-            
-    def begin_gradient_fill(self, type, colors, alphas, ratios, 
-                            matrix=None, 
-                            spreadMethod=SpreadMethod.PAD, 
+
+    def begin_gradient_fill(self, type, colors, alphas, ratios,
+                            matrix=None,
+                            spreadMethod=SpreadMethod.PAD,
                             interpolationMethod=InterpolationMethod.RGB,
                             focalPointRatio=0.0):
         self.finalize_path()
-        
+
     def line_style(self,
-                    thickness=float('nan'), color=0, alpha=1.0, 
-                    pixelHinting=False, 
-                    scaleMode=LineScaleMode.NORMAL, 
-                    startCaps=None, endCaps=None, 
+                    thickness=float('nan'), color=0, alpha=1.0,
+                    pixelHinting=False,
+                    scaleMode=LineScaleMode.NORMAL,
+                    startCaps=None, endCaps=None,
                     joints=None, miterLimit=3.0):
         self.finalize_path()
-                       
+
     def end_lines(self):
         self.finalize_path()
-    
+
     def end_shape(self):
         self.finalize_path()
-            
+
     def finalize_path(self):
         self.current_draw_command = ""
         self.path_data = ""
-        
+
 class SVGShapeExporter(DefaultSVGShapeExporter):
     def __init__(self):
         self.path = None
@@ -198,10 +202,10 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
         self.paths = {}
         self.fills_ended = False
         super(SVGShapeExporter, self).__init__()
-        
+
     def begin_shape(self):
         self.g = self._e.g()
-         
+
     def begin_fill(self, color, alpha=1.0):
         self.finalize_path()
         self.path.set("fill", ColorUtils.to_rgb_string(color))
@@ -212,19 +216,19 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
             self.path.set("stroke-width", "1")
         else:
             self.path.set("stroke", "none")
-            
-    def begin_gradient_fill(self, type, colors, alphas, ratios, 
-                            matrix=None, 
-                            spreadMethod=SpreadMethod.PAD, 
+
+    def begin_gradient_fill(self, type, colors, alphas, ratios,
+                            matrix=None,
+                            spreadMethod=SpreadMethod.PAD,
                             interpolationMethod=InterpolationMethod.RGB,
                             focalPointRatio=0.0):
         self.finalize_path()
         gradient_id = self.export_gradient(type, colors, alphas, ratios, matrix, spreadMethod, interpolationMethod, focalPointRatio)
-        self.path.set("stroke", "none")    
+        self.path.set("stroke", "none")
         self.path.set("fill", "url(#%s)" % gradient_id)
-        
-    def export_gradient(self, type, colors, alphas, ratios, 
-                        matrix=None, 
+
+    def export_gradient(self, type, colors, alphas, ratios,
+                        matrix=None,
                         spreadMethod=SpreadMethod.PAD,
                         interpolationMethod=InterpolationMethod.RGB,
                         focalPointRatio=0.0):
@@ -233,7 +237,7 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
         gradient = self._e.linearGradient() if type == GradientType.LINEAR \
             else self._e.radialGradient()
         gradient.set("gradientUnits", "userSpaceOnUse")
-        
+
         if type == GradientType.LINEAR:
             gradient.set("x1", "-819.2")
             gradient.set("x2", "819.2")
@@ -244,21 +248,21 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
             if focalPointRatio < 0.0 or focalPointRatio > 0.0:
                 gradient.set("fx", str(819.2 * focalPointRatio))
                 gradient.set("fy", "0")
-        
+
         if spreadMethod == SpreadMethod.PAD:
             gradient.set("spreadMethod", "pad")
         elif spreadMethod == SpreadMethod.REFLECT:
             gradient.set("spreadMethod", "reflect")
         elif spreadMethod == SpreadMethod.REPEAT:
             gradient.set("spreadMethod", "repeat")
-        
+
         if interpolationMethod == InterpolationMethod.LINEAR_RGB:
             gradient.set("color-interpolation", "linearRGB")
-            
+
         if matrix is not None:
             sm = _swf_matrix_to_svg_matrix(matrix)
             gradient.set("gradientTransform", sm);
-        
+
         for i in range(0, len(colors)):
             entry = self._e.stop()
             offset = ratios[i] / 255.0
@@ -268,7 +272,7 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
             if alphas[i] != 1.0:
                 entry.set("stop-opacity", str(alphas[i]))
             gradient.append(entry)
-        
+
         # prevent same gradient in <defs />
         key = etree.tostring(gradient)
         if key in self._gradients:
@@ -278,9 +282,9 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
             self._gradient_ids[key] = gradient_id
             gradient.set("id", gradient_id)
             self.defs.append(gradient)
-            
+
         return gradient_id
-        
+
     def export_pattern(self, bitmap_id, matrix, repeat=False, smooth=False):
         self.num_patterns += 1
         bitmap_id = "c%d" % bitmap_id
@@ -302,20 +306,20 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
         use.set(XLINK_HREF, "#%s" % bitmap_id)
         pattern.append(use)
         self.defs.append(pattern)
-        
+
         return pattern_id
-        
+
     def begin_bitmap_fill(self, bitmap_id, matrix=None, repeat=False, smooth=False):
         self.finalize_path()
         pattern_id = self.export_pattern(bitmap_id, matrix, repeat, smooth)
-        self.path.set("stroke", "none")    
+        self.path.set("stroke", "none")
         self.path.set("fill", "url(#%s)" % pattern_id)
-         
+
     def line_style(self,
-                    thickness=float('nan'), color=0, alpha=1.0, 
-                    pixelHinting=False, 
-                    scaleMode=LineScaleMode.NORMAL, 
-                    startCaps=None, endCaps=None, 
+                    thickness=float('nan'), color=0, alpha=1.0,
+                    pixelHinting=False,
+                    scaleMode=LineScaleMode.NORMAL,
+                    startCaps=None, endCaps=None,
                     joints=None, miterLimit=3.0):
         self.finalize_path()
         self.path.set("fill", "none")
@@ -328,14 +332,14 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
 
     def line_gradient_style(self,
                     thickness=float('nan'),
-                    pixelHinting = False, 
-                    scaleMode=LineScaleMode.NORMAL, 
-                    startCaps=0, endCaps=0, 
+                    pixelHinting = False,
+                    scaleMode=LineScaleMode.NORMAL,
+                    startCaps=0, endCaps=0,
                     joints=0, miterLimit=3.0,
                     type = 1,
                     colors = [],
                     alphas = [],
-                    ratios = [], 
+                    ratios = [],
                     matrix=None,
                     spreadMethod=SpreadMethod.PAD,
                     interpolationMethod=InterpolationMethod.RGB,
@@ -349,12 +353,12 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
         thickness = 1 if math.isnan(thickness) else thickness
         thickness = MINIMUM_STROKE_WIDTH if thickness < MINIMUM_STROKE_WIDTH else thickness
         self.path.set("stroke-width", str(thickness))
-    
+
     def line_bitmap_style(self,
                     thickness=float('nan'),
-                    pixelHinting=False, 
-                    scaleMode=LineScaleMode.NORMAL, 
-                    startCaps=None, endCaps=None, 
+                    pixelHinting=False,
+                    scaleMode=LineScaleMode.NORMAL,
+                    startCaps=None, endCaps=None,
                     joints=None, miterLimit = 3.0,
                     bitmap_id=None, matrix=None, repeat=False, smooth=False):
         self.finalize_path()
@@ -366,13 +370,13 @@ class SVGShapeExporter(DefaultSVGShapeExporter):
         thickness = 1 if math.isnan(thickness) else thickness
         thickness = MINIMUM_STROKE_WIDTH if thickness < MINIMUM_STROKE_WIDTH else thickness
         self.path.set("stroke-width", str(thickness))
-        
+
     def begin_fills(self):
         self.fills_ended = False
     def end_fills(self):
         self.finalize_path()
         self.fills_ended = True
-                                                         
+
     def finalize_path(self):
         if self.path is not None and len(self.path_data) > 0:
             self.path_data = self.path_data.rstrip()
@@ -391,17 +395,17 @@ class BaseExporter(object):
         self.force_stroke = force_stroke
         if swf is not None:
             self.export(swf)
-            
+
     def export(self, swf, force_stroke=False):
         self.force_stroke = force_stroke
         self.export_define_shapes(swf.tags)
         self.export_display_list(self.get_display_tags(swf.tags))
-        
+
     def export_define_bits(self, tag):
         png_buffer = StringIO()
         image = None
         if isinstance(tag, TagDefineBitsJPEG3):
-            
+
             tag.bitmapData.seek(0)
             tag.bitmapAlphaData.seek(0, 2)
             num_alpha = tag.bitmapAlphaData.tell()
@@ -433,22 +437,22 @@ class BaseExporter(object):
                 image = Image.open(buff)
             else:
                 image = Image.open(tag.bitmapData)
-            
+
         self.export_image(tag, image)
-    
+
     def export_define_bits_lossless(self, tag):
         tag.bitmapData.seek(0)
         image = Image.open(tag.bitmapData)
         self.export_image(tag, image)
-        
+
     def export_define_sprite(self, tag, parent=None):
         display_tags = self.get_display_tags(tag.tags)
         self.export_display_list(display_tags, parent)
-            
+
     def export_define_shape(self, tag):
         self.shape_exporter.debug = isinstance(tag, TagDefineShape4)
         tag.shapes.export(self.shape_exporter)
-        
+
     def export_define_shapes(self, tags):
         for tag in tags:
             if isinstance(tag, SWFTimelineContainer):
@@ -463,18 +467,22 @@ class BaseExporter(object):
                 self.export_define_bits(tag)
             elif isinstance(tag, TagDefineBitsLossless):
                 self.export_define_bits_lossless(tag)
-                  
+            elif isinstance(tag, TagDefineFont):
+                self.export_define_font(tag)
+            elif isinstance(tag, TagDefineText):
+                self.export_define_text(tag)
+
     def export_display_list(self, tags, parent=None):
         self.clip_depth = 0
         for tag in tags:
             self.export_display_list_item(tag, parent)
-    
+
     def export_display_list_item(self, tag, parent=None):
         pass
-    
+
     def export_image(self, tag, image=None):
         pass
-        
+
     def get_display_tags(self, tags, z_sorted=True):
         dp_tuples = []
         for tag in tags:
@@ -488,20 +496,20 @@ class BaseExporter(object):
         for item in dp_tuples:
             display_tags.append(item[0])
         return display_tags
-    
+
     def serialize(self):
         return None
-        
+
 class SVGExporter(BaseExporter):
     def __init__(self, swf=None, margin=0):
         self._e = objectify.ElementMaker(annotate=False,
                         namespace=SVG_NS, nsmap={None : SVG_NS, "xlink" : XLINK_NS})
         self._margin = margin
         super(SVGExporter, self).__init__(swf)
-        
+
     def export(self, swf, force_stroke=False):
         """ Exports the specified SWF to SVG.
-        
+
         @param swf  The SWF.
         @param force_stroke Whether to force strokes on non-stroked fills.
         """
@@ -513,10 +521,12 @@ class SVGExporter(BaseExporter):
         self.svg.append(self.root)
         self.shape_exporter.defs = self.defs
         self._num_filters = 0
-        
+        self.fonts = dict([(x.characterId,x) for x in swf.all_tags_of_type(TagDefineFont)])
+        self.fontInfos = dict([(x.characterId,x) for x in swf.all_tags_of_type(TagDefineFontInfo)])
+
         # GO!
         super(SVGExporter, self).export(swf, force_stroke)
-        
+
         # Setup svg @width, @height and @viewBox
         # and add the optional margin
         self.bounds = SVGBounds(self.svg)
@@ -524,31 +534,128 @@ class SVGExporter(BaseExporter):
         self.svg.set("height", "%dpx" % round(self.bounds.height))
         if self._margin > 0:
             self.bounds.grow(self._margin)
-        vb = [self.bounds.minx, self.bounds.miny, 
+        vb = [self.bounds.minx, self.bounds.miny,
               self.bounds.width, self.bounds.height]
         self.svg.set("viewBox", "%s" % " ".join(map(str,vb)))
-        
+
         # Return the SVG as StringIO
         return self._serialize()
-    
+
     def _serialize(self):
         return StringIO(etree.tostring(self.svg,
                 encoding="UTF-8", xml_declaration=True))
-                
+
     def export_define_sprite(self, tag, parent=None):
         id = "c%d"%tag.characterId
         g = self._e.g(id=id)
         self.defs.append(g)
         self.clip_depth = 0
         super(SVGExporter, self).export_define_sprite(tag, g)
-            
+
+    def export_define_font(self, tag):
+        fontInfo = self.fontInfos[tag.characterId]
+        if not fontInfo.useGlyphText:
+            return
+
+        defs = self._e.defs(id="font_{0}".format(tag.characterId))
+
+        for index, glyph in enumerate(tag.glyphShapeTable):
+            # Export the glyph as a shape and add the path to the "defs"
+            # element to be referenced later when exporting text.
+            code_point = fontInfo.codeTable[index]
+            pathGroup = glyph.export().g.getchildren()
+
+            if len(pathGroup):
+                path = pathGroup[0]
+
+                path.set("id", "font_{0}_{1}".format(tag.characterId, code_point))
+
+                # SWF glyphs are always defined on an EM square of 1024 by 1024 units.
+                path.set("transform", "scale({0})".format(float(1)/EM_SQUARE_LENGTH))
+
+                # We'll be setting the color on the USE element that
+                # references this element.
+                del path.attrib["stroke"]
+                del path.attrib["fill"]
+
+                defs.append(path)
+
+        self.defs.append(defs)
+
+    def export_define_text(self, tag):
+        g = self._e.g(id="c{0}".format(int(tag.characterId)))
+        g.set("class", "text_content")
+
+        x = 0
+        y = 0
+
+        for rec in tag.records:
+            if rec.hasXOffset:
+                x = rec.xOffset/PIXELS_PER_TWIP
+            if rec.hasYOffset:
+                y = rec.yOffset/PIXELS_PER_TWIP
+
+            size = rec.textHeight/PIXELS_PER_TWIP
+            fontInfo = self.fontInfos[rec.fontId]
+
+            if not fontInfo.useGlyphText:
+                inner_text = ""
+                xValues = []
+
+            for glyph in rec.glyphEntries:
+                code_point = fontInfo.codeTable[glyph.index]
+
+                # Ignore control characters
+                if code_point in range(32):
+                    continue
+
+                if fontInfo.useGlyphText:
+                    use = self._e.use()
+                    use.set(XLINK_HREF, "#font_{0}_{1}".format(rec.fontId, code_point))
+
+                    use.set(
+                        'transform',
+                        "scale({0}) translate({1} {2})".format(
+                            size, float(x)/size, float(y)/size
+                        )
+                    )
+
+                    color = ColorUtils.to_rgb_string(ColorUtils.rgb(rec.textColor))
+                    use.set("style", "fill: {0}; stroke: {0}".format(color))
+
+                    g.append(use)
+                else:
+                    inner_text += unichr(code_point)
+                    xValues.append(str(x))
+
+                x = x + float(glyph.advance)/PIXELS_PER_TWIP
+
+            if not fontInfo.useGlyphText:
+                text = self._e.text(inner_text)
+
+                text.set("font-family", fontInfo.fontName)
+                text.set("font-size", str(size))
+                text.set("fill", ColorUtils.to_rgb_string(ColorUtils.rgb(rec.textColor)))
+
+                text.set("y", str(y))
+                text.set("x", " ".join(xValues))
+
+                if fontInfo.bold:
+                    text.set("font-weight", "bold")
+                if fontInfo.italic:
+                    text.set("font-style", "italic")
+
+                g.append(text)
+
+        self.defs.append(g)
+
     def export_define_shape(self, tag):
         self.shape_exporter.force_stroke = self.force_stroke
         super(SVGExporter, self).export_define_shape(tag)
         shape = self.shape_exporter.g
         shape.set("id", "c%d" % tag.characterId)
         self.defs.append(shape)
-    
+
     def export_display_list_item(self, tag, parent=None):
         g = self._e.g()
         use = self._e.use()
@@ -574,7 +681,7 @@ class SVGExporter(BaseExporter):
 
         if tag.hasColorTransform:
             filter_cxform = self.export_color_transform(tag.colorTransform, svg_filter)
-            filters.append(filter_cxform) 
+            filters.append(filter_cxform)
         if tag.hasFilterList and len(tag.filters) > 0:
             cxform = "color-xform" if tag.hasColorTransform else None
             f = self.export_filters(tag, svg_filter, cxform)
@@ -583,7 +690,7 @@ class SVGExporter(BaseExporter):
         if tag.hasColorTransform or (tag.hasFilterList and len(filters) > 0):
             self.defs.append(svg_filter)
             use.set("filter", "url(#%s)" % filter_id)
-            
+
         use.set(XLINK_HREF, "#c%s" % tag.characterId)
         g.append(use)
         if parent is not None:
@@ -591,22 +698,22 @@ class SVGExporter(BaseExporter):
         else:
             self.root.append(g)
         return use
-        
+
     def export_color_transform(self, cxform, svg_filter, result='color-xform'):
         fe_cxform = self._e.feColorMatrix()
         fe_cxform.set("in", "SourceGraphic")
         fe_cxform.set("type", "matrix")
         fe_cxform.set("values", " ".join(map(str, cxform.matrix)))
         fe_cxform.set("result", "cxform")
-        
+
         fe_composite = self._e.feComposite(operator="in")
         fe_composite.set("in2", "SourceGraphic")
         fe_composite.set("result", result)
-        
+
         svg_filter.append(fe_cxform)
         svg_filter.append(fe_composite)
         return result
-    
+
     def export_filters(self, tag, svg_filter, cxform=None):
         num_filters = len(tag.filters)
         elements = []
@@ -639,16 +746,16 @@ class SVGExporter(BaseExporter):
             else:
                 raise Exception("unknown filter: ", swf_filter)
         return elements
-    
+
 #   <filter id="test-filter" x="-50%" y="-50%" width="200%" height="200%">
 #		<feGaussianBlur in="SourceAlpha" stdDeviation="6" result="blur"/>
 #		<feOffset dy="0" dx="0"/>
 #		<feComposite in2="SourceAlpha" operator="arithmetic"
 #			k2="-1" k3="1" result="shadowDiff"/>
 #		<feFlood flood-color="black" flood-opacity="1"/>
-#		<feComposite in2="shadowDiff" operator="in"/>	
+#		<feComposite in2="shadowDiff" operator="in"/>
 #	</filter>;
-        			
+
     def export_filter_dropshadow(self, swf_filter, svg_filter, blend_in=None, result="offsetBlur"):
         gauss = self._e.feGaussianBlur()
         gauss.set("in", "SourceAlpha")
@@ -668,15 +775,15 @@ class SVGExporter(BaseExporter):
             svg_filter.append(flood)
             svg_filter.append(composite1)
         else:
-            SVGFilterFactory.create_drop_shadow_filter(self._e, svg_filter, 
-                None, 
-                swf_filter.blurX/20.0, 
+            SVGFilterFactory.create_drop_shadow_filter(self._e, svg_filter,
+                None,
+                swf_filter.blurX/20.0,
                 swf_filter.blurY/20.0,
                 blend_in,
                 result)
         #print etree.tostring(svg_filter, pretty_print=True)
         return result
-        
+
     def export_image(self, tag, image=None):
         if image is not None:
             buff = StringIO()
@@ -698,20 +805,20 @@ class SingleShapeSVGExporter(SVGExporter):
     """
     def __init__(self, margin=0):
         super(SingleShapeSVGExporter, self).__init__(margin = margin)
-        
+
     def export_single_shape(self, shape_tag, swf):
         from swf.movie import SWF
-        
+
         # find a typical use of this shape
         example_place_objects = [x for x in swf.all_tags_of_type(TagPlaceObject) if x.hasCharacter and x.characterId == shape_tag.characterId]
-        
+
         if len(example_place_objects):
             place_object = example_place_objects[0]
             characters = swf.build_dictionary()
             ids_to_export = place_object.get_dependencies()
             ids_exported = set()
             tags_to_export = []
-            
+
             # this had better form a dag!
             while len(ids_to_export):
                 id = ids_to_export.pop()
@@ -723,17 +830,17 @@ class SingleShapeSVGExporter(SVGExporter):
                 ids_exported.add(id)
             tags_to_export.reverse()
             tags_to_export.append(place_object)
-        else:            
+        else:
             place_object = TagPlaceObject()
             place_object.hasCharacter = True
             place_object.characterId = shape_tag.characterId
             tags_to_export = [ shape_tag, place_object ]
-        
+
         stunt_swf = SWF()
         stunt_swf.tags = tags_to_export
-        
+
         return super(SingleShapeSVGExporter, self).export(stunt_swf)
-            
+
 class SVGFilterFactory(object):
     # http://commons.oreilly.com/wiki/index.php/SVG_Essentials/Filters
     # http://dev.opera.com/articles/view/svg-evolution-3-applying-polish/
@@ -747,7 +854,7 @@ class SVGFilterFactory(object):
         filter.append(offset)
         filter.append(blend)
         return result
-        
+
     @classmethod
     def export_color_matrix_filter(cls, e, filter, matrix, svg_filter, attr_in=None, result='color-matrix'):
         attr_in = "SourceGraphic" if attr_in is None else attr_in
@@ -759,14 +866,14 @@ class SVGFilterFactory(object):
         filter.append(fe_cxform)
         #print etree.tostring(filter, pretty_print=True)
         return result
-    
+
     @classmethod
     def export_glow_filter(cls, e, filter, attr_in=None, result="glow-out"):
         attr_in = "SourceGraphic" if attr_in is None else attr_in
         gaussianBlur = SVGFilterFactory.create_gaussian_blur(e, attr_in=attr_in, attr_deviaton="1", result=result)
         filter.append(gaussianBlur)
         return result
-        
+
     @classmethod
     def create_blend(cls, e, attr_in=None, attr_in2="BackgroundImage", mode="normal", result=None):
         blend = e.feBlend()
@@ -777,7 +884,7 @@ class SVGFilterFactory(object):
         if result is not None:
             blend.set("result", result)
         return blend
-        
+
     @classmethod
     def create_gaussian_blur(cls, e, attr_in="SourceAlpha", attr_deviaton="3", result=None):
         gaussianBlur = e.feGaussianBlur()
@@ -786,7 +893,7 @@ class SVGFilterFactory(object):
         if result is not None:
             gaussianBlur.set("result", result)
         return gaussianBlur
-        
+
     @classmethod
     def create_offset(cls, e, attr_in=None, dx=0, dy=0, result=None):
         offset = e.feOffset()
@@ -797,7 +904,7 @@ class SVGFilterFactory(object):
         if result is not None:
             offset.set("result", result)
         return offset
-        
+
 class SVGBounds(object):
     def __init__(self, svg=None):
         self.minx = 1000000.0
@@ -860,11 +967,12 @@ class SVGBounds(object):
             self._handle_path_data(str(element.get("d")))
         elif element.tag == "{%s}use" % SVG_NS:
             href = element.get(XLINK_HREF)
-            href = href.replace("#", "")
-            els = self._svg.xpath("./svg:defs//svg:g[@id='%s']" % href,
-                    namespaces=NS)
-            if len(els) > 0:
-                self._parse(els[0])
+            if href:
+                href = href.replace("#", "")
+                els = self._svg.xpath("./svg:defs//svg:g[@id='%s']" % href,
+                        namespaces=NS)
+                if len(els) > 0:
+                    self._parse(els[0])
 
         for child in element.getchildren():
             if child.tag == "{%s}defs" % SVG_NS: continue
@@ -914,12 +1022,12 @@ class SVGBounds(object):
 
 def _encode_jpeg(data):
     return "data:image/jpeg;base64," + base64.encodestring(data)[:-1]
-                                        
+
 def _encode_png(data):
     return "data:image/png;base64," + base64.encodestring(data)[:-1]
 
 def _swf_matrix_to_matrix(swf_matrix=None, need_scale=False, need_translate=True, need_rotation=False, unit_div=20.0):
-    
+
     if swf_matrix is None:
         values = [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]
     else:
@@ -933,9 +1041,9 @@ def _swf_matrix_to_matrix(swf_matrix=None, need_scale=False, need_translate=True
         if need_translate:
             values[4] /= unit_div
             values[5] /= unit_div
-        
+
     return values
-    
+
 def _swf_matrix_to_svg_matrix(swf_matrix=None, need_scale=False, need_translate=True, need_rotation=False, unit_div=20.0):
     values = _swf_matrix_to_matrix(swf_matrix, need_scale, need_translate, need_rotation, unit_div)
     str_values = ",".join(map(str, values))
