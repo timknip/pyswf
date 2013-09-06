@@ -1656,6 +1656,11 @@ class TagDefineSceneAndFrameLabelData(Tag):
 
     def parse(self, data, length, version=1):
         self.sceneCount = data.readEncodedU32()
+
+        if self.sceneCount >= 0x80000000:
+            print "WARNING: Negative sceneCount value: %x found!. SWF file exploiting CVE-2007-0071?" % self.sceneCount
+            return 
+
         self.scenes = []
         self.frameLabels = []
         for i in range(0, self.sceneCount):
