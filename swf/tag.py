@@ -2,7 +2,7 @@ from consts import *
 from data import *
 from utils import *
 from stream import *
-import Image
+from PIL import Image
 import struct
 import StringIO
 
@@ -721,10 +721,10 @@ class TagDefineBitsLossless(DefinitionTag):
                 s.write(indexed_colors[ord(temp.read(1))])
             self.image_buffer = s.getvalue()
             s.close()
-            
+
             im = Image.fromstring("RGBA", (self.padded_width, self.bitmap_height), self.image_buffer)
             im = im.crop((0, 0, self.bitmap_width, self.bitmap_height))
-            
+
         elif self.bitmap_format == BitmapFormat.BIT_15:
             raise Exception("DefineBitsLossless: BIT_15 not yet implemented")
         elif self.bitmap_format == BitmapFormat.BIT_24:
@@ -1659,7 +1659,7 @@ class TagDefineSceneAndFrameLabelData(Tag):
 
         if self.sceneCount >= 0x80000000:
             print "WARNING: Negative sceneCount value: %x found!. SWF file exploiting CVE-2007-0071?" % self.sceneCount
-            return 
+            return
 
         self.scenes = []
         self.frameLabels = []
