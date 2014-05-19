@@ -12,7 +12,7 @@ setup(
     name='pyswf',
     version='1.4',
     description='SWF Parsing Utilities',
-    long_description=read('README'),
+    long_description=read('README.md'),
     keywords = "swf parser parsing decompile utilities",
 
     author='Tim Knip',
