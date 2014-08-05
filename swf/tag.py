@@ -1305,12 +1305,19 @@ class TagDefineFont2(TagDefineFont):
 
         numGlyphs = data.readUI16()
         numSkip = 2 if self.wideOffsets else 1
-        # Skip offsets. We don't need them.
-        data.skip_bytes(numGlyphs << numSkip)
+        # don't # Skip offsets. We don't need them.
+        # Adobe Flash Player works in this way
+        
+        startOfOffsetTable = data.f.tell()
+        offsetTable = []
+        for i in range(0, numGlyphs):
+            offsetTable.append(data.readUI32() if self.wideOffsets else data.readUI16())
 
         codeTableOffset = data.readUI32() if self.wideOffsets else data.readUI16()
         for i in range(0, numGlyphs):
+            data.f.seek(startOfOffsetTable + offsetTable[i])
             self.glyphShapeTable.append(data.readSHAPE(self.unitDivisor))
+        data.f.seek(startOfOffsetTable + codeTableOffset)
         for i in range(0, numGlyphs):
             self.codeTable.append(data.readUI16() if self.wideCodes else data.readUI8())
 
