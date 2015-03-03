@@ -10,7 +10,7 @@ def read(fname):
 
 setup(
     name='pyswf',
-    version='1.4',
+    version='1.5',
     description='SWF Parsing Utilities',
     long_description=read('README.md'),
     keywords = "swf parser parsing decompile utilities",
@@ -19,7 +19,7 @@ setup(
     author_email='tim@floorplanner.com',
     url='https://github.com/timknip/pyswf',
 
-    install_requires = ["lxml==2.3", "pillow==2.3.1"],
+    install_requires = ["lxml>=3.3.0", "pillow>=2.3.0"],
     packages=find_packages(),
     license = "MIT",
     classifiers=[
