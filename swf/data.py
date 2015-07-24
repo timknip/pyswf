@@ -1,7 +1,11 @@
 from consts import *
 from utils import *
 
-class SWFRawTag(object):
+class _dumb_repr(object):
+    def __repr__(self):
+        return '<%s %r>' % (self.__class__.__name__, self.__dict__)
+
+class SWFRawTag(_dumb_repr):
     def __init__(self, s=None):
         if not s is None:
             self.parse(s)
@@ -14,25 +18,25 @@ class SWFRawTag(object):
         #self.bytes = s.f.read(self.header.tag_length())
         #s.f.seek(self.pos_content)
 
-class SWFStraightEdge(object):
+class SWFStraightEdge(_dumb_repr):
     def __init__(self, start, to, line_style_idx, fill_style_idx):
         self.start = start
         self.to = to
         self.line_style_idx = line_style_idx
         self.fill_style_idx = fill_style_idx
-    
+
     def reverse_with_new_fillstyle(self, new_fill_idx):
         return SWFStraightEdge(self.to, self.start, self.line_style_idx, new_fill_idx)
-        
+
 class SWFCurvedEdge(SWFStraightEdge):
     def __init__(self, start, control, to, line_style_idx, fill_style_idx):
         super(SWFCurvedEdge, self).__init__(start, to, line_style_idx, fill_style_idx)
         self.control = control
-        
+
     def reverse_with_new_fillstyle(self, new_fill_idx):
         return SWFCurvedEdge(self.to, self.control, self.start, self.line_style_idx, new_fill_idx)
-     
-class SWFShape(object):
+
+class SWFShape(_dumb_repr):
     def __init__(self, data=None, level=1, unit_divisor=20.0):
         self._records = []
         self._fillStyles = []
@@ -48,27 +52,37 @@ class SWFShape(object):
         self.coord_map = {}
         if not data is None:
             self.parse(data, level)
-            
+
+    def get_dependencies(self):
+        s = set()
+        for x in self._fillStyles:
+            s.update(x.get_dependencies())
+        for x in self._lineStyles:
+            s.update(x.get_dependencies())
+        return s
+
     def parse(self, data, level=1):
         data.reset_bits_pending()
         fillbits = data.readUB(4)
         linebits = data.readUB(4)
         self.read_shape_records(data, fillbits, linebits, level)
-    
+
     def export(self, handler=None):
         self._create_edge_maps()
         if handler is None:
+            from export import SVGShapeExporter
             handler = SVGShapeExporter()
         handler.begin_shape()
         for i in range(0, self.num_groups):
             self._export_fill_path(handler, i)
             self._export_line_path(handler, i)
         handler.end_shape()
-        
+        return handler
+
     @property
     def records(self):
         return self._records
-        
+
     def read_shape_records(self, data, fill_bits, line_bits, level=1):
         shape_record = None
         record_id = 0
@@ -98,7 +112,7 @@ class SWFShape(object):
             self._records.append(shape_record)
             record_id += 1
             #print shape_record.tostring()
-        
+
     def _create_edge_maps(self):
         if self._edgeMapsCreated:
             return
@@ -110,13 +124,13 @@ class SWFShape(object):
         curr_fs_idx0 = 0
         curr_fs_idx1 = 0
         curr_ls_idx = 0
-        
+
         self.fill_edge_maps = []
         self.line_edge_maps = []
         self.current_fill_edge_map = {}
         self.current_line_edge_map = {}
         self.num_groups = 0
-        
+
         for i in range(0, len(self._records)):
             rec = self._records[i]
             if rec.type == SWFShapeRecord.TYPE_STYLECHANGE:
@@ -130,7 +144,7 @@ class SWFShape(object):
                     ls_offset = len(self._lineStyles)
                     self._append_to(self._fillStyles, rec.fill_styles)
                     self._append_to(self._lineStyles, rec.line_styles)
-                
+
                 if rec.state_line_style and rec.state_fill_style0 and rec.state_fill_style1 and \
                     rec.line_style == 0 and rec.fill_style0 == 0 and rec.fill_style1 == 0:
                     # new group (probably)
@@ -157,7 +171,7 @@ class SWFShape(object):
                         curr_fs_idx1 = rec.fill_style1
                         if curr_fs_idx1 > 0:
                             curr_fs_idx1 += fs_offset
-  
+
                 if rec.state_moveto:
                     xPos = rec.move_deltaX
                     yPos = rec.move_deltaY
@@ -196,9 +210,9 @@ class SWFShape(object):
                 curr_fs_idx0 = 0
                 curr_fs_idx1 = 0
                 curr_ls_idx = 0
-    
+
         self._edgeMapsCreated = True
-    
+
     def _process_sub_path(self, sub_path, linestyle_idx, fillstyle_idx0, fillstyle_idx1, record_id=-1):
         path = None
         if fillstyle_idx0 != 0:
@@ -208,21 +222,21 @@ class SWFShape(object):
                 path = self.current_fill_edge_map[fillstyle_idx0]
             for j in range(len(sub_path) - 1, -1, -1):
                 path.append(sub_path[j].reverse_with_new_fillstyle(fillstyle_idx0))
-                                      
+
         if fillstyle_idx1 != 0:
             if not fillstyle_idx1 in self.current_fill_edge_map:
                 path = self.current_fill_edge_map[fillstyle_idx1] = []
             else:
                 path = self.current_fill_edge_map[fillstyle_idx1]
             self._append_to(path, sub_path)
-                    
+
         if linestyle_idx != 0:
             if not linestyle_idx in self.current_line_edge_map:
                 path = self.current_line_edge_map[linestyle_idx] = []
             else:
                 path = self.current_line_edge_map[linestyle_idx]
             self._append_to(path, sub_path)
-             
+
     def _clean_edge_map(self, edge_map):
         for style_idx in edge_map:
             sub_path = edge_map[style_idx] if style_idx in edge_map else None
@@ -247,17 +261,17 @@ class SWFShape(object):
                                 idx = 0
                                 prev_edge = None
                 edge_map[style_idx] = tmp_path
-  
+
     def _equal_point(self, a, b, tol=0.001):
         return (a[0] > b[0]-tol and a[0] < b[0]+tol and a[1] > b[1]-tol and a[1] < b[1]+tol)
-    
+
     def _find_next_edge_in_coord_map(self, edge):
         key = "%0.4f_%0.4f" % (edge.to[0], edge.to[1])
         if key in self.coord_map and len(self.coord_map[key]) > 0:
             return self.coord_map[key][0]
         else:
             return None
-             
+
     def _create_coord_map(self, path):
         self.coord_map = {}
         for i in range(0, len(path)):
@@ -268,7 +282,7 @@ class SWFShape(object):
                 self.coord_map[key] = [path[i]]
             else:
                 self.coord_map[key].append(path[i])
-                
+
     def _remove_edge_from_coord_map(self, edge):
         key = "%0.4f_%0.4f" % (edge.start[0], edge.start[1])
         if key in self.coord_map:
@@ -281,7 +295,7 @@ class SWFShape(object):
                     del coord_map_array[idx]
                 except:
                     pass
-                    
+
     def _create_path_from_edge_map(self, edge_map):
         new_path = []
         style_ids = []
@@ -291,7 +305,7 @@ class SWFShape(object):
         for i in range(0, len(style_ids)):
             self._append_to(new_path, edge_map[style_ids[i]])
         return new_path
-        
+
     def _export_fill_path(self, handler, group_index):
         path = self._create_path_from_edge_map(self.fill_edge_maps[group_index])
 
@@ -312,7 +326,7 @@ class SWFShape(object):
                     if fill_style.type == 0x0:
                         # solid fill
                         handler.begin_fill(
-                            ColorUtils.rgb(fill_style.rgb), 
+                            ColorUtils.rgb(fill_style.rgb),
                             ColorUtils.alpha(fill_style.rgb))
                     elif fill_style.type in [0x10, 0x12, 0x13]:
                         # gradient fill
@@ -345,7 +359,7 @@ class SWFShape(object):
                     # Font shapes define no fillstyles per se, but do reference fillstyle index 1,
                     # which represents the font color. We just report solid black in this case.
                     handler.begin_fill(0)
-                        
+
             if not self._equal_point(pos, e.start):
                 handler.move_to(e.start[0] * u, e.start[1] * u)
 
@@ -353,14 +367,14 @@ class SWFShape(object):
                 handler.curve_to(e.control[0] * u, e.control[1] * u, e.to[0] * u, e.to[1] * u)
             else:
                 handler.line_to(e.to[0] * u, e.to[1] * u)
-                
+
             pos = e.to
-  
+
         handler.end_fill()
         handler.end_fills()
-            
+
     def _export_line_path(self, handler, group_index):
-        
+
         path = self._create_path_from_edge_map(self.line_edge_maps[group_index])
         pos = [100000000, 100000000]
         u = 1.0 / self.unit_divisor
@@ -388,12 +402,12 @@ class SWFShape(object):
                         scale_mode = LineScaleMode.HORIZONTAL
                     elif line_style.no_hscale_flag:
                         scale_mode = LineScaleMode.VERTICAL
-                    
+
                     if not line_style.has_fill_flag:
                         handler.line_style(
-                            line_style.width / 20.0, 
-                            ColorUtils.rgb(line_style.color), 
-                            ColorUtils.alpha(line_style.color), 
+                            line_style.width / 20.0,
+                            ColorUtils.rgb(line_style.color),
+                            ColorUtils.alpha(line_style.color),
                             line_style.pixelhinting_flag,
                             scale_mode,
                             line_style.start_caps_style,
@@ -402,7 +416,7 @@ class SWFShape(object):
                             line_style.miter_limit_factor)
                     else:
                         fill_style = line_style.fill_type
-                        
+
                         if fill_style.type in [0x10, 0x12, 0x13]:
                             # gradient fill
                             colors = []
@@ -415,7 +429,7 @@ class SWFShape(object):
                                 alphas.append(ColorUtils.alpha(gr.color))
 
                             handler.line_gradient_style(
-                                line_style.width / 20.0, 
+                                line_style.width / 20.0,
                                 line_style.pixelhinting_flag,
                                 scale_mode,
                                 line_style.start_caps_style,
@@ -431,7 +445,7 @@ class SWFShape(object):
                                 )
                         elif fill_style.type in [0x40, 0x41, 0x42]:
                             handler.line_bitmap_style(
-                                line_style.width / 20.0, 
+                                line_style.width / 20.0,
                                 line_style.pixelhinting_flag,
                                 scale_mode,
                                 line_style.start_caps_style,
@@ -453,27 +467,35 @@ class SWFShape(object):
                 handler.line_to(e.to[0] * u, e.to[1] * u)
             pos = e.to
         handler.end_lines()
-                    
+
     def _append_to(self, v1, v2):
         for i in range(0, len(v2)):
             v1.append(v2[i])
-    
+
     def __str__(self):
         return "[SWFShape]"
-            
+
 class SWFShapeWithStyle(SWFShape):
     def __init__(self, data, level, unit_divisor):
         self._initialFillStyles = []
         self._initialLineStyles = []
         super(SWFShapeWithStyle, self).__init__(data, level, unit_divisor)
-    
+
     def export(self, handler=None):
         self._fillStyles.extend(self._initialFillStyles)
         self._lineStyles.extend(self._initialLineStyles)
-        super(SWFShapeWithStyle, self).export(handler)
-        
+        return super(SWFShapeWithStyle, self).export(handler)
+
+    def get_dependencies(self):
+        s = set()
+        for x in self._fillStyles + self._initialFillStyles:
+            s.update(x.get_dependencies())
+        for x in self._lineStyles + self._initialLineStyles:
+            s.update(x.get_dependencies())
+        return s
+
     def parse(self, data, level=1):
-        
+
         data.reset_bits_pending()
         num_fillstyles = self.readstyle_array_length(data, level)
         for i in range(0, num_fillstyles):
@@ -494,7 +516,7 @@ class SWFShapeWithStyle(SWFShape):
         if level >= 2 and length == 0xff:
             length = data.readUI16()
         return length
-    
+
     def __str__(self):
         s = "    FillStyles:\n" if len(self._fillStyles) > 0 else ""
         for i in range(0, len(self._initialFillStyles)):
@@ -506,36 +528,36 @@ class SWFShapeWithStyle(SWFShape):
         for record in self._records:
             s += record.__str__() + '\n'
         return s.rstrip() + super(SWFShapeWithStyle, self).__str__()
-              
-class SWFShapeRecord(object):
-    
+
+class SWFShapeRecord(_dumb_repr):
+
     TYPE_UNKNOWN = 0
     TYPE_END = 1
     TYPE_STYLECHANGE = 2
     TYPE_STRAIGHTEDGE = 3
     TYPE_CURVEDEDGE = 4
-    
+
     record_id = -1
-    
+
     def __init__(self, data=None, level=1):
         if not data is None:
             self.parse(data, level)
-            
+
     @property
     def is_edge_record(self):
-        return (self.type == SWFShapeRecord.TYPE_STRAIGHTEDGE or 
+        return (self.type == SWFShapeRecord.TYPE_STRAIGHTEDGE or
             self.type == SWFShapeRecord.TYPE_CURVEDEDGE)
-            
+
     def parse(self, data, level=1):
         pass
-    
+
     @property
     def type(self):
         return SWFShapeRecord.TYPE_UNKNOWN
-        
+
     def __str__(self):
         return "    [SWFShapeRecord]"
-      			
+
 class SWFShapeRecordStraightEdge(SWFShapeRecord):
     def __init__(self, data, num_bits=0, level=1):
         self.num_bits = num_bits
@@ -550,7 +572,7 @@ class SWFShapeRecordStraightEdge(SWFShapeRecord):
         self.deltaY = data.readSB(self.num_bits) \
             if self.general_line_flag or self.vert_line_flag \
             else 0.0
-            
+
     @property
     def type(self):
         return SWFShapeRecord.TYPE_STRAIGHTEDGE
@@ -565,7 +587,7 @@ class SWFShapeRecordStraightEdge(SWFShapeRecord):
             else:
                 s += " Horizontal: %d" % self.deltaX
         return s
-        
+
 class SWFShapeRecordCurvedEdge(SWFShapeRecord):
     def __init__(self, data, num_bits=0, level=1):
         self.num_bits = num_bits
@@ -576,7 +598,7 @@ class SWFShapeRecordCurvedEdge(SWFShapeRecord):
         self.control_deltaY = data.readSB(self.num_bits)
         self.anchor_deltaX = data.readSB(self.num_bits)
         self.anchor_deltaY = data.readSB(self.num_bits)
-        
+
     @property
     def type(self):
         return SWFShapeRecord.TYPE_CURVEDEDGE
@@ -585,7 +607,7 @@ class SWFShapeRecordCurvedEdge(SWFShapeRecord):
         return "    [SWFShapeRecordCurvedEdge]" + \
             " ControlDelta: %d, %d" % (self.control_deltaX, self.control_deltaY) + \
             " AnchorDelta: %d, %d" % (self.anchor_deltaX, self.anchor_deltaY)
-     
+
 class SWFShapeRecordStyleChange(SWFShapeRecord):
     def __init__(self, data, states=0, fill_bits=0, line_bits=0, level=1):
         self.fill_styles = []
@@ -605,7 +627,7 @@ class SWFShapeRecordStyleChange(SWFShapeRecord):
         super(SWFShapeRecordStyleChange, self).__init__(data, level)
 
     def parse(self, data, level=1):
-        
+
         if self.state_moveto:
             movebits = data.readUB(5)
             self.move_deltaX = data.readSB(movebits)
@@ -626,17 +648,17 @@ class SWFShapeRecordStyleChange(SWFShapeRecord):
                     self.line_styles.append(data.readLINESTYLE2(level))
             self.num_fillbits = data.readUB(4)
             self.num_linebits = data.readUB(4)
-            
+
     @property
     def type(self):
         return SWFShapeRecord.TYPE_STYLECHANGE
-    
+
     def readstyle_array_length(self, data, level=1):
         length = data.readUI8()
         if level >= 2 and length == 0xff:
             length = data.readUI16()
         return length
-            
+
     def __str__(self):
         return "    [SWFShapeRecordStyleChange]" + \
             " moveTo: %d %d" % (self.move_deltaX, self.move_deltaY) + \
@@ -644,11 +666,11 @@ class SWFShapeRecordStyleChange(SWFShapeRecord):
             " fs1: %d" % self.fill_style1 + \
             " linestyle: %d" % self.line_style + \
             " flags: %d %d %d" % (self.state_fill_style0, self.state_fill_style1, self.state_line_style)
-                                   
+
 class SWFShapeRecordEnd(SWFShapeRecord):
     def __init__(self):
         super(SWFShapeRecordEnd, self).__init__(None)
-        
+
     def parse(self, data, level=1):
         pass
 
@@ -658,8 +680,8 @@ class SWFShapeRecordEnd(SWFShapeRecord):
 
     def __str__(self):
         return "    [SWFShapeRecordEnd]"
-                
-class SWFMatrix(object):
+
+class SWFMatrix(_dumb_repr):
     def __init__(self, data):
         self.scaleX = 1.0
         self.scaleY = 1.0
@@ -669,7 +691,7 @@ class SWFMatrix(object):
         self.translateY = 0.0
         if not data is None:
             self.parse(data)
-            
+
     def parse(self, data):
         data.reset_bits_pending();
         self.scaleX = 1.0
@@ -687,99 +709,106 @@ class SWFMatrix(object):
         translateBits = data.readUB(5)
         self.translateX = data.readSB(translateBits)
         self.translateY = data.readSB(translateBits)
-    
+
     def to_array(self):
         return [
-            self.scaleX, self.rotateSkew0, 
-            self.rotateSkew1, self.scaleY, 
+            self.scaleX, self.rotateSkew0,
+            self.rotateSkew1, self.scaleY,
             self.translateX, self.translateY
         ]
-    
+
     def __str__(self):
         def fmt(s):
             return "%0.2f" % s
-            
+
         return "[%s]" % ",".join(map(fmt, self.to_array()))
-        
-class SWFGradientRecord(object):
+
+class SWFGradientRecord(_dumb_repr):
     def __init__(self, data=None, level=1):
         self._records = []
         if not data is None:
             self.parse(data, level)
 
-    def parse(self, data, level=1):  
+    def parse(self, data, level=1):
         self.ratio = data.readUI8()
         self.color = data.readRGB() if level <= 2 else data.readRGBA()
-    
+
     def __str__(self):
         return "[SWFGradientRecord] Color: %s, Ratio: %d" % (ColorUtils.to_rgb_string(self.color), self.ratio)
-        
-class SWFGradient(object):
+
+class SWFGradient(_dumb_repr):
     def __init__(self, data=None, level=1):
         self._records = []
         self.focal_point = 0.0
         if not data is None:
             self.parse(data, level)
-    
+
     @property
     def records(self):
         return self._records
-        
-    def parse(self, data, level=1):  
+
+    def parse(self, data, level=1):
         data.reset_bits_pending();
         self.spreadmethod = data.readUB(2)
         self.interpolation_mode = data.readUB(2)
         num_gradients = data.readUB(4)
         for i in range(0, num_gradients):
             self._records.append(data.readGRADIENTRECORD(level))
-    
+
     def __str__(self):
         s = "[SWFGadient]"
         for record in self._records:
             s += "\n  " + record.__str__()
         return s
-        
+
 class SWFFocalGradient(SWFGradient):
     def __init__(self, data=None, level=1):
         super(SWFFocalGradient, self).__init__(data, level)
 
-    def parse(self, data, level=1):  
+    def parse(self, data, level=1):
         super(SWFFocalGradient, self).parse(data, level)
         self.focal_point = data.readFIXED8()
-    
+
     def __str__(self):
         return "[SWFFocalGradient] Color: %s, Ratio: %d, Focal: %0.2f" % \
             (ColorUtils.to_rgb_string(self.color), self.ratio, self.focal_point)
-                                      
-class SWFFillStyle(object):
+
+class SWFFillStyle(_dumb_repr):
     def __init__(self, data=None, level=1):
         if not data is None:
             self.parse(data, level)
-            
+
+    COLOR = [0x0]
+    GRADIENT = [0x10, 0x12, 0x13]
+    BITMAP = [0x40, 0x41, 0x42, 0x43]
+
     def parse(self, data, level=1):
         self.type = data.readUI8()
-        if self.type == 0x0:
+        if self.type in SWFFillStyle.COLOR:
             self.rgb = data.readRGB() if level <= 2 else data.readRGBA()
-        elif self.type in [0x10, 0x12, 0x13]:
+        elif self.type in SWFFillStyle.GRADIENT:
             self.gradient_matrix = data.readMATRIX()
             self.gradient = data.readFOCALGRADIENT(level) if self.type == 0x13 else data.readGRADIENT(level)
-        elif self.type in [0x40, 0x41, 0x42, 0x43]:
+        elif self.type in SWFFillStyle.BITMAP:
             self.bitmap_id = data.readUI16()
             self.bitmap_matrix = data.readMATRIX()
         else:
             raise Exception("Unknown fill style type: 0x%x" % self.type, level)
-    
+
+    def get_dependencies(self):
+        return set([self.bitmap_id]) if self.type in SWFFillStyle.BITMAP else set()
+
     def __str__(self):
         s = "[SWFFillStyle] "
-        if self.type == 0x0:
+        if self.type in SWFFillStyle.COLOR:
             s += "Color: %s" % ColorUtils.to_rgb_string(self.rgb)
-        elif self.type in [0x10, 0x12, 0x13]:
+        elif self.type in SWFFillStyle.GRADIENT:
             s += "Gradient: %s" % self.gradient_matrix
-        elif self.type in [0x40, 0x41, 0x42, 0x43]:
+        elif self.type in SWFFillStyle.BITMAP:
             s += "BitmapID: %d" % (self.bitmap_id)
         return s
-        
-class SWFLineStyle(object):
+
+class SWFLineStyle(_dumb_repr):
     def __init__(self, data=None, level=1):
         # forward declarations for SWFLineStyle2
         self.start_caps_style = LineCapsStyle.ROUND
@@ -797,15 +826,18 @@ class SWFLineStyle(object):
         if not data is None:
             self.parse(data, level)
 
+    def get_dependencies(self):
+        return set()
+
     def parse(self, data, level=1):
         self.width = data.readUI16()
         self.color = data.readRGB() if level <= 2 else data.readRGBA()
-    
+
     def __str__(self):
         s = "[SWFLineStyle] "
         s += "Color: %s, Width: %d" % (ColorUtils.to_rgb_string(self.color), self.width)
         return s
-                          
+
 class SWFLineStyle2(SWFLineStyle):
     def __init__(self, data=None, level=1):
         super(SWFLineStyle2, self).__init__(data, level)
@@ -838,44 +870,47 @@ class SWFLineStyle2(SWFLineStyle):
         s += "NoVscaleFlag: %d, " % self.no_vscale_flag
         s += "PixelhintingFlag: %d, " % self.pixelhinting_flag
         s += "NoClose: %d, " % self.no_close
-        
+
         if self.joint_style:
             s += "MiterLimitFactor: %d" % self.miter_limit_factor
         if self.has_fill_flag:
             s += "FillType: %s, " % self.fill_type
         else:
             s += "Color: %s" % ColorUtils.to_rgb_string(self.color)
-        
+
         return s
 
-class SWFMorphGradientRecord(object):
+class SWFMorphGradientRecord(_dumb_repr):
     def __init__(self, data):
         if not data is None:
             self.parse(data)
-            
+
     def parse(self, data):
         self.startRatio = data.readUI8()
         self.startColor = data.readRGBA()
         self.endRatio = data.readUI8()
         self.endColor = data.readRGBA()
 
-class SWFMorphGradient(object):
+class SWFMorphGradient(_dumb_repr):
     def __init__(self, data, level=1):
         self.records = []
         if not data is None:
             self.parse(data, level)
-            
+
     def parse(self, data, level=1):
         self.records = []
         numGradients = data.readUI8()
         for i in range(0, numGradients):
             self.records.append(data.readMORPHGRADIENTRECORD())
-            
-class SWFMorphFillStyle(object):
+
+class SWFMorphFillStyle(_dumb_repr):
     def __init__(self, data, level=1):
         if not data is None:
             self.parse(data, level)
-            
+
+    def get_dependencies(self):
+        return set([self.bitmapId]) if hasattr(self, 'bitmapId') else set()
+
     def parse(self, data, level=1):
         type = data.readUI8()
         if type == 0x0:
@@ -890,7 +925,7 @@ class SWFMorphFillStyle(object):
             self.startBitmapMatrix = data.readMATRIX()
             self.endBitmapMatrix = data.readMATRIX()
 
-class SWFMorphLineStyle(object):
+class SWFMorphLineStyle(_dumb_repr):
     def __init__(self, data, level=1):
         # Forward declaration of SWFMorphLineStyle2 properties
         self.startCapsStyle = LineCapsStyle.ROUND
@@ -936,7 +971,7 @@ class SWFMorphLineStyle2(SWFMorphLineStyle):
             self.startColor = data.readRGBA()
             self.endColor = data.readRGBA()
 
-class SWFRecordHeader(object):
+class SWFRecordHeader(_dumb_repr):
     def __init__(self, type, content_length, header_length):
         self.type = type
         self.content_length = content_length
@@ -946,7 +981,7 @@ class SWFRecordHeader(object):
     def tag_length(self):
         return self.header_length + self.content_length
 
-class SWFRectangle(object):
+class SWFRectangle(_dumb_repr):
     def __init__(self):
         self.xmin = self.xmax = self.ymin = self.ymax = 0
 
@@ -958,14 +993,21 @@ class SWFRectangle(object):
         self.ymin = s.readSB(bits)
         self.ymax = s.readSB(bits)
 
+    @property
+    def dimensions(self):
+        """
+        Returns dimensions as (x, y) tuple.
+        """
+        return (self.xmax - self.xmin, self.ymax - self.ymin)
+
     def __str__(self):
         return "[xmin: %d xmax: %d ymin: %d ymax: %d]" % (self.xmin/20, self.xmax/20, self.ymin/20, self.ymax/20)
-        
-class SWFColorTransform(object):
+
+class SWFColorTransform(_dumb_repr):
     def __init__(self, data=None):
         if not data is None:
             self.parse(data)
-    
+
     def parse(self, data):
         data.reset_bits_pending()
         self.hasAddTerms = (data.readUB(1) == 1)
@@ -985,7 +1027,7 @@ class SWFColorTransform(object):
             self.rAdd = data.readSB(bits)
             self.gAdd = data.readSB(bits)
             self.bAdd = data.readSB(bits)
-    
+
     @property
     def matrix(self):
         return [
@@ -994,11 +1036,11 @@ class SWFColorTransform(object):
             0.0, 0.0, self.bMult / 256.0, 0.0, self.bAdd / 256.0,
             0.0, 0.0, 0.0, 1.0, 1.0
         ]
-        
+
     def __str__(self):
         return "[%d %d %d %d %d %d]" % \
             (self.rMult, self.gMult, self.bMult, self.rAdd, self.gAdd, self.bAdd)
-        
+
 class SWFColorTransformWithAlpha(SWFColorTransform):
     def __init__(self, data=None):
         super(SWFColorTransformWithAlpha, self).__init__(data)
@@ -1016,7 +1058,7 @@ class SWFColorTransformWithAlpha(SWFColorTransform):
             self.rMult = data.readSB(bits)
             self.gMult = data.readSB(bits)
             self.bMult = data.readSB(bits)
-            self.aMult = data.readSB(bits)     
+            self.aMult = data.readSB(bits)
         self.rAdd = 0
         self.gAdd = 0
         self.bAdd = 0
@@ -1026,7 +1068,7 @@ class SWFColorTransformWithAlpha(SWFColorTransform):
             self.gAdd = data.readSB(bits)
             self.bAdd = data.readSB(bits)
             self.aAdd = data.readSB(bits)
-    
+
     @property
     def matrix(self):
         '''
@@ -1038,66 +1080,66 @@ class SWFColorTransformWithAlpha(SWFColorTransform):
             0.0, 0.0, self.bMult / 256.0, 0.0, self.bAdd / 256.0,
             0.0, 0.0, 0.0, self.aMult / 256.0, self.aAdd / 256.0
         ]
-                
+
     def __str__(self):
         return "[%d %d %d %d %d %d %d %d]" % \
             (self.rMult, self.gMult, self.bMult, self.aMult, self.rAdd, self.gAdd, self.bAdd, self.aAdd)
- 
-class SWFFrameLabel(object):
+
+class SWFFrameLabel(_dumb_repr):
     def __init__(self, frameNumber, name):
         self.frameNumber = frameNumber
         self.name = name
 
     def __str__(self):
         return "Frame: %d, Name: %s" % (self.frameNumber, self.name)
-                               
-class SWFScene(object):
+
+class SWFScene(_dumb_repr):
     def __init__(self, offset, name):
         self.offset = offset
         self.name = name
-        
+
     def __str__(self):
         return "Scene: %d, Name: '%s'" % (self.offset, self.name)
-        
-class SWFSymbol(object):
+
+class SWFSymbol(_dumb_repr):
     def __init__(self, data=None):
         if not data is None:
             self.parse(data)
-        
+
     def parse(self, data):
         self.tagId = data.readUI16()
         self.name = data.readString()
 
     def __str__(self):
         return "ID %d, Name: %s" % (self.tagId, self.name)
-        
-class SWFGlyphEntry(object):
+
+class SWFGlyphEntry(_dumb_repr):
     def __init__(self, data=None, glyphBits=0, advanceBits=0):
         if not data is None:
             self.parse(data, glyphBits, advanceBits)
-        
+
     def parse(self, data, glyphBits, advanceBits):
         # GLYPHENTRYs are not byte aligned
         self.index = data.readUB(glyphBits)
         self.advance = data.readSB(advanceBits)
-    
+
     def __str__(self):
         return "Index: %d, Advance: %d" % (self.index, self.advance)
-        
-class SWFKerningRecord(object):
+
+class SWFKerningRecord(_dumb_repr):
     def __init__(self, data=None, wideCodes=False):
         if not data is None:
             self.parse(data, wideCodes)
-        
+
     def parse(self, data, wideCodes):
         self.code1 = data.readUI16() if wideCodes else data.readUI8()
         self.code2 = data.readUI16() if wideCodes else data.readUI8()
         self.adjustment = data.readSI16()
-    
+
     def __str__(self):
-        return "Code1: %d, Code2: %d, Adjustement: %d" % (self.code1, self.code2, self.adjustment)
-        
-class SWFTextRecord(object):
+        return "Code1: %d, Code2: %d, Adjustment: %d" % (self.code1, self.code2, self.adjustment)
+
+class SWFTextRecord(_dumb_repr):
     def __init__(self, data=None, glyphBits=0, advanceBits=0, previousRecord=None, level=1):
         self.hasFont = False
         self.hasColor = False
@@ -1112,6 +1154,9 @@ class SWFTextRecord(object):
         if not data is None:
             self.parse(data, glyphBits, advanceBits, previousRecord, level)
 
+    def get_dependencies(self):
+        return set([self.fontId]) if self.hasFont else set()
+
     def parse(self, data, glyphBits, advanceBits, previousRecord=None, level=1):
         self.glyphEntries = []
         styles = data.readUI8()
@@ -1120,40 +1165,40 @@ class SWFTextRecord(object):
         self.hasColor = ((styles & 0x04) != 0)
         self.hasYOffset = ((styles & 0x02) != 0)
         self.hasXOffset = ((styles & 0x01) != 0)
-        
+
         if self.hasFont:
             self.fontId = data.readUI16()
         elif not previousRecord is None:
             self.fontId = previousRecord.fontId
-        
+
         if self.hasColor:
             self.textColor = data.readRGB() if level < 2 else data.readRGBA()
         elif not previousRecord is None:
             self.textColor = previousRecord.textColor
-        
+
         if self.hasXOffset:
             self.xOffset = data.readSI16();
         elif not previousRecord is None:
             self.xOffset = previousRecord.xOffset
-        
+
         if self.hasYOffset:
             self.yOffset = data.readSI16();
         elif not previousRecord is None:
             self.yOffset = previousRecord.yOffset
-        
+
         if self.hasFont:
             self.textHeight = data.readUI16()
         elif not previousRecord is None:
             self.textHeight = previousRecord.textHeight
-        
+
         glyphCount = data.readUI8()
         for i in range(0, glyphCount):
             self.glyphEntries.append(data.readGLYPHENTRY(glyphBits, advanceBits))
-    
+
     def __str__(self):
         return "[SWFTextRecord]"
-        
-class SWFClipActions(object):
+
+class SWFClipActions(_dumb_repr):
     def __init__(self, data=None, version=0):
         self.eventFlags = None
         self.records = []
@@ -1171,8 +1216,8 @@ class SWFClipActions(object):
 
     def __str__(self):
         return "[SWFClipActions]"
-                         
-class SWFClipActionRecord(object):
+
+class SWFClipActionRecord(_dumb_repr):
     def __init__(self, data=None, version=0):
         self.eventFlags = None
         self.keyCode = 0
@@ -1193,8 +1238,8 @@ class SWFClipActionRecord(object):
 
     def __str__(self):
         return "[SWFClipActionRecord]"
-                           
-class SWFClipEventFlags(object):
+
+class SWFClipEventFlags(_dumb_repr):
     keyUpEvent = False
     keyDownEvent = False
     mouseUpEvent = False
@@ -1214,11 +1259,11 @@ class SWFClipEventFlags(object):
     constructEvent = False # SWF7
     keyPressEvent = False # SWF6
     dragOutEvent = False # SWF6
-    
+
     def __init__(self, data=None, version=0):
         if not data is None:
             self.parse(data, version)
-            
+
     def parse(self, data, version):
         flags1 = data.readUI8();
         self.keyUpEvent = ((flags1 & 0x80) != 0)
@@ -1244,11 +1289,11 @@ class SWFClipEventFlags(object):
             self.keyPressEvent = ((flags3 & 0x02) != 0)
             self.dragOutEvent = ((flags3 & 0x01) != 0)
             data.readUI8() # reserved, always 0
-    
+
     def __str__(self):
         return "[SWFClipEventFlags]"
-                       
-class SWFZoneData(object):
+
+class SWFZoneData(_dumb_repr):
     def __init__(self, data=None):
         if not data is None:
             self.parse(data)
@@ -1259,8 +1304,8 @@ class SWFZoneData(object):
 
     def __str__(self):
         return "[SWFZoneData]"
-                                 
-class SWFZoneRecord(object):
+
+class SWFZoneRecord(_dumb_repr):
     def __init__(self, data=None):
         if not data is None:
             self.parse(data)
@@ -1276,4 +1321,117 @@ class SWFZoneRecord(object):
 
     def __str__(self):
         return "[SWFZoneRecord]"
-                    
+
+class SWFSoundInfo(_dumb_repr):
+    def __init__(self, data=None):
+        if not data is None:
+            self.parse(data)
+
+    def parse(self, data):
+        reserved = data.readUB(2)
+        assert reserved == 0
+        self.syncStop = data.readUB(1) == 1
+        self.syncNoMultiple = data.readUB(1) == 1
+        self.hasEnvelope = data.readUB(1) == 1
+        self.hasLoops = data.readUB(1) == 1
+        self.hasOutPoint = data.readUB(1) == 1
+        self.hasInPoint = data.readUB(1) == 1
+        self.inPoint = data.readUI32() if self.hasInPoint else None
+        self.outPoint = data.readUI32() if self.hasOutPoint else None
+        self.loopCount = data.readUI16() if self.hasLoops else None
+        self.envPointCount = data.readUI8() if self.hasEnvelope else None
+        self.envelopePoints = [data.readSOUNDENVELOPE() for x in xrange(self.envPointCount)] if self.hasEnvelope else None
+
+    def __str__(self):
+        return "[SWFSoundInfo]"
+
+class SWFSoundEnvelope(_dumb_repr):
+    def __init__(self, data=None):
+        if not data is None:
+            self.parse(data)
+
+    def parse(self, data):
+        self.position = data.readUI32()
+        self.leftLevel = data.readUI16()
+        self.rightLevel = data.readUI16()
+
+    def __str__(self):
+        return "[SWFSoundEnvelope]"
+
+class SWFButtonRecord(_dumb_repr):
+    def __init__(self, version, data=None):
+        # version is 1 for DefineButton, 2 for DefineButton2, etc
+        if not data is None:
+            self.parse(data, version)
+
+    def get_dependencies(self):
+        return set([self.characterId]) if self.valid else set()
+
+    def parse(self, data, version):
+        reserved0 = data.readUB(2)
+        self.hasBlendMode = data.readUB(1) == 1
+        self.hasFilterList = data.readUB(1) == 1
+        self.stateHitTest = data.readUB(1) == 1
+        self.stateDown = data.readUB(1) == 1
+        self.stateOver = data.readUB(1) == 1
+        self.stateUp = data.readUB(1) == 1
+
+        self.valid = reserved0 or self.hasBlendMode or \
+                     self.hasFilterList or self.stateHitTest or \
+                     self.stateDown or self.stateOver or self.stateUp
+        if not self.valid:
+            return
+
+        self.characterId = data.readUI16()
+        self.placeDepth = data.readUI16()
+        self.placeMatrix = data.readMATRIX()
+
+        if version == 2:
+            self.colorTransform = data.readCXFORMWITHALPHA()
+            self.filterList = data.readFILTERLIST() if self.hasFilterList else None
+            self.blendMode = data.readUI8() if self.hasBlendMode else 0
+
+    def __str__(self):
+        return "[SWFButtonRecord]"
+
+    def __repr__(self):
+        return "[SWFButtonRecord %r]" % self.__dict__
+
+class SWFButtonCondAction(_dumb_repr):
+    def __init__(self, data=None):
+        if not data is None:
+            self.parse(data)
+
+    def parse(self, data):
+        self.idleToOverDown = data.readUB(1) == 1
+        self.outDownToIdle = data.readUB(1) == 1
+        self.outDownToOverDown = data.readUB(1) == 1
+        self.overDownToOutDown = data.readUB(1) == 1
+
+        self.overDownToOverUp = data.readUB(1) == 1
+        self.overUpToOverDown = data.readUB(1) == 1
+        self.overUpToIdle = data.readUB(1) == 1
+        self.idleToOverUp = data.readUB(1) == 1
+
+        self.keyPress = data.readUB(7)
+        self.overDownToIdle = data.readUB(1) == 1
+
+        self.actions = data.readACTIONRECORDs()
+
+    def __str__(self):
+        return "[SWFButtonCondAction]"
+
+class SWFExport(_dumb_repr):
+    def __init__(self, data=None):
+        if not data is None:
+            self.parse(data)
+
+    def get_dependencies(self):
+        return set([self.characterId])
+
+    def parse(self, data):
+        self.characterId = data.readUI16()
+        self.characterName = data.readString()
+
+    def __str__(self):
+        return "[SWFExport %d as %r]" % (self.characterId, self.characterName)

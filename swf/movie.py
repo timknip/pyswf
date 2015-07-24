@@ -4,7 +4,10 @@ SWF
 from tag import SWFTimelineContainer
 from stream import SWFStream
 from export import SVGExporter
-import StringIO
+try:
+    import cStringIO as StringIO
+except ImportError:
+    import StringIO
 
 class SWFHeaderException(Exception):
     """ Exception raised in case of an invalid SWFHeader """
@@ -158,7 +161,6 @@ class SWF(SWFTimelineContainer):
         self._header._frame_rate = data.readFIXED8()
         self._header._frame_count = data.readUI16()
         self.parse_tags(data)
-        
         
     def __str__(self):
         s = "[SWF]\n"

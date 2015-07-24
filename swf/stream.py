@@ -12,7 +12,9 @@ class SWFStream(object):
     def __init__(self, file):
         """ Initialize with a file object """
         self.f = file
-        self._bit_pending = 0
+        self._bits_pending = 0
+        self._partial_byte = None
+        self._make_masks()
         
     def bin(self, s):
         """ Return a value as a binary string """
@@ -40,25 +42,64 @@ class SWFStream(object):
         """ Closes the stream """
         if self.f:
             self.f.close()
-            
-    def readbits(self, bits, bit_buffer=0):
-        """ Read the specified number of bits from the stream """
-        if bits == 0: return bit_buffer
+    
+    def _make_masks(self):
+        self._masks = [(1 << x) - 1 for x in range(9)]
+    
+    def _read_bytes_aligned(self, bytes):
+        buf = self.f.read(bytes)
+        return reduce(lambda x, y: x << 8 | ord(y), buf, 0)
+    
+    def readbits(self, bits):
+        """
+        Read the specified number of bits from the stream.
+        Returns 0 for bits == 0.
+        """
         
-        if self._bits_pending > 0:
-            self.f.seek(self.f.tell() - 1)
-            byte = ord(self.f.read(1)) & (0xff >> (8 - self._bits_pending))
-            consumed = min(self._bits_pending, bits)
-            self._bits_pending -= consumed
-            partial = byte >> self._bits_pending
-        else:
-            consumed = min(8, bits);
-            self._bits_pending = 8 - consumed
-            partial = ord(self.f.read(1)) >> self._bits_pending
+        if bits == 0:
+            return 0
+        
+        # fast byte-aligned path
+        if bits % 8 == 0 and self._bits_pending == 0:
+            return self._read_bytes_aligned(bits / 8)
+        
+        out = 0
+        masks = self._masks
+        
+        def transfer_bits(x, y, n, t):
+            """
+            transfers t bits from the top of y_n to the bottom of x.
+            then returns x and the remaining bits in y
+            """
+            if n == t:
+                # taking all
+                return (x << t) | y, 0
             
-        bits -= consumed;
-        bit_buffer = (bit_buffer << consumed) | partial
-        return self.readbits(bits, bit_buffer) if bits > 0 else bit_buffer
+            mask = masks[t]           # (1 << t) - 1
+            remainmask = masks[n - t] # (1 << n - t) - 1
+            taken = ((y >> n - t) & mask)
+            return (x << t) | taken, y & remainmask
+        
+        while bits > 0:
+            if self._bits_pending > 0:
+                assert self._partial_byte is not None
+                take = min(self._bits_pending, bits)
+                out, self._partial_byte = transfer_bits(out, self._partial_byte, self._bits_pending, take)
+                
+                if take == self._bits_pending:
+                    # we took them all
+                    self._partial_byte = None
+                self._bits_pending -= take
+                bits -= take
+                continue
+            
+            r = self.f.read(1)
+            if r == '':
+                raise EOFError
+            self._partial_byte = ord(r)
+            self._bits_pending = 8
+        
+        return out
      
     def readFB(self, bits):
         """ Read a float using the specified number of bits """
@@ -102,6 +143,11 @@ class SWFStream(object):
         """ Read a unsigned int """
         self.reset_bits_pending();
         return struct.unpack('<I', self.f.read(4))[0]
+
+    def readUI64(self):
+        """ Read a uint64_t """
+        self.reset_bits_pending();
+        return struct.unpack('<Q', self.f.read(8))[0]
     
     def readEncodedU32(self):
         """ Read a encoded unsigned int """
@@ -242,6 +288,10 @@ class SWFStream(object):
     def readMORPHLINESTYLE(self, level=1):
         """ Read a SWFMorphLineStyle """
         return SWFMorphLineStyle(self, level)
+    
+    def readMORPHLINESTYLE2(self, level=1):
+        """ Read a SWFMorphLineStyle2 """
+        return SWFMorphLineStyle2(self, level)
         
     def readMORPHGRADIENT(self, level=1):
         """ Read a SWFTextRecord """
@@ -261,6 +311,17 @@ class SWFStream(object):
             action = SWFActionFactory.create(actionCode, actionLength)
             action.parse(self)
         return action
+        
+    def readACTIONRECORDs(self):
+        """ Read zero or more button records (zero-terminated) """
+        out = []
+        while 1:
+            action = self.readACTIONRECORD()
+            if action:
+                out.append(action)
+            else:
+                break
+        return out
         
     def readCLIPACTIONS(self, version):
         """ Read a SWFClipActions """
@@ -317,6 +378,11 @@ class SWFStream(object):
         filter.parse(self)
         return filter
     
+    def readFILTERLIST(self):
+        """ Read a length-prefixed list of FILTERs """
+        number = self.readUI8()
+        return [self.readFILTER() for _ in xrange(number)]
+    
     def readZONEDATA(self):
         """ Read a SWFZoneData """
         return SWFZoneData(self)
@@ -324,6 +390,64 @@ class SWFStream(object):
     def readZONERECORD(self):
         """ Read a SWFZoneRecord """
         return SWFZoneRecord(self)
+        
+    def readSOUNDINFO(self):
+        """ Read a SWFSoundInfo """
+        return SWFSoundInfo(self)
+        
+    def readSOUNDENVELOPE(self):
+        """ Read a SWFSoundEnvelope """
+        return SWFSoundEnvelope(self)
+    
+    def readBUTTONRECORD(self, version):
+        rc = SWFButtonRecord(data = self, version = version)
+        return rc if rc.valid else None
+        
+    def readBUTTONRECORDs(self, version):
+        """ Read zero or more button records (zero-terminated) """
+        out = []
+        while 1:
+            button = self.readBUTTONRECORD(version)
+            if button:
+                out.append(button)
+            else:
+                break
+        return out
+    
+    def readBUTTONCONDACTION(self):
+        """ Read a size-prefixed BUTTONCONDACTION """
+        size = self.readUI16()
+        if size == 0:
+            return None
+        return SWFButtonCondAction(self)
+    
+    def readBUTTONCONDACTIONSs(self):
+        """ Read zero or more button-condition actions """
+        out = []
+        while 1:
+            action = self.readBUTTONCONDACTION()
+            if action:
+                out.append(action)
+            else:
+                break
+        return out
+        
+    def readEXPORT(self):
+        """ Read a SWFExport """
+        return SWFExport(self)
+    
+    def readMORPHFILLSTYLEARRAY(self):
+        count = self.readUI8()
+        if count == 0xff:
+            count = self.readUI16()
+        return [self.readMORPHFILLSTYLE() for _ in xrange(count)]
+        
+    def readMORPHLINESTYLEARRAY(self, version):
+        count = self.readUI8()
+        if count == 0xff:
+            count = self.readUI16()
+        kind = self.readMORPHLINESTYLE if version == 1 else self.readMORPHLINESTYLE2
+        return [kind() for _ in xrange(count)]
         
     def readraw_tag(self):
         """ Read a SWFRawTag """
