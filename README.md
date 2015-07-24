@@ -13,14 +13,14 @@ or you might need do:
 
     $sudo python setup.py install
 
-DEPENDENCIES
-============
-- lxml
-- StringIO
-- Image (PIL)
+WINDOWS
+=======
+Its advised to install lxml and pylzma from binary.
+- [lxml](https://pypi.python.org/pypi/lxml/3.4.0#downloads)
+- [pylzma](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pylzma)
+    - download the *.whl, cd into download location and run:
 
-You can use easy_install or pip to install these.
-NOTE: this code is only tested with python 2.6
+        $ pip install pylzma<VERSION>.whl
 
 USAGE
 =====
