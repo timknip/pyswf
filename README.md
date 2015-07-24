@@ -5,7 +5,7 @@ PYSWF is a Python port of Claus Wahlers *great* SWF parser https://github.com/cl
 Can't thank Claus enough!
 
 INSTALL
-=======
+-------
 
     python setup.py install
 
@@ -14,7 +14,7 @@ or you might need do:
     $sudo python setup.py install
 
 WINDOWS
-=======
+-------
 Install lxml and pylzma from a binary distribution before running setup.
 - [lxml 3.4.0](https://pypi.python.org/pypi/lxml/3.4.0#downloads)
 - [pylzma 0.4.6](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pylzma)
@@ -24,7 +24,7 @@ Install lxml and pylzma from a binary distribution before running setup.
             $ pip install pylzma-VERSION.whl
 
 USAGE
-=====
+-----
 
 Basic example:
 --------------
