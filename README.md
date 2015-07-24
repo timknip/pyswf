@@ -15,12 +15,13 @@ or you might need do:
 
 WINDOWS
 =======
-Its advised to install lxml and pylzma from binary.
-- [lxml](https://pypi.python.org/pypi/lxml/3.4.0#downloads)
-- [pylzma](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pylzma)
+Its advised to install lxml and pylzma from a binary distribution.
+- [lxml 3.4.0](https://pypi.python.org/pypi/lxml/3.4.0#downloads)
+- [pylzma 0.4.6](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pylzma)
     - download the *.whl, cd into download location and run:
 
-        $ pip install pylzma<VERSION>.whl
+
+            $ pip install pylzma-VERSION.whl
 
 USAGE
 =====
