@@ -15,7 +15,7 @@ or you might need do:
 
 WINDOWS
 =======
-Its advised to install lxml and pylzma from a binary distribution.
+Install lxml and pylzma from a binary distribution before running setup.
 - [lxml 3.4.0](https://pypi.python.org/pypi/lxml/3.4.0#downloads)
 - [pylzma 0.4.6](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pylzma)
     - download the *.whl, cd into download location and run:
