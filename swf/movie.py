@@ -17,14 +17,15 @@ class SWFHeader(object):
         a = stream.readUI8()
         b = stream.readUI8()
         c = stream.readUI8()
-        if not a in [0x43, 0x46] or b != 0x57 or c != 0x53:
-            # Invalid signature! ('FWS' or 'CWS')
+        if not a in [0x43, 0x46, 0x5A] or b != 0x57 or c != 0x53:
+            # Invalid signature! ('FWS' or 'CWS' or 'ZFS')
             raise SWFHeaderException("not a SWF file! (invalid signature)")
 
-        self._compressed = (a == 0x43)
+        self._compressed_zlib = (a == 0x43)
+        self._compressed_lzma = (a == 0x5A)
         self._version = stream.readUI8()
         self._file_length = stream.readUI32()
-        if not self._compressed:
+        if not (self._compressed_zlib or self._compressed_lzma):
             self._frame_size = stream.readRECT()
             self._frame_rate = stream.readFIXED8()
             self._frame_count = stream.readUI16()
@@ -56,8 +57,18 @@ class SWFHeader(object):
                 
     @property
     def compressed(self):
+        """ Whether the SWF is compressed """
+        return self._compressed_zlib or self._compressed_lzma
+
+    @property
+    def compressed_zlib(self):
         """ Whether the SWF is compressed using ZLIB """
-        return self._compressed
+        return self._compressed_zlib
+
+    @property
+    def compressed_lzma(self):
+        """ Whether the SWF is compressed using LZMA """
+        return self._compressed_lzma
         
     def __str__(self):
         return "   [SWFHeader]\n" + \
@@ -130,16 +141,22 @@ class SWF(SWFTimelineContainer):
         self._data = data = data if isinstance(data, SWFStream) else SWFStream(data)
         self._header = SWFHeader(self._data)
         if self._header.compressed:
-            import zlib
-            data = data.f.read()
-            zip = zlib.decompressobj()
             temp = StringIO.StringIO()
-            temp.write(zip.decompress(data))
+            if self._header.compressed_zlib:
+                import zlib
+                data = data.f.read()
+                zip = zlib.decompressobj()
+                temp.write(zip.decompress(data))
+            else:
+                import pylzma
+                data.readUI32() #consume compressed length
+                data = data.f.read()
+                temp.write(pylzma.decompress(data))
             temp.seek(0)
             data = SWFStream(temp)
-            self._header._frame_size = data.readRECT()
-            self._header._frame_rate = data.readFIXED8()
-            self._header._frame_count = data.readUI16()
+        self._header._frame_size = data.readRECT()
+        self._header._frame_rate = data.readFIXED8()
+        self._header._frame_count = data.readUI16()
         self.parse_tags(data)
         
         

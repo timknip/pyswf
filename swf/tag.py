@@ -45,6 +45,7 @@ class TagFactory(object):
         elif type == 82: return TagDoABC()
         elif type == 83: return TagDefineShape4()
         elif type == 86: return TagDefineSceneAndFrameLabelData()
+        elif type == 87: return TagDefineBinaryData()
         elif type == 88: return TagDefineFontName()
         else: return None
 
@@ -1305,12 +1306,19 @@ class TagDefineFont2(TagDefineFont):
 
         numGlyphs = data.readUI16()
         numSkip = 2 if self.wideOffsets else 1
-        # Skip offsets. We don't need them.
-        data.skip_bytes(numGlyphs << numSkip)
+        # don't # Skip offsets. We don't need them.
+        # Adobe Flash Player works in this way
+        
+        startOfOffsetTable = data.f.tell()
+        offsetTable = []
+        for i in range(0, numGlyphs):
+            offsetTable.append(data.readUI32() if self.wideOffsets else data.readUI16())
 
         codeTableOffset = data.readUI32() if self.wideOffsets else data.readUI16()
         for i in range(0, numGlyphs):
+            data.f.seek(startOfOffsetTable + offsetTable[i])
             self.glyphShapeTable.append(data.readSHAPE(self.unitDivisor))
+        data.f.seek(startOfOffsetTable + codeTableOffset)
         for i in range(0, numGlyphs):
             self.codeTable.append(data.readUI16() if self.wideCodes else data.readUI8())
 
@@ -1673,6 +1681,27 @@ class TagDefineSceneAndFrameLabelData(Tag):
             frameNumber = data.readEncodedU32();
             frameLabel = data.readString();
             self.frameLabels.append(SWFFrameLabel(frameNumber, frameLabel))
+
+class TagDefineBinaryData(DefinitionTag):
+    """
+	The DefineBinaryData tag permits arbitrary binary data to be embedded in a SWF file. DefineBinaryData is a definition tag, like DefineShape and DefineSprite. It associates a blob of binary data with a standard SWF 16-bit character ID. The character ID is entered into the SWF file's character dictionary. DefineBinaryData is intended to be used in conjunction with the SymbolClass tag. The SymbolClass tag can be used to associate a DefineBinaryData tag with an AS3 class definition. The AS3 class must be a subclass of ByteArray. When the class is instantiated, it will be populated automatically with the contents of the binary data resource.
+    """
+    TYPE = 87 
+    def __init__(self):
+        super(TagDefineBinaryData, self).__init__()
+
+    @property
+    def name(self):
+        return "DefineBinaryData"
+
+    @property
+    def type(self):
+        return TagDefineBinaryData.TYPE
+
+    def parse(self, data, length, version=1):
+        self.characterId = data.readUI16()
+        self.reserved = data.readUI32()
+        self.data = data.read(length - 6)
 
 class TagDefineFontName(Tag):
     TYPE = 88
