@@ -7,11 +7,15 @@ Can't thank Claus enough!
 INSTALL
 -------
 
-    python setup.py install
+    $ pip install pyswf==1.5.3
+
+or:
+
+    $ python setup.py install
 
 or you might need do:
 
-    $sudo python setup.py install
+    $ sudo python setup.py install
 
 WINDOWS
 -------
