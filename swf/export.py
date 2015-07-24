@@ -10,11 +10,18 @@ from filters import *
 from lxml import objectify
 from lxml import etree
 import base64
-from PIL import Image
-from StringIO import StringIO
+try:
+    import Image
+except ImportError:
+    from PIL import Image
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from StringIO import StringIO
 import math
 import re
 import copy
+import cgi
 
 SVG_VERSION = "1.1"
 SVG_NS      = "http://www.w3.org/2000/svg"
@@ -22,7 +29,10 @@ XLINK_NS    = "http://www.w3.org/1999/xlink"
 XLINK_HREF  = "{%s}href" % XLINK_NS
 NS = {"svg" : SVG_NS, "xlink" : XLINK_NS}
 
-MINIMUM_STROKE_WIDTH = 1.0
+PIXELS_PER_TWIP = 20
+EM_SQUARE_LENGTH = 1024
+
+MINIMUM_STROKE_WIDTH = 0.5
 
 CAPS_STYLE = {
     0 : 'round',
@@ -434,6 +444,7 @@ class BaseExporter(object):
         self.export_image(tag, image)
 
     def export_define_bits_lossless(self, tag):
+        tag.bitmapData.seek(0)
         image = Image.open(tag.bitmapData)
         self.export_image(tag, image)
 
@@ -459,6 +470,10 @@ class BaseExporter(object):
                 self.export_define_bits(tag)
             elif isinstance(tag, TagDefineBitsLossless):
                 self.export_define_bits_lossless(tag)
+            elif isinstance(tag, TagDefineFont):
+                self.export_define_font(tag)
+            elif isinstance(tag, TagDefineText):
+                self.export_define_text(tag)
 
     def export_display_list(self, tags, parent=None):
         self.clip_depth = 0
@@ -509,6 +524,8 @@ class SVGExporter(BaseExporter):
         self.svg.append(self.root)
         self.shape_exporter.defs = self.defs
         self._num_filters = 0
+        self.fonts = dict([(x.characterId,x) for x in swf.all_tags_of_type(TagDefineFont)])
+        self.fontInfos = dict([(x.characterId,x) for x in swf.all_tags_of_type(TagDefineFontInfo)])
 
         # GO!
         super(SVGExporter, self).export(swf, force_stroke)
@@ -538,6 +555,103 @@ class SVGExporter(BaseExporter):
         self.clip_depth = 0
         super(SVGExporter, self).export_define_sprite(tag, g)
 
+    def export_define_font(self, tag):
+        fontInfo = self.fontInfos[tag.characterId]
+        if not fontInfo.useGlyphText:
+            return
+
+        defs = self._e.defs(id="font_{0}".format(tag.characterId))
+
+        for index, glyph in enumerate(tag.glyphShapeTable):
+            # Export the glyph as a shape and add the path to the "defs"
+            # element to be referenced later when exporting text.
+            code_point = fontInfo.codeTable[index]
+            pathGroup = glyph.export().g.getchildren()
+
+            if len(pathGroup):
+                path = pathGroup[0]
+
+                path.set("id", "font_{0}_{1}".format(tag.characterId, code_point))
+
+                # SWF glyphs are always defined on an EM square of 1024 by 1024 units.
+                path.set("transform", "scale({0})".format(float(1)/EM_SQUARE_LENGTH))
+
+                # We'll be setting the color on the USE element that
+                # references this element.
+                del path.attrib["stroke"]
+                del path.attrib["fill"]
+
+                defs.append(path)
+
+        self.defs.append(defs)
+
+    def export_define_text(self, tag):
+        g = self._e.g(id="c{0}".format(int(tag.characterId)))
+        g.set("class", "text_content")
+
+        x = 0
+        y = 0
+
+        for rec in tag.records:
+            if rec.hasXOffset:
+                x = rec.xOffset/PIXELS_PER_TWIP
+            if rec.hasYOffset:
+                y = rec.yOffset/PIXELS_PER_TWIP
+
+            size = rec.textHeight/PIXELS_PER_TWIP
+            fontInfo = self.fontInfos[rec.fontId]
+
+            if not fontInfo.useGlyphText:
+                inner_text = ""
+                xValues = []
+
+            for glyph in rec.glyphEntries:
+                code_point = fontInfo.codeTable[glyph.index]
+
+                # Ignore control characters
+                if code_point in range(32):
+                    continue
+
+                if fontInfo.useGlyphText:
+                    use = self._e.use()
+                    use.set(XLINK_HREF, "#font_{0}_{1}".format(rec.fontId, code_point))
+
+                    use.set(
+                        'transform',
+                        "scale({0}) translate({1} {2})".format(
+                            size, float(x)/size, float(y)/size
+                        )
+                    )
+
+                    color = ColorUtils.to_rgb_string(ColorUtils.rgb(rec.textColor))
+                    use.set("style", "fill: {0}; stroke: {0}".format(color))
+
+                    g.append(use)
+                else:
+                    inner_text += unichr(code_point)
+                    xValues.append(str(x))
+
+                x = x + float(glyph.advance)/PIXELS_PER_TWIP
+
+            if not fontInfo.useGlyphText:
+                text = self._e.text(inner_text)
+
+                text.set("font-family", fontInfo.fontName)
+                text.set("font-size", str(size))
+                text.set("fill", ColorUtils.to_rgb_string(ColorUtils.rgb(rec.textColor)))
+
+                text.set("y", str(y))
+                text.set("x", " ".join(xValues))
+
+                if fontInfo.bold:
+                    text.set("font-weight", "bold")
+                if fontInfo.italic:
+                    text.set("font-style", "italic")
+
+                g.append(text)
+
+        self.defs.append(g)
+
     def export_define_shape(self, tag):
         self.shape_exporter.force_stroke = self.force_stroke
         super(SVGExporter, self).export_define_shape(tag)
@@ -560,8 +674,7 @@ class SVGExporter(BaseExporter):
             paths = self.defs.xpath("./svg:g[@id='c%d']/svg:path" % tag.characterId, namespaces=NS)
             for path in paths:
                 path.set("fill", "#ffffff")
-            is_mask = True
-        elif tag.depth <= self.clip_depth:
+        elif tag.depth <= self.clip_depth and self.mask_id is not None:
             g.set("mask", "url(#%s)" % self.mask_id)
 
         filters = []
@@ -694,6 +807,48 @@ class SVGExporter(BaseExporter):
             img.set(XLINK_HREF, "%s" % data_url)
             self.defs.append(img)
 
+class SingleShapeSVGExporter(SVGExporter):
+    """
+    An SVG exporter which knows how to export a single shape.
+    """
+    def __init__(self, margin=0):
+        super(SingleShapeSVGExporter, self).__init__(margin = margin)
+
+    def export_single_shape(self, shape_tag, swf):
+        from swf.movie import SWF
+
+        # find a typical use of this shape
+        example_place_objects = [x for x in swf.all_tags_of_type(TagPlaceObject) if x.hasCharacter and x.characterId == shape_tag.characterId]
+
+        if len(example_place_objects):
+            place_object = example_place_objects[0]
+            characters = swf.build_dictionary()
+            ids_to_export = place_object.get_dependencies()
+            ids_exported = set()
+            tags_to_export = []
+
+            # this had better form a dag!
+            while len(ids_to_export):
+                id = ids_to_export.pop()
+                if id in ids_exported or id not in characters:
+                    continue
+                tag = characters[id]
+                ids_to_export.update(tag.get_dependencies())
+                tags_to_export.append(tag)
+                ids_exported.add(id)
+            tags_to_export.reverse()
+            tags_to_export.append(place_object)
+        else:
+            place_object = TagPlaceObject()
+            place_object.hasCharacter = True
+            place_object.characterId = shape_tag.characterId
+            tags_to_export = [ shape_tag, place_object ]
+
+        stunt_swf = SWF()
+        stunt_swf.tags = tags_to_export
+
+        return super(SingleShapeSVGExporter, self).export(stunt_swf)
+
 class SVGFilterFactory(object):
     # http://commons.oreilly.com/wiki/index.php/SVG_Essentials/Filters
     # http://dev.opera.com/articles/view/svg-evolution-3-applying-polish/
@@ -820,11 +975,12 @@ class SVGBounds(object):
             self._handle_path_data(str(element.get("d")))
         elif element.tag == "{%s}use" % SVG_NS:
             href = element.get(XLINK_HREF)
-            href = href.replace("#", "")
-            els = self._svg.xpath("./svg:defs//svg:g[@id='%s']" % href,
-                    namespaces=NS)
-            if len(els) > 0:
-                self._parse(els[0])
+            if href:
+                href = href.replace("#", "")
+                els = self._svg.xpath("./svg:defs//svg:g[@id='%s']" % href,
+                        namespaces=NS)
+                if len(els) > 0:
+                    self._parse(els[0])
 
         for child in element.getchildren():
             if child.tag == "{%s}defs" % SVG_NS: continue
