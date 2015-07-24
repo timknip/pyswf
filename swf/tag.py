@@ -169,7 +169,7 @@ class SWFTimelineContainer(DefinitionTag):
         pos = data.tell()
         eof = (pos > self.file_length)
         if eof:
-            print "WARNING: end of file encountered, no end tag."
+            #print "WARNING: end of file encountered, no end tag."
             return TagEnd()
         raw_tag = data.readraw_tag()
         tag_type = raw_tag.header.type
@@ -183,7 +183,7 @@ class SWFTimelineContainer(DefinitionTag):
             #    print "=> tag_error", tag.name
             data.seek(pos + raw_tag.header.tag_length)
         else:
-            print "[WARNING] unhandled tag %s" % (hex(tag_type))
+            #print "[WARNING] unhandled tag %s" % (hex(tag_type))
             data.skip_bytes(raw_tag.header.tag_length)
         data.seek(pos + raw_tag.header.tag_length)
         return tag
@@ -217,9 +217,9 @@ class SWFTimelineContainer(DefinitionTag):
         d = {}
         for t in self.all_tags_of_type(DefinitionTag, recurse_into_sprites = False):
             if t.characterId in d:
-                print 'redefinition of characterId %d:' % (t.characterId)
-                print '  was:', d[t.characterId]
-                print 'redef:', t
+                #print 'redefinition of characterId %d:' % (t.characterId)
+                #print '  was:', d[t.characterId]
+                #print 'redef:', t
                 raise ValueError('illegal redefinition of character')
             d[t.characterId] = t
         return d
@@ -1830,7 +1830,7 @@ class TagDefineSceneAndFrameLabelData(Tag):
         self.sceneCount = data.readEncodedU32()
 
         if self.sceneCount >= 0x80000000:
-            print "WARNING: Negative sceneCount value: %x found!. SWF file exploiting CVE-2007-0071?" % self.sceneCount
+            #print "WARNING: Negative sceneCount value: %x found!. SWF file exploiting CVE-2007-0071?" % self.sceneCount
             return
 
         self.scenes = []
@@ -2650,4 +2650,4 @@ if __name__ == '__main__':
         if k.startswith('Tag') and hasattr(v, 'TYPE'):
             y = TagFactory.create(v.TYPE)
             if y == None:
-                print v.__name__, 'missing', 'for', v.TYPE
+                #print v.__name__, 'missing', 'for', v.TYPE
