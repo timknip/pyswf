@@ -7,10 +7,12 @@ Can't thank Claus enough!
 INSTALL
 -------
 
-    $ pip install pyswf==1.5.3
+    $ pip install pyswf==1.5.4
 
 or:
 
+    $ git clone git@github.com:timknip/pyswf.git
+    $ cd pyswf
     $ python setup.py install
 
 or you might need do:
@@ -19,13 +21,14 @@ or you might need do:
 
 WINDOWS
 -------
-Install lxml and pylzma from a binary distribution before running setup.
+Install Pillow, lxml and pylzma from a binary distribution before running setup.
+- [Pillow 2.9.0](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pillow)
 - [lxml 3.4.0](https://pypi.python.org/pypi/lxml/3.4.0#downloads)
 - [pylzma 0.4.6](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pylzma)
-    - download the *.whl, cd into download location and run:
 
+Installing the *.whl files:
 
-            $ pip install pylzma-VERSION.whl
+    $ pip install the-downloaded.whl
 
 USAGE
 -----

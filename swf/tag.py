@@ -2651,3 +2651,4 @@ if __name__ == '__main__':
             y = TagFactory.create(v.TYPE)
             if y == None:
                 #print v.__name__, 'missing', 'for', v.TYPE
+                pass
