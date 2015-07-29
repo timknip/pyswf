@@ -2,6 +2,7 @@ from consts import *
 from data import *
 from utils import *
 from stream import *
+import datetime
 try:
     import Image
 except ImportError:
@@ -2144,7 +2145,7 @@ class TagProductInfo(Tag):
         s += " product: %s" % ProductKind.tostring(self.product)
         s += " edition: %s" % ProductEdition.tostring(self.edition)
         s += " major.minor.build: %d.%d.%d" % (self.majorVersion, self.minorVersion, self.build)
-        s += " compileTime: %d" % (self.compileTime)
+        s += " compileTime: %d (%s)" % (self.compileTime, datetime.datetime.fromtimestamp(self.compileTime//1000.0).ctime())
         return s
 
 class TagScriptLimits(Tag):
