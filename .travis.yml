@@ -8,3 +8,4 @@ branches:
 # command to install dependencies
 install:
   - pip install .
+script: make test
