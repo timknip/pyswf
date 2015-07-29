@@ -4,6 +4,8 @@ A Python library for reading and writing SWF files.
 PYSWF is a Python port of Claus Wahlers *great* SWF parser https://github.com/claus/as3swf
 Can't thank Claus enough!
 
+[![Build Status](https://travis-ci.org/timknip/pyswf.svg)](https://travis-ci.org/timknip/pyswf)
+
 INSTALL
 -------
 
