@@ -157,9 +157,9 @@ class SWF(SWFTimelineContainer):
                 temp.write(pylzma.decompress(data))
             temp.seek(0)
             data = SWFStream(temp)
-        self._header._frame_size = data.readRECT()
-        self._header._frame_rate = data.readFIXED8()
-        self._header._frame_count = data.readUI16()
+            self._header._frame_size = data.readRECT()
+            self._header._frame_rate = data.readFIXED8()
+            self._header._frame_count = data.readUI16()
         self.parse_tags(data)
         
     def __str__(self):
