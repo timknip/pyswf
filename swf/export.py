@@ -14,6 +14,12 @@ try:
     import Image
 except ImportError:
     from PIL import Image
+
+    # Fix Pillow 1.x -> 3.x incompatibility:
+    # (fromstring was renamed to frombytes)
+    if not hasattr(Image, 'frombytes'):
+        Image.frombytes = Image.fromstring
+
 try:
     from cStringIO import StringIO
 except ImportError:
@@ -425,7 +431,7 @@ class BaseExporter(object):
                         alpha = ord(tag.bitmapAlphaData.read(1))
                         rgb = list(image_data[i])
                         buff += struct.pack("BBBB", rgb[0], rgb[1], rgb[2], alpha)
-                    image = Image.fromstring("RGBA", (image_width, image_height), buff)
+                    image = Image.frombytes("RGBA", (image_width, image_height), buff)
         elif isinstance(tag, TagDefineBitsJPEG2):
             tag.bitmapData.seek(0)
             image = Image.open(tag.bitmapData)

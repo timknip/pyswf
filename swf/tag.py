@@ -7,6 +7,12 @@ try:
     import Image
 except ImportError:
     from PIL import Image
+
+    # Fix Pillow 1.x -> 3.x incompatibility:
+    # (fromstring was renamed to frombytes)
+    if not hasattr(Image, 'frombytes'):
+        Image.frombytes = Image.fromstring
+
 import struct
 
 try:
@@ -888,7 +894,7 @@ class TagDefineBitsLossless(DefinitionTag):
             self.image_buffer = s.getvalue()
             s.close()
 
-            im = Image.fromstring("RGBA", (self.padded_width, self.bitmap_height), self.image_buffer)
+            im = Image.frombytes("RGBA", (self.padded_width, self.bitmap_height), self.image_buffer)
             im = im.crop((0, 0, self.bitmap_width, self.bitmap_height))
 
         elif self.bitmap_format == BitmapFormat.BIT_15:
@@ -907,7 +913,7 @@ class TagDefineBitsLossless(DefinitionTag):
                 b = ord(temp.read(1))
                 s.write(struct.pack("BBBB", r, g, b, a))
             self.image_buffer = s.getvalue()
-            im = Image.fromstring("RGBA", (self.bitmap_width, self.bitmap_height), self.image_buffer)
+            im = Image.frombytes("RGBA", (self.bitmap_width, self.bitmap_height), self.image_buffer)
         else:
             raise Exception("unhandled bitmap format! %s %d" % (BitmapFormat.tostring(self.bitmap_format), self.bitmap_format))
 
