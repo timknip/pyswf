@@ -527,6 +527,17 @@ class SVGExporter(BaseExporter):
         self.fonts = dict([(x.characterId,x) for x in swf.all_tags_of_type(TagDefineFont)])
         self.fontInfos = dict([(x.characterId,x) for x in swf.all_tags_of_type(TagDefineFontInfo)])
 
+        # Make sure that all fonts have a fontInfos entry
+        for font_id in self.fonts.keys():
+            if font_id not in self.fontInfos:
+                info = TagDefineFontInfo()
+
+                # For now, draw characters as paths (instead of using SVG <text> elements)
+                info.useGlyphText = True
+
+                info.codeTable = self.fonts[font_id].codeTable
+                self.fontInfos[font_id] = info
+
         # GO!
         super(SVGExporter, self).export(swf, force_stroke)
 
