@@ -152,7 +152,7 @@ class SWFTimelineContainer(DefinitionTag):
     def get_dependencies(self):
         """ Returns the character ids this tag refers to """
         s = super(SWFTimelineContainer, self).get_dependencies()
-        for dt in self.all_tags_of_type(DefinitionTag):
+        for dt in self.all_tags_of_type((DefinitionTag, TagPlaceObject)):
             s.update(dt.get_dependencies())
         return s
 
