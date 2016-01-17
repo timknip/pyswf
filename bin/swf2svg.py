@@ -1,6 +1,6 @@
 import argparse
 from swf.movie import SWF
-from swf.export import SVGExporter, SingleShapeSVGExporterMixin, FrameSVGExporterMixin
+from swf.export import SVGExporter, SingleShapeSVGExporterMixin, FrameSVGExporterMixin, NamesSVGExporterMixin
 
 parser = argparse.ArgumentParser(description="Convert an SWF file into an SVG")
 parser.add_argument("--swf", type=argparse.FileType('rb'),
@@ -11,6 +11,8 @@ parser.add_argument("--shape", type=int,
                     help="Only export shape SHAPE (integer)", required=False)
 parser.add_argument("--frame", type=int,
                     help="Export frame FRAME (0-based index) instead of frame 0", required=False)
+parser.add_argument("--names", action='store_true',
+                    help='For each element, extract SWF instanceName to class="n-<name>"', required=False)
 
 options = parser.parse_args()
 argparse.swf_file = options.swf
@@ -31,6 +33,10 @@ if options.shape is not None:
 if options.frame is not None:
     export_mixins.append(FrameSVGExporterMixin)
     export_opts['frame'] = options.frame
+
+if options.names:
+    export_mixins.append(NamesSVGExporterMixin)
+
 
 # create the SVG exporter
 svg_exporter = SVGExporter()

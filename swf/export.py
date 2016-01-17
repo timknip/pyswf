@@ -899,11 +899,24 @@ class FrameSVGExporterMixin(object):
 
                     if not tag.hasCharacter:
                         tag.characterId = orig_tag.characterId
+                    # this is for NamesSVGExporterMixin
+                    if not tag.hasName:
+                        tag.instanceName = orig_tag.instanceName
                 frame_tags[tag.depth] = tag
             elif isinstance(tag, TagRemoveObject):
                 del frame_tags[tag.depth]
 
         return super(FrameSVGExporterMixin, self).get_display_tags(frame_tags.values(), z_sorted)
+
+class NamesSVGExporterMixin(object):
+    '''
+    Add class="n-<name>" to SVG elements for tags that have an instanceName.
+    '''
+    def export_display_list_item(self, tag, parent=None):
+        use = super(NamesSVGExporterMixin, self).export_display_list_item(tag, parent)
+        if hasattr(tag, 'instanceName') and tag.instanceName is not None:
+            use.set('class', 'n-%s' % tag.instanceName)
+        return use
 
 
 class SVGFilterFactory(object):
