@@ -1,7 +1,10 @@
+from __future__ import absolute_import
 import struct, math
-from data import *
-from actions import *
-from filters import SWFFilterFactory
+from .data import *
+from .actions import *
+from .filters import SWFFilterFactory
+from six.moves import range
+from functools import reduce
 
 class SWFStream(object):
     """
@@ -381,7 +384,7 @@ class SWFStream(object):
     def readFILTERLIST(self):
         """ Read a length-prefixed list of FILTERs """
         number = self.readUI8()
-        return [self.readFILTER() for _ in xrange(number)]
+        return [self.readFILTER() for _ in range(number)]
     
     def readZONEDATA(self):
         """ Read a SWFZoneData """
@@ -440,14 +443,14 @@ class SWFStream(object):
         count = self.readUI8()
         if count == 0xff:
             count = self.readUI16()
-        return [self.readMORPHFILLSTYLE() for _ in xrange(count)]
+        return [self.readMORPHFILLSTYLE() for _ in range(count)]
         
     def readMORPHLINESTYLEARRAY(self, version):
         count = self.readUI8()
         if count == 0xff:
             count = self.readUI16()
         kind = self.readMORPHLINESTYLE if version == 1 else self.readMORPHLINESTYLE2
-        return [kind() for _ in xrange(count)]
+        return [kind() for _ in range(count)]
         
     def readraw_tag(self):
         """ Read a SWFRawTag """

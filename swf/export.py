@@ -1,23 +1,23 @@
 """
 This module defines exporters for the SWF fileformat.
 """
-from consts import *
-from geom import *
-from utils import *
-from data import *
-from tag import *
-from filters import *
+from __future__ import absolute_import
+from .consts import *
+from .geom import *
+from .utils import *
+from .data import *
+from .tag import *
+from .filters import *
 from lxml import objectify
 from lxml import etree
 import base64
+from six.moves import map
+from six.moves import range
 try:
     import Image
 except ImportError:
     from PIL import Image
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
+from six.moves import cStringIO
 import math
 import re
 import copy
@@ -992,7 +992,7 @@ class SVGBounds(object):
     def _build_matrix(self, transform):
         if transform.find("matrix") >= 0:
             raw = str(transform).replace("matrix(", "").replace(")", "")
-            f = map(float, re.split("\s+|,", raw))
+            f = list(map(float, re.split("\s+|,", raw)))
             return Matrix2(f[0], f[1], f[2], f[3], f[4], f[5])
 
     def _calc_combined_matrix(self):

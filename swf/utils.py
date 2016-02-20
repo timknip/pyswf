@@ -1,4 +1,5 @@
-from consts import BitmapType
+from __future__ import absolute_import
+from .consts import BitmapType
 import math
 
 class NumberUtils(object):

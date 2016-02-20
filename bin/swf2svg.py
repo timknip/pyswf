@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import argparse
 from swf.movie import SWF
 from swf.export import SVGExporter

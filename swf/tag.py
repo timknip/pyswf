@@ -1,18 +1,17 @@
-from consts import *
-from data import *
-from utils import *
-from stream import *
+from __future__ import absolute_import
+from .consts import *
+from .data import *
+from .utils import *
+from .stream import *
 import datetime
+from six.moves import range
 try:
     import Image
 except ImportError:
     from PIL import Image
 import struct
 
-try:
-    import cStringIO as StringIO
-except ImportError:
-    import StringIO
+from six.moves import cStringIO
 
 class TagFactory(object):
     @classmethod
@@ -883,7 +882,7 @@ class TagDefineBitsLossless(DefinitionTag):
 
             # create the image buffer
             s = StringIO.StringIO()
-            for i in xrange(t):
+            for i in range(t):
                 s.write(indexed_colors[ord(temp.read(1))])
             self.image_buffer = s.getvalue()
             s.close()
@@ -2220,7 +2219,7 @@ class TagExportAssets(Tag):
 
     def parse(self, data, length, version=1):
         self.count = data.readUI16()
-        self.exports = [data.readEXPORT() for i in xrange(self.count)]
+        self.exports = [data.readEXPORT() for i in range(self.count)]
 
     def __str__(self):
         s = super(TagExportAssets, self).__str__()
@@ -2642,7 +2641,7 @@ class TagDefineMorphShape2(TagDefineMorphShape):
 
 if __name__ == '__main__':
     # some table checks
-    for x in xrange(256):
+    for x in range(256):
         y = TagFactory.create(x)
         if y:
             assert y.type == x, y.name + ' is misnamed'
