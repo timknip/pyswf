@@ -51,7 +51,7 @@ class SWFStream(object):
     
     def _read_bytes_aligned(self, bytes):
         buf = self.f.read(bytes)
-        return reduce(lambda x, y: x << 8 | ord(y), buf, 0)
+        return reduce(lambda x, y: x << 8 | y, buf, 0)
     
     def readbits(self, bits):
         """
@@ -64,7 +64,7 @@ class SWFStream(object):
         
         # fast byte-aligned path
         if bits % 8 == 0 and self._bits_pending == 0:
-            return self._read_bytes_aligned(bits / 8)
+            return self._read_bytes_aligned(bits // 8)
         
         out = 0
         masks = self._masks
@@ -97,7 +97,7 @@ class SWFStream(object):
                 continue
             
             r = self.f.read(1)
-            if r == '':
+            if r == b'':
                 raise EOFError
             self._partial_byte = ord(r)
             self._bits_pending = 8
@@ -368,11 +368,11 @@ class SWFStream(object):
     def readString(self):
         """ Read a string """
         s = self.f.read(1)
-        string = ""
+        string = b""
         while ord(s) > 0:
             string += s
             s = self.f.read(1)
-        return string
+        return string.decode()
     
     def readFILTER(self):
         """ Read a SWFFilter """

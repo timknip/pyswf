@@ -829,7 +829,7 @@ class TagDefineBitsLossless(DefinitionTag):
     """
     TYPE = 20
     bitmapData = None
-    image_buffer = ""
+    image_buffer = b""
     bitmap_format = 0
     bitmap_width = 0
     bitmap_height = 0
@@ -841,7 +841,7 @@ class TagDefineBitsLossless(DefinitionTag):
 
     def parse(self, data, length, version=1):
         import zlib
-        self.image_buffer = ""
+        self.image_buffer = b""
         self.characterId = data.readUI16()
         self.bitmap_format = data.readUI8()
         self.bitmap_width = data.readUI16()
