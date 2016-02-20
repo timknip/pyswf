@@ -17,6 +17,7 @@ try:
     import Image
 except ImportError:
     from PIL import Image
+from io import BytesIO
 from six.moves import cStringIO
 import math
 import re
@@ -405,7 +406,7 @@ class BaseExporter(object):
         self.export_display_list(self.get_display_tags(swf.tags))
 
     def export_define_bits(self, tag):
-        png_buffer = StringIO()
+        png_buffer = BytesIO()
         image = None
         if isinstance(tag, TagDefineBitsJPEG3):
 
@@ -425,14 +426,14 @@ class BaseExporter(object):
                         alpha = ord(tag.bitmapAlphaData.read(1))
                         rgb = list(image_data[i])
                         buff += struct.pack("BBBB", rgb[0], rgb[1], rgb[2], alpha)
-                    image = Image.fromstring("RGBA", (image_width, image_height), buff)
+                    image = Image.frombytes("RGBA", (image_width, image_height), buff)
         elif isinstance(tag, TagDefineBitsJPEG2):
             tag.bitmapData.seek(0)
             image = Image.open(tag.bitmapData)
         else:
             tag.bitmapData.seek(0)
             if self.jpegTables is not None:
-                buff = StringIO()
+                buff = BytesIO()
                 self.jpegTables.seek(0)
                 buff.write(self.jpegTables.read())
                 buff.write(tag.bitmapData.read())
@@ -545,7 +546,7 @@ class SVGExporter(BaseExporter):
         return self._serialize()
 
     def _serialize(self):
-        return StringIO(etree.tostring(self.svg,
+        return cStringIO(etree.tostring(self.svg,
                 encoding="UTF-8", xml_declaration=True))
 
     def export_define_sprite(self, tag, parent=None):
@@ -794,7 +795,7 @@ class SVGExporter(BaseExporter):
 
     def export_image(self, tag, image=None):
         if image is not None:
-            buff = StringIO()
+            buff = BytesIO()
             image.save(buff, "PNG")
             buff.seek(0)
             data_url = _encode_png(buff.read())
