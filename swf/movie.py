@@ -1,13 +1,12 @@
 """
 SWF
 """
-from tag import SWFTimelineContainer
-from stream import SWFStream
-from export import SVGExporter
-try:
-    import cStringIO as StringIO
-except ImportError:
-    import StringIO
+from __future__ import absolute_import
+from .tag import SWFTimelineContainer
+from .stream import SWFStream
+from .export import SVGExporter
+from six.moves import cStringIO
+from io import BytesIO
 
 class SWFHeaderException(Exception):
     """ Exception raised in case of an invalid SWFHeader """
@@ -144,7 +143,7 @@ class SWF(SWFTimelineContainer):
         self._data = data = data if isinstance(data, SWFStream) else SWFStream(data)
         self._header = SWFHeader(self._data)
         if self._header.compressed:
-            temp = StringIO.StringIO()
+            temp = BytesIO()
             if self._header.compressed_zlib:
                 import zlib
                 data = data.f.read()

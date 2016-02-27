@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import os
 from setuptools import setup, find_packages
 
@@ -19,7 +20,7 @@ setup(
     author_email='tim@floorplanner.com',
     url='https://github.com/timknip/pyswf',
 
-    install_requires = ["lxml>=3.3.0", "Pillow>=2.3.0", "pylzma>=0.4.6"],
+    install_requires = ["lxml>=3.3.0", "Pillow>=2.3.0", "pylzma>=0.4.6", "six"],
     packages=find_packages(),
     license = "MIT",
     classifiers=[

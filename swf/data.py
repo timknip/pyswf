@@ -1,5 +1,8 @@
-from consts import *
-from utils import *
+from __future__ import absolute_import
+from .consts import *
+from .utils import *
+from six.moves import map
+from six.moves import range
 
 class _dumb_repr(object):
     def __repr__(self):
@@ -70,7 +73,7 @@ class SWFShape(_dumb_repr):
     def export(self, handler=None):
         self._create_edge_maps()
         if handler is None:
-            from export import SVGShapeExporter
+            from .export import SVGShapeExporter
             handler = SVGShapeExporter()
         handler.begin_shape()
         for i in range(0, self.num_groups):
@@ -1340,7 +1343,7 @@ class SWFSoundInfo(_dumb_repr):
         self.outPoint = data.readUI32() if self.hasOutPoint else None
         self.loopCount = data.readUI16() if self.hasLoops else None
         self.envPointCount = data.readUI8() if self.hasEnvelope else None
-        self.envelopePoints = [data.readSOUNDENVELOPE() for x in xrange(self.envPointCount)] if self.hasEnvelope else None
+        self.envelopePoints = [data.readSOUNDENVELOPE() for x in range(self.envPointCount)] if self.hasEnvelope else None
 
     def __str__(self):
         return "[SWFSoundInfo]"

@@ -1,23 +1,24 @@
 """
 This module defines exporters for the SWF fileformat.
 """
-from consts import *
-from geom import *
-from utils import *
-from data import *
-from tag import *
-from filters import *
+from __future__ import absolute_import
+from .consts import *
+from .geom import *
+from .utils import *
+from .data import *
+from .tag import *
+from .filters import *
 from lxml import objectify
 from lxml import etree
 import base64
+from six.moves import map
+from six.moves import range
 try:
     import Image
 except ImportError:
     from PIL import Image
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
+from io import BytesIO
+from six.moves import cStringIO
 import math
 import re
 import copy
@@ -405,7 +406,7 @@ class BaseExporter(object):
         self.export_display_list(self.get_display_tags(swf.tags))
 
     def export_define_bits(self, tag):
-        png_buffer = StringIO()
+        png_buffer = BytesIO()
         image = None
         if isinstance(tag, TagDefineBitsJPEG3):
 
@@ -425,14 +426,14 @@ class BaseExporter(object):
                         alpha = ord(tag.bitmapAlphaData.read(1))
                         rgb = list(image_data[i])
                         buff += struct.pack("BBBB", rgb[0], rgb[1], rgb[2], alpha)
-                    image = Image.fromstring("RGBA", (image_width, image_height), buff)
+                    image = Image.frombytes("RGBA", (image_width, image_height), buff)
         elif isinstance(tag, TagDefineBitsJPEG2):
             tag.bitmapData.seek(0)
             image = Image.open(tag.bitmapData)
         else:
             tag.bitmapData.seek(0)
             if self.jpegTables is not None:
-                buff = StringIO()
+                buff = BytesIO()
                 self.jpegTables.seek(0)
                 buff.write(self.jpegTables.read())
                 buff.write(tag.bitmapData.read())
@@ -545,7 +546,7 @@ class SVGExporter(BaseExporter):
         return self._serialize()
 
     def _serialize(self):
-        return StringIO(etree.tostring(self.svg,
+        return cStringIO(etree.tostring(self.svg,
                 encoding="UTF-8", xml_declaration=True))
 
     def export_define_sprite(self, tag, parent=None):
@@ -794,7 +795,7 @@ class SVGExporter(BaseExporter):
 
     def export_image(self, tag, image=None):
         if image is not None:
-            buff = StringIO()
+            buff = BytesIO()
             image.save(buff, "PNG")
             buff.seek(0)
             data_url = _encode_png(buff.read())
@@ -992,7 +993,7 @@ class SVGBounds(object):
     def _build_matrix(self, transform):
         if transform.find("matrix") >= 0:
             raw = str(transform).replace("matrix(", "").replace(")", "")
-            f = map(float, re.split("\s+|,", raw))
+            f = list(map(float, re.split("\s+|,", raw)))
             return Matrix2(f[0], f[1], f[2], f[3], f[4], f[5])
 
     def _calc_combined_matrix(self):

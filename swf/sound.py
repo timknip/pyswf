@@ -1,7 +1,8 @@
-import consts
-import tag
+from __future__ import absolute_import
+from . import consts
+from . import tag
 import wave
-import stream
+from . import stream
 
 supportedCodecs = (
     consts.AudioCodec.MP3,
