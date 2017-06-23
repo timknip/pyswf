@@ -811,11 +811,36 @@ class SVGExporter(BaseExporter):
 class SingleShapeSVGExporter(SVGExporter):
     """
     An SVG exporter which knows how to export a single shape.
+    NB: This class is here just for backward compatibility.
+    Use SingleShapeSVGExporterMixin instead to mix with other functionality.
     """
     def __init__(self, margin=0):
         super(SingleShapeSVGExporter, self).__init__(margin = margin)
 
     def export_single_shape(self, shape_tag, swf):
+        class MySingleShapeSVGExporter(SingleShapeSVGExporterMixin, SVGExporter):
+            pass
+        exporter = MySingleShapeSVGExporter()
+        return exporter.export(swf, shape=shape_tag)
+
+class SingleShapeSVGExporterMixin(object):
+    def export(self, swf, shape, **export_opts):
+        """ Exports the specified shape of the SWF to SVG.
+
+        @param swf   The SWF.
+        @param shape Which shape to export, either by characterId(int) or as a Tag object.
+        """
+
+        # If `shape` is given as int, find corresponding shape tag.
+        if isinstance(shape, Tag):
+            shape_tag = shape
+        else:
+            shapes = [x for x in swf.all_tags_of_type((TagDefineShape, TagDefineSprite)) if x.characterId == shape]
+            if len(shapes):
+                shape_tag = shapes[0]
+            else:
+                raise Exception("Shape %s not found" % shape)
+
         from swf.movie import SWF
 
         # find a typical use of this shape
@@ -848,7 +873,52 @@ class SingleShapeSVGExporter(SVGExporter):
         stunt_swf = SWF()
         stunt_swf.tags = tags_to_export
 
-        return super(SingleShapeSVGExporter, self).export(stunt_swf)
+        return super(SingleShapeSVGExporterMixin, self).export(stunt_swf, **export_opts)
+
+class FrameSVGExporterMixin(object):
+    def export(self, swf, frame, **export_opts):
+        """ Exports a frame of the specified SWF to SVG.
+
+        @param swf   The SWF.
+        @param frame Which frame to export, by 0-based index (int)
+        """
+        self.wanted_frame = frame
+        return super(FrameSVGExporterMixin, self).export(swf, *export_opts)
+
+    def get_display_tags(self, tags, z_sorted=True):
+
+        current_frame = 0
+        frame_tags = dict() # keys are depths, values are placeobject tags
+        for tag in tags:
+            if isinstance(tag, TagShowFrame):
+                if current_frame == self.wanted_frame:
+                    break
+                current_frame += 1
+            elif isinstance(tag, TagPlaceObject):
+                if tag.hasMove:
+                    orig_tag = frame_tags.pop(tag.depth)
+
+                    if not tag.hasCharacter:
+                        tag.characterId = orig_tag.characterId
+                    # this is for NamesSVGExporterMixin
+                    if not tag.hasName:
+                        tag.instanceName = orig_tag.instanceName
+                frame_tags[tag.depth] = tag
+            elif isinstance(tag, TagRemoveObject):
+                del frame_tags[tag.depth]
+
+        return super(FrameSVGExporterMixin, self).get_display_tags(frame_tags.values(), z_sorted)
+
+class NamesSVGExporterMixin(object):
+    '''
+    Add class="n-<name>" to SVG elements for tags that have an instanceName.
+    '''
+    def export_display_list_item(self, tag, parent=None):
+        use = super(NamesSVGExporterMixin, self).export_display_list_item(tag, parent)
+        if hasattr(tag, 'instanceName') and tag.instanceName is not None:
+            use.set('class', 'n-%s' % tag.instanceName)
+        return use
+
 
 class SVGFilterFactory(object):
     # http://commons.oreilly.com/wiki/index.php/SVG_Essentials/Filters
