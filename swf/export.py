@@ -18,7 +18,6 @@ try:
 except ImportError:
     from PIL import Image
 from io import BytesIO
-from six.moves import cStringIO
 import math
 import re
 import copy
@@ -542,11 +541,11 @@ class SVGExporter(BaseExporter):
               self.bounds.width, self.bounds.height]
         self.svg.set("viewBox", "%s" % " ".join(map(str,vb)))
 
-        # Return the SVG as StringIO
+        # Return the SVG as BytesIO
         return self._serialize()
 
     def _serialize(self):
-        return cStringIO(etree.tostring(self.svg,
+        return BytesIO(etree.tostring(self.svg,
                 encoding="UTF-8", xml_declaration=True))
 
     def export_define_sprite(self, tag, parent=None):
