@@ -13,6 +13,7 @@ from lxml import etree
 import base64
 from six.moves import map
 from six.moves import range
+from six import unichr
 try:
     import Image
 except ImportError:
