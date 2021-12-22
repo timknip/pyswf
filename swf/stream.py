@@ -24,7 +24,7 @@ class SWFStream(object):
         return str(s) if s<=1 else bin(s>>1) + str(s&1)
         
     def calc_max_bits(self, signed, values):
-        """ Calculates the maximim needed bits to represent a value """
+        """ Calculates the maximum needed bits to represent a value """
         b = 0
         vmax = -10000000
         
